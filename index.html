@@ -4,26 +4,21 @@
     <title>Auth Callback</title>
 </head>
 <body>
-    <p>Authentication complete. You can close this window.</p>
+    <p>Processing authentication...</p>
     <script>
         // Get the authorization code from URL
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');
         const state = urlParams.get('state');
         
-        // Log the parameters (for debugging)
-        console.log('Code:', code);
-        console.log('State:', state);
-        
         if (code) {
-            // Construct the callback URL
-            const callbackUrl = `${window.location.href}?code=${code}&state=${state}`;
-            console.log('Redirecting to:', callbackUrl);
+            // Just display completion message
+            document.body.innerHTML = '<p>Authentication complete. You can close this window.</p>';
             
-            // Redirect back to the app
-            window.location.href = callbackUrl;
+            // Let the app handle the redirect
+            window.location.href = `https://samuelalake.github.io?code=${code}&state=${state}`;
         } else {
-            document.body.innerHTML += '<p style="color: red;">No authorization code received</p>';
+            document.body.innerHTML = '<p style="color: red;">No authorization code received</p>';
         }
     </script>
 </body>
