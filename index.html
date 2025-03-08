@@ -4,21 +4,17 @@
     <title>Auth Callback</title>
 </head>
 <body>
-    <p>Processing authentication...</p>
+    <p>Redirecting to app...</p>
     <script>
-        // Get the authorization code from URL
+        // Get the authorization code and state from URL
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');
         const state = urlParams.get('state');
         
+        // Construct the custom URL scheme
         if (code) {
-            // Just display completion message
-            document.body.innerHTML = '<p>Authentication complete. You can close this window.</p>';
-            
-            // Let the app handle the redirect
-            window.location.href = `https://samuelalake.github.io?code=${code}&state=${state}`;
-        } else {
-            document.body.innerHTML = '<p style="color: red;">No authorization code received</p>';
+            const appUrl = `fbauth://callback?code=${code}&state=${state}`;
+            window.location.href = appUrl;
         }
     </script>
 </body>
