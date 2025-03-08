@@ -11,10 +11,17 @@
         const code = urlParams.get('code');
         const state = urlParams.get('state');
         
-        // Construct the redirect URL with the authorization code
+        // Log the parameters (for debugging)
+        console.log('Code:', code);
+        console.log('State:', state);
+        
         if (code) {
-            const redirectUrl = `${window.location.origin}/auth/callback?code=${code}&state=${state}`;
-            window.location.href = redirectUrl;
+            // Construct the callback URL
+            const callbackUrl = `${window.location.href}?code=${code}&state=${state}`;
+            console.log('Redirecting to:', callbackUrl);
+            
+            // Redirect back to the app
+            window.location.href = callbackUrl;
         } else {
             document.body.innerHTML += '<p style="color: red;">No authorization code received</p>';
         }
