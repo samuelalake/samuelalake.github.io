@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
     unoptimized: true
   },
   // No basePath needed for samuelalake.github.io (root domain)
+  transpilePackages: ['@primer/react'],
+  experimental: {
+    esmExternals: 'loose'
+  }
 };
 
 export default nextConfig;

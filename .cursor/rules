@@ -1,0 +1,118 @@
+# Cursor Rules for Portfolio Project
+
+## 🚨 **Critical Issues to Avoid**
+
+### **1. Next.js App Router vs Pages Router Confusion**
+- **NEVER** mix App Router (`app/` directory) with Pages Router (`pages/` directory)
+- **ALWAYS** check which router is being used before creating components
+- **GitHub Pages requires Pages Router** - App Router doesn't work with static export
+- **Solution**: Use `npx create-next-app@latest --app false` for Pages Router
+
+### **2. Primer React Component Integration Issues**
+- **AVOID** using Primer React components directly without proper setup
+- **TypeScript errors** occur with Primer component props (fontSize, mb, etc.)
+- **Use `sx` prop** instead of direct props: `sx={{ fontSize: 3, mb: 3 }}`
+- **CSS import issues** - Primer CSS causes build failures with Next.js
+- **Solution**: Start with basic HTML/CSS, add Primer later with proper configuration
+
+### **3. GitHub Pages Deployment Configuration**
+- **MUST** use `output: 'export'` in next.config.js for static export
+- **MUST** set `basePath` and `assetPrefix` for GitHub Pages subdirectory
+- **MUST** use `images: { unoptimized: true }` for static export
+- **NEVER** use server-side features with static export
+
+### **4. Package.json Script Issues**
+- **AVOID** `next export` command in newer Next.js versions
+- **USE** `next build` with `output: 'export'` configuration
+- **REMOVE** `--turbopack` flags for production builds
+- **ADD** `.nojekyll` file for GitHub Pages: `touch out/.nojekyll`
+
+### **5. Environment Variable Setup**
+- **ALWAYS** create `.env.local` from `.env.example`
+- **NEVER** commit actual tokens to repository
+- **USE** `env.example` as template for required variables
+- **CHECK** environment variable names match code usage
+
+## 🛠 **Best Practices**
+
+### **Component Development**
+- Start with basic HTML/CSS before adding component libraries
+- Test build process frequently during development
+- Use TypeScript for better error catching
+- Keep components simple and focused
+
+### **Styling Approach**
+- Use inline styles for rapid prototyping
+- Move to CSS modules or styled-components later
+- Test responsive design early
+- Avoid complex CSS frameworks initially
+
+### **Content Management**
+- Use markdown files for content
+- Implement frontmatter for metadata
+- Create utility functions for content processing
+- Plan for dynamic content integration
+
+### **GitHub Integration**
+- Set up GitHub API client early
+- Handle rate limiting and errors gracefully
+- Cache API responses for performance
+- Use webhooks for content updates
+
+## 🔧 **Debugging Checklist**
+
+### **Build Failures**
+1. Check for App Router vs Pages Router conflicts
+2. Verify all imports are correct
+3. Check TypeScript errors
+4. Ensure all dependencies are installed
+5. Test with minimal components first
+
+### **Deployment Issues**
+1. Verify GitHub Pages configuration
+2. Check GitHub Actions workflow
+3. Ensure static export is working
+4. Test locally with `npm run build`
+5. Check repository settings
+
+### **Component Issues**
+1. Start with basic HTML elements
+2. Add styling incrementally
+3. Test each component individually
+4. Check for TypeScript errors
+5. Verify responsive behavior
+
+## 📝 **Project-Specific Notes**
+
+### **User Profile**
+- **Role**: Product Designer & Design Engineer
+- **Focus**: UX/UI Design, Front-end Development, Design Systems
+- **Skills**: Figma, Sketch, React, TypeScript, CSS
+- **Tagline**: "Designing the future, one pixel at a time"
+
+### **Repository Setup**
+- **Existing Repo**: samuelalake.github.io
+- **Deployment**: GitHub Pages
+- **Domain**: samuelalake.github.io
+- **Content**: Portfolio, projects, blog, activity timeline
+
+### **Technology Stack**
+- **Framework**: Next.js 15+ with Pages Router
+- **Language**: TypeScript
+- **Styling**: CSS-in-JS (inline styles initially)
+- **Deployment**: GitHub Pages + GitHub Actions
+- **Content**: Markdown + MDX (planned)
+
+## 🚀 **Next Steps Priority**
+1. Deploy to existing samuelalake.github.io repository
+2. Add Primer React components with proper setup
+3. Integrate GitHub API for real data
+4. Implement design system and responsive layout
+5. Add content management system
+
+## ⚠️ **Common Pitfalls**
+- Don't assume component libraries work out of the box
+- Always test build process before adding complexity
+- Check GitHub Pages compatibility before deployment
+- Start simple and add features incrementally
+- Document configuration changes for future reference

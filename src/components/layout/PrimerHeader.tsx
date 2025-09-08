@@ -1,0 +1,36 @@
+import { IconButton, Text } from "@primer/react";
+import { SunIcon } from "@primer/octicons-react";
+import Link from "next/link";
+
+// Add this SVG component
+const SSymbol = () => (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 32C7.17929 32 0 24.8207 0 16C0 7.16395 7.17929 0 16 0C24.8361 0 32 7.16395 32 16C32 24.8207 24.8361 32 16 32ZM15.7852 23.4708C19.559 23.4708 21.9981 21.6606 21.9981 18.8073C21.9981 16.6136 20.4947 15.3557 17.6874 14.7268L15.7239 14.2665C14.1745 13.9137 13.5916 13.4535 13.5916 12.6251C13.5916 11.5666 14.4813 10.8917 15.8926 10.8917C17.1965 10.8917 18.0249 11.3826 18.6385 12.4564C19.0681 12.9933 19.4362 13.2541 20.1112 13.2541C20.9243 13.2541 21.4765 12.7939 21.4765 11.9655C21.4765 11.6894 21.4151 11.3672 21.2464 11.0451C20.5714 9.48035 18.5772 8.34516 15.954 8.34516C12.5024 8.34516 10.14 10.2013 10.14 12.8859C10.14 15.0182 11.5513 16.2608 14.1438 16.8591L16.1687 17.3653C18.0096 17.8102 18.5925 18.1937 18.5925 19.1141C18.5925 20.2339 17.4727 20.8629 16 20.8629C14.5887 20.8629 13.6222 20.3567 12.9166 19.2828C12.5024 18.7766 12.1035 18.5312 11.5053 18.5312C10.6616 18.5312 10.0786 19.0681 10.0786 19.8965C10.0786 20.2033 10.1553 20.5101 10.3241 20.8169C10.953 22.2435 12.9319 23.4708 15.7852 23.4708Z" fill="#1F2328"/>
+  </svg>
+);
+
+export default function PrimerHeader() {
+  return (
+    <header className="w-full" style={{ backgroundColor: "var(--bgColor-inset)" }}>
+      <div className="mx-auto px-4">
+        <div 
+          className="pt-4 pb-2" 
+          style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '16px' 
+          }}
+        >
+          <Link href="/" aria-label="Samuel Alake Portfolio Home" className="shrink-0">
+            <SSymbol />
+          </Link>
+          <Text fontWeight="semibold" className="text-fg-default">samuelalake</Text>
+          <div className="ml-auto">
+            <IconButton aria-label="Toggle theme" icon={SunIcon}/>
+          </div>
+        </div>
+      </div>
+      <div  />
+    </header>
+  );
+}
