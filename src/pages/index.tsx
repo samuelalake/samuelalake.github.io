@@ -8,63 +8,60 @@ export default function Home() {
         <meta name="description" content="Product Designer & Design Engineer Portfolio" />
       </Head>
       
-      <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '2rem' }}>
+      <div className="p-4" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div className="d-flex flex-items-center mb-4">
           <img
             src="https://github.com/samuelalake.png"
             alt="Samuel Alake"
-            style={{ width: '80px', height: '80px', borderRadius: '50%', marginRight: '1rem' }}
+            className="avatar avatar-8 mr-3"
+            style={{ width: '80px', height: '80px' }}
           />
           <div>
-            <h1 style={{ fontSize: '2rem', margin: '0 0 0.5rem 0' }}>
+            <h1 className="h1 mb-1">
               Samuel Alake
             </h1>
-            <p style={{ color: '#666', fontSize: '1.2rem', margin: '0 0 1rem 0' }}>
+            <p className="text-muted mb-2" style={{ fontSize: '1.2rem' }}>
               Designing the future, one pixel at a time
             </p>
-            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.9rem', color: '#666' }}>
+            <div className="d-flex flex-items-center">
+              <span className="text-small text-muted mr-3">
                 ⭐ 42 stars
               </span>
-              <span style={{ fontSize: '0.9rem', color: '#666' }}>
+              <span className="text-small text-muted mr-3">
                 🍴 12 forks
               </span>
-              <span style={{ fontSize: '0.9rem', color: '#28a745' }}>
+              <span className="Label Label--success">
                 Available for work
               </span>
             </div>
           </div>
         </div>
 
-        <div style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>
+        <div className="mb-4">
+          <h2 className="h2 mb-3">
             Featured Projects
           </h2>
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-            gap: '1rem' 
-          }}>
+          <div className="d-flex flex-wrap" style={{ gap: '1rem' }}>
             {[1, 2, 3, 4].map((i) => (
               <div
                 key={i}
-                style={{
-                  padding: '1.5rem',
-                  border: '1px solid #d0d7de',
-                  borderRadius: '6px',
-                  backgroundColor: '#f6f8fa'
+                className="Box p-3"
+                style={{ 
+                  minWidth: '300px', 
+                  flex: '1 1 300px',
+                  maxWidth: '400px'
                 }}
               >
-                <h3 style={{ fontSize: '1.2rem', margin: '0 0 0.5rem 0' }}>
+                <h3 className="h3 mb-1">
                   Project {i}
                 </h3>
-                <p style={{ color: '#666', margin: '0 0 1rem 0' }}>
+                <p className="text-muted mb-2">
                   A brief description of what this project does and why it&apos;s interesting.
                 </p>
-                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.8rem', color: '#666' }}>TypeScript</span>
-                  <span style={{ fontSize: '0.8rem', color: '#666' }}>React</span>
-                  <span style={{ fontSize: '0.8rem', color: '#666' }}>Next.js</span>
+                <div className="d-flex flex-wrap">
+                  <span className="Label mr-1 mb-1">TypeScript</span>
+                  <span className="Label mr-1 mb-1">React</span>
+                  <span className="Label mr-1 mb-1">Next.js</span>
                 </div>
               </div>
             ))}
@@ -72,27 +69,22 @@ export default function Home() {
         </div>
 
         <div>
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>
+          <h2 className="h2 mb-3">
             Recent Activity
           </h2>
           <div>
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                style={{
-                  padding: '1.5rem',
-                  border: '1px solid #d0d7de',
-                  borderRadius: '6px',
-                  marginBottom: '0.5rem'
-                }}
+                className="Box p-3 mb-2"
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <span>🐙</span>
-                  <span style={{ fontSize: '0.9rem', color: '#666' }}>
+                <div className="d-flex flex-items-center">
+                  <span className="mr-2">🐙</span>
+                  <span className="text-small text-muted">
                     {i} day{i > 1 ? 's' : ''} ago
                   </span>
                 </div>
-                <p style={{ margin: '0.5rem 0 0 0' }}>
+                <p className="mt-2 mb-0">
                   Pushed to <strong>project-{i}</strong>
                 </p>
               </div>
