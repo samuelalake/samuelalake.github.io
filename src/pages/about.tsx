@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Layout from '../components/Layout'
 
 export default function About() {
   return (
@@ -8,7 +9,7 @@ export default function About() {
         <meta name="description" content="Learn more about Samuel Alake's background as a Product Designer & Design Engineer" />
       </Head>
       
-      <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
+      <Layout>
         <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>About</h1>
         <p style={{ color: '#666', fontSize: '1.1rem', marginBottom: '2rem' }}>
           Learn more about my background, skills, and experience
@@ -37,7 +38,7 @@ export default function About() {
             [Experience details will be added here]
           </p>
         </div>
-      </div>
+      </Layout>
     </>
   )
 }

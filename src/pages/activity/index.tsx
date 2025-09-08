@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
+import Layout from '../../components/Layout'
 
 interface ActivityItem {
   id: string
@@ -99,7 +100,7 @@ export default function Activity() {
         <meta name="description" content="Timeline of Samuel Alake's professional activity and contributions" />
       </Head>
       
-      <div className="p-4" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+      <Layout>
         <div className="mb-4">
           <h1 className="h1 mb-2">Activity</h1>
           <p className="text-muted mb-4">
@@ -211,7 +212,7 @@ export default function Activity() {
             </div>
           </div>
         </div>
-      </div>
+      </Layout>
     </>
   )
 }
