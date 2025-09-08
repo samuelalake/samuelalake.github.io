@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auth Callback</title>
+</head>
+<body>
+    <p>Redirecting to app...</p>
+    <script>
+        // Get the authorization code and state from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        const state = urlParams.get('state');
+        
+        // Construct the custom URL scheme
+        if (code) {
+            const appUrl = `fbauth://callback?code=${code}&state=${state}`;
+            window.location.href = appUrl;
+        }
+    </script>
+</body>
+</html>
