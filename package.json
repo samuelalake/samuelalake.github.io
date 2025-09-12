@@ -12,7 +12,8 @@
     "sync:github-to-notion": "node scripts/sync-github-to-notion.js",
     "sync:project": "node scripts/sync-github-to-notion.js",
     "sync:auto": "node scripts/auto-sync-from-notion.js",
-    "sync:auto-project": "node scripts/auto-sync-from-notion.js"
+    "sync:auto-project": "node scripts/auto-sync-from-notion.js",
+    "sync:all-projects": "node scripts/auto-sync-all-projects.js"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

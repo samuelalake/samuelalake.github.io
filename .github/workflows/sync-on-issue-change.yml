@@ -1,0 +1,38 @@
+name: Sync on Issue Change
+
+on:
+  # Run when issues are created or updated
+  issues:
+    types: [opened, edited, closed, reopened, labeled, unlabeled]
+  
+  # Run when pull requests are created or updated
+  pull_request:
+    types: [opened, edited, closed, reopened, labeled, unlabeled]
+
+jobs:
+  sync-issue:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Sync specific issue to Notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_PROJECTS_DATABASE_ID: ${{ secrets.NOTION_PROJECTS_DATABASE_ID }}
+          NOTION_TASKS_DATABASE_ID: ${{ secrets.NOTION_TASKS_DATABASE_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+        run: |
+          echo "🚀 Syncing issue #${{ github.event.issue.number }} to Notion..."
+          node test-github-sync.js
