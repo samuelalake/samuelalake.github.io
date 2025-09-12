@@ -129,65 +129,74 @@ async function testGitHubSync() {
           ? description.substring(0, 1997) + '...'
           : description;
           
-        // Simple markdown to Notion rich text conversion
+        // Enhanced markdown to Notion rich text conversion
         const convertMarkdownToNotion = (text) => {
           const lines = text.split('\n');
           const blocks = [];
           
           for (const line of lines) {
+            // Skip empty lines to avoid unnecessary spacing
             if (line.trim() === '') {
-              blocks.push({
-                object: 'block',
-                type: 'paragraph',
-                paragraph: { rich_text: [] }
-              });
-            } else if (line.startsWith('# ')) {
+              continue; // Don't create empty paragraphs
+            }
+            
+            // Process headings with inline formatting
+            if (line.startsWith('# ')) {
+              const content = line.substring(2);
               blocks.push({
                 object: 'block',
                 type: 'heading_1',
                 heading_1: {
-                  rich_text: [{ type: 'text', text: { content: line.substring(2) } }]
+                  rich_text: convertInlineMarkdown(content)
                 }
               });
             } else if (line.startsWith('## ')) {
+              const content = line.substring(3);
               blocks.push({
                 object: 'block',
                 type: 'heading_2',
                 heading_2: {
-                  rich_text: [{ type: 'text', text: { content: line.substring(3) } }]
+                  rich_text: convertInlineMarkdown(content)
                 }
               });
             } else if (line.startsWith('### ')) {
+              const content = line.substring(4);
               blocks.push({
                 object: 'block',
                 type: 'heading_3',
                 heading_3: {
-                  rich_text: [{ type: 'text', text: { content: line.substring(4) } }]
+                  rich_text: convertInlineMarkdown(content)
                 }
               });
-            } else if (line.startsWith('- ') || line.startsWith('* ')) {
+            } 
+            // Process list items with inline formatting
+            else if (line.startsWith('- ') || line.startsWith('* ')) {
+              const content = line.substring(2);
               blocks.push({
                 object: 'block',
                 type: 'bulleted_list_item',
                 bulleted_list_item: {
-                  rich_text: [{ type: 'text', text: { content: line.substring(2) } }]
+                  rich_text: convertInlineMarkdown(content)
                 }
               });
             } else if (line.match(/^\d+\. /)) {
+              const content = line.replace(/^\d+\. /, '');
               blocks.push({
                 object: 'block',
                 type: 'numbered_list_item',
                 numbered_list_item: {
-                  rich_text: [{ type: 'text', text: { content: line.replace(/^\d+\. /, '') } }]
+                  rich_text: convertInlineMarkdown(content)
                 }
               });
-            } else {
-              // Regular paragraph with basic formatting
-              const richText = convertInlineMarkdown(line);
+            } 
+            // Process regular paragraphs with inline formatting
+            else {
               blocks.push({
                 object: 'block',
                 type: 'paragraph',
-                paragraph: { rich_text: richText }
+                paragraph: {
+                  rich_text: convertInlineMarkdown(line)
+                }
               });
             }
           }
@@ -195,33 +204,38 @@ async function testGitHubSync() {
           return blocks;
         };
         
+        // Enhanced inline markdown converter
         const convertInlineMarkdown = (text) => {
           const richText = [];
           let currentText = text;
           
-          // Handle **bold** and *italic*
+          // Handle **bold**, *italic*, and `code` with proper regex
           const parts = currentText.split(/(\*\*.*?\*\*|\*.*?\*|`.*?`)/);
           
           for (const part of parts) {
             if (part.startsWith('**') && part.endsWith('**')) {
+              // Bold text
               richText.push({
                 type: 'text',
                 text: { content: part.slice(2, -2) },
                 annotations: { bold: true }
               });
             } else if (part.startsWith('*') && part.endsWith('*') && !part.startsWith('**')) {
+              // Italic text
               richText.push({
                 type: 'text',
                 text: { content: part.slice(1, -1) },
                 annotations: { italic: true }
               });
             } else if (part.startsWith('`') && part.endsWith('`')) {
+              // Code text
               richText.push({
                 type: 'text',
                 text: { content: part.slice(1, -1) },
                 annotations: { code: true }
               });
             } else if (part.trim() !== '') {
+              // Regular text
               richText.push({
                 type: 'text',
                 text: { content: part }
