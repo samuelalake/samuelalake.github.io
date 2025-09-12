@@ -231,7 +231,7 @@ export async function syncAllGitHubIssuesToNotionTasks(): Promise<GitHubTaskSync
 /**
  * Get combined roadmap view (GitHub issues + Notion tasks) for portfolio display
  */
-export async function getPortfolioRoadmap(projectName?: string): Promise<{
+export async function getPortfolioRoadmap(projectSlug?: string): Promise<{
   tasks: NotionTask[];
   groupedByStatus: {
     todo: NotionTask[];
@@ -246,10 +246,64 @@ export async function getPortfolioRoadmap(projectName?: string): Promise<{
   };
 }> {
   try {
+    console.log('🔍 getPortfolioRoadmap called with projectSlug:', projectSlug);
+    
     // Get all tasks (includes synced GitHub issues)
-    const tasks = projectName 
-      ? await getNotionTasks() // You'll need to filter by project if needed
-      : await getNotionTasks();
+    const allTasks = await getNotionTasks();
+    console.log('📊 Total tasks found:', allTasks.length);
+    
+    // Filter tasks by project if projectSlug is provided
+    let tasks = allTasks;
+    
+    if (projectSlug) {
+      // Import getNotionProjectBySlug to get the project ID
+      const { getNotionProjectBySlug } = await import('./notion');
+      const project = await getNotionProjectBySlug(projectSlug);
+      
+      if (project) {
+        console.log('🎯 Found project:', project.title, 'with ID:', project.id);
+        console.log('🔍 Project ID format:', {
+          original: project.id,
+          withDashes: project.id?.replace(/(.{8})(.{4})(.{4})(.{4})(.{12})/, '$1-$2-$3-$4-$5'),
+          withoutDashes: project.id?.replace(/-/g, '')
+        });
+        
+        // Get tasks directly with project ID filter instead of filtering afterwards
+        const { getNotionTasks } = await import('./notion');
+        tasks = await getNotionTasks(project.id, project.title);
+        console.log('📋 Tasks fetched directly for project:', tasks.length);
+        
+        // Also try getting all tasks to see what we have
+        const allTasks = await getNotionTasks();
+        console.log('📊 Total tasks available:', allTasks.length);
+        
+        // Log a few sample tasks to see their project relationships
+        if (allTasks.length > 0) {
+          console.log('📋 Sample tasks and their project relationships:');
+          allTasks.slice(0, 3).forEach((task, index) => {
+            console.log(`  Task ${index + 1}:`, {
+              title: task.title,
+              projectId: task.projectId,
+              hasProjectId: !!task.projectId
+            });
+          });
+        }
+        
+        // Also log the raw Notion data to see what Projects property looks like
+        console.log('🔍 Raw Notion task data sample:');
+        const rawTasks = await getNotionTasks();
+        if (rawTasks.length > 0) {
+          console.log('  Raw task data structure:', {
+            title: rawTasks[0].title,
+            projectId: rawTasks[0].projectId,
+            // Let's also check what the raw Notion API returns
+          });
+        }
+      } else {
+        console.log('❌ Project not found for slug:', projectSlug);
+        tasks = [];
+      }
+    }
 
     // Group by status
     const groupedByStatus = {

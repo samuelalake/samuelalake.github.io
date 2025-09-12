@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next'
 import { Heading, Text, PageLayout, NavList, Avatar } from "@primer/react";
 import Link from "next/link";
 import MainLayout from '../components/layout/MainLayout'
-import { getNotionProjects, NotionProject } from '../lib/notion'
+import { getNotionProjects, NotionProject, getFeaturedPublications, NotionPublication } from '../lib/notion'
 
 function SectionHeader({ title }: { title: string }) {
   return (
@@ -20,9 +20,10 @@ function SectionHeader({ title }: { title: string }) {
 
 interface HomeProps {
   projects: NotionProject[]
+  publications: NotionPublication[]
 }
 
-export default function Home({ projects = [] }: HomeProps) {
+export default function Home({ projects = [], publications = [] }: HomeProps) {
   return (
     <>
       <Head>
@@ -106,57 +107,49 @@ export default function Home({ projects = [] }: HomeProps) {
                   gap: '12px'
                 }}
               >
-                <Link href="/publications/design-thinking">
-                  <div className="border rounded-2 p-3 color-bg-default cursor-pointer hover:color-bg-subtle transition-colors">
-                    <div 
-                      className="w-full color-bg-inset color-border-muted" 
-                      style={{ 
-                        aspectRatio: '16/9',
-                        border: '1px solid'
-                      }} 
-                    />
-                    <div className="mt-2">
-                      <Text className="text-large text-semibold color-fg-default">Design Thinking</Text>
-                      <div>
-                        <Text className="text-small color-fg-muted">A comprehensive guide to design thinking methodology</Text>
+                {publications.length > 0 ? (
+                  publications.map((publication) => (
+                    <Link key={publication.id} href={publication.url || `/publications/${publication.id}`}>
+                      <div className="border rounded-2 p-3 color-bg-default cursor-pointer hover:color-bg-subtle transition-colors">
+                        <div 
+                          className="w-full color-bg-inset color-border-muted" 
+                          style={{ 
+                            aspectRatio: '16/9',
+                            border: '1px solid'
+                          }} 
+                        />
+                        <div className="mt-2">
+                          <Text className="text-large text-semibold color-fg-default">{publication.title}</Text>
+                          <div>
+                            <Text className="text-small color-fg-muted">{publication.description}</Text>
+                          </div>
+                          {publication.tags.length > 0 && (
+                            <div className="mt-1">
+                              {publication.tags.map((tag, index) => (
+                                <span 
+                                  key={index}
+                                  className="text-small color-fg-muted"
+                                  style={{ 
+                                    backgroundColor: 'var(--color-neutral-subtle)',
+                                    padding: '2px 6px',
+                                    borderRadius: '12px',
+                                    marginRight: '4px'
+                                  }}
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
+                    </Link>
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-8">
+                    <Text className="text-muted">No publications available</Text>
                   </div>
-                </Link>
-                <Link href="/publications/ux-research">
-                  <div className="border rounded-2 p-3 color-bg-default cursor-pointer hover:color-bg-subtle transition-colors">
-                    <div 
-                      className="w-full color-bg-inset color-border-muted" 
-                      style={{ 
-                        aspectRatio: '16/9',
-                        border: '1px solid'
-                      }} 
-                    />
-                    <div className="mt-2">
-                      <Text className="text-large text-semibold color-fg-default">UX Research Methods</Text>
-                      <div>
-                        <Text className="text-small color-fg-muted">Best practices for user experience research</Text>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-                <Link href="/publications/accessibility">
-                  <div className="border rounded-2 p-3 color-bg-default cursor-pointer hover:color-bg-subtle transition-colors">
-                    <div 
-                      className="w-full color-bg-inset color-border-muted" 
-                      style={{ 
-                        aspectRatio: '16/9',
-                        border: '1px solid'
-                      }} 
-                    />
-                    <div className="mt-2">
-                      <Text className="text-large text-semibold color-fg-default">Accessibility in Design</Text>
-                      <div>
-                        <Text className="text-small color-fg-muted">Creating inclusive digital experiences</Text>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
+                )}
               </div>
             </PageLayout.Content>
           </PageLayout>
@@ -168,15 +161,19 @@ export default function Home({ projects = [] }: HomeProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const projects = await getNotionProjects()
+    const [projects, publications] = await Promise.all([
+      getNotionProjects(),
+      getFeaturedPublications()
+    ])
     
     return {
       props: {
         projects: projects || [],
+        publications: publications || [],
       },
     }
   } catch (error) {
-    console.error('Error fetching projects:', error)
+    console.error('Error fetching data:', error)
     
     // Return fallback data when Notion is unavailable
     const fallbackProjects = [
@@ -207,6 +204,7 @@ export const getStaticProps: GetStaticProps = async () => {
     return {
       props: {
         projects: fallbackProjects,
+        publications: [],
       },
     }
   }

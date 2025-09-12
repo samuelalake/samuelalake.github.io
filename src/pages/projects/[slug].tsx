@@ -7,12 +7,15 @@ import {
   PageHeader, 
   UnderlineNav,
   Timeline,
-  NavList
+  NavList,
+  Box,
+  Heading,
+  Link
 } from "@primer/react";
 import MainLayout from '../../components/layout/MainLayout'
 import MarkdownRenderer from '../../components/MarkdownRenderer'
 import RoadmapView from '../../components/RoadmapView'
-import { GitCommitIcon } from '@primer/octicons-react';
+import { GitCommitIcon, ArrowLeftIcon } from '@primer/octicons-react';
 import { getAllMarkdownContent, MarkdownContent } from '../../lib/markdown';
 import { getNotionProjects, getNotionProjectBySlug, NotionProject, NotionTask } from '../../lib/notion';
 import { getNotionPageContent } from '../../lib/notion';
@@ -195,42 +198,83 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
       </Head>
       
       <MainLayout>
-        <div className="mx-auto max-w-[1200px] px-4 py-4">
-          <PageLayout>
-            <PageLayout.Content>
+        <PageLayout>
+          <PageLayout.Header>
+            {/* Header content can go here if needed */}
+          </PageLayout.Header>
+          
+          <PageLayout.Content>
+            <Box sx={{ p: 4, maxWidth: '1200px', mx: 'auto' }}>
               {/* Page Header */}
-              <PageHeader>
-                <PageHeader.ParentLink href="/projects">← Back to Projects</PageHeader.ParentLink>
-                <PageHeader.Title className="h1 text-bold color-fg-default">{project.title}</PageHeader.Title>
-                <PageHeader.Description>
-                  {project.description}
-                </PageHeader.Description>
-              </PageHeader>
+              <Box sx={{ mb: 4 }}>
+                {/* Back navigation */}
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+                  <Link 
+                    href="/projects" 
+                    sx={{ 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      gap: 1, 
+                      color: 'fg.muted',
+                      textDecoration: 'none',
+                      fontSize: 1
+                    }}
+                  >
+                    <ArrowLeftIcon size={16} />
+                    Back to Projects
+                  </Link>
+                </Box>
 
-              {/* Content Area with Border */}
-              <div className="border rounded-2 color-bg-default mt-4">
-                {/* UnderlineNav for Tabs */}
-                <UnderlineNav aria-label="Project content tabs">
-                  <UnderlineNav.Item 
-                    aria-current={activeTab === 'brief' ? 'page' : undefined}
-                    onClick={() => setActiveTab('brief')}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    Brief
-                  </UnderlineNav.Item>
-                  <UnderlineNav.Item 
-                    aria-current={activeTab === 'roadmap' ? 'page' : undefined}
-                    onClick={() => setActiveTab('roadmap')}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    Roadmap
-                  </UnderlineNav.Item>
-                </UnderlineNav>
+                {/* Project title and metadata */}
+                <Box sx={{ mb: 3 }}>
+                  <Heading sx={{ fontSize: 5, fontWeight: 'normal', mb: 1 }}>
+                    {project.title}
+                  </Heading>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Text sx={{ fontSize: 0, color: 'fg.muted', fontWeight: 'semibold' }}>
+                      {project.project.organization || 'Personal'}
+                    </Text>
+                    <Text sx={{ fontSize: 0, color: 'fg.muted' }}>
+                      created {new Date(project.project.createdTime).toLocaleDateString()}
+                    </Text>
+                  </Box>
+                </Box>
+              </Box>
+
+              {/* Main Board Container */}
+              <Box sx={{ 
+                border: '1px solid',
+                borderColor: 'border.default',
+                borderRadius: 2,
+                overflow: 'hidden'
+              }}>
+                {/* Tabs Header */}
+                <Box sx={{ 
+                  borderBottom: '1px solid',
+                  borderBottomColor: 'border.default'
+                }}>
+                  <UnderlineNav aria-label="Project views">
+                    <UnderlineNav.Item 
+                      aria-current={activeTab === 'brief' ? 'page' : undefined}
+                      onClick={() => setActiveTab('brief')}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      Brief
+                    </UnderlineNav.Item>
+                    <UnderlineNav.Item 
+                      aria-current={activeTab === 'roadmap' ? 'page' : undefined}
+                      onClick={() => setActiveTab('roadmap')}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      Planning
+                    </UnderlineNav.Item>
+                  </UnderlineNav>
+                </Box>
 
                 {/* Tab Content Area */}
-                <div className="m-4">
+                <div>
                   {activeTab === 'brief' && (
-                    <div>
+                    <div style={{ padding: '24px' }}>
                       {project.notionContent ? (
                         <MarkdownRenderer content={project.notionContent} />
                       ) : project.markdownContent?.brief ? (
@@ -244,106 +288,56 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                   )}
                   {activeTab === 'roadmap' && (
                     <div>
+                      {(() => {
+                        console.log('🔍 Roadmap tab rendered');
+                        console.log('📊 project.portfolioRoadmap:', project.portfolioRoadmap);
+                        console.log('📊 project.roadmapItems:', project.roadmapItems);
+                        return null;
+                      })()}
+                      
+                      {/* Debug Information */}
                       {project.portfolioRoadmap && project.portfolioRoadmap.tasks.length > 0 ? (
-                        <div>
-                          <Text className="h3 text-semibold color-fg-default mb-4">
-                            Project Roadmap
-                          </Text>
-                          <RoadmapView 
-                            tasks={project.portfolioRoadmap.tasks}
-                            groupedByStatus={project.portfolioRoadmap.groupedByStatus}
-                            groupedByPriority={project.portfolioRoadmap.groupedByPriority}
-                            showFilters={true}
-                          />
-                        </div>
-                      ) : project.roadmapItems && project.roadmapItems.length > 0 ? (
-                        <div>
-                          <Text className="h3 text-semibold color-fg-default mb-3">
-                            Project Roadmap (Legacy View)
-                          </Text>
-                          <div className="space-y-4">
-                            {project.roadmapItems.map((item, index) => (
-                              <div key={item.id} className="border rounded-2 p-3 color-bg-subtle">
-                                <div className="flex items-start justify-between mb-2">
-                                  <div className="flex-1">
-                                    <Text className="text-semibold color-fg-default mb-1">
-                                      {item.title}
-                                    </Text>
-                                    <Text className="text-small color-fg-muted mb-2">
-                                      {item.description}
-                                    </Text>
-                                  </div>
-                                  <div className="flex items-center gap-2 ml-4">
-                                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                      item.priority === 'urgent' ? 'color-bg-danger-emphasis color-fg-on-emphasis' :
-                                      item.priority === 'high' ? 'color-bg-attention-emphasis color-fg-on-emphasis' :
-                                      item.priority === 'medium' ? 'color-bg-accent-emphasis color-fg-on-emphasis' :
-                                      'color-bg-neutral-emphasis color-fg-on-emphasis'
-                                    }`}>
-                                      {item.priority}
-                                    </span>
-                                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                      item.status === 'closed' ? 'color-bg-success-emphasis color-fg-on-emphasis' :
-                                      item.status === 'in_progress' ? 'color-bg-attention-emphasis color-fg-on-emphasis' :
-                                      'color-bg-neutral-emphasis color-fg-on-emphasis'
-                                    }`}>
-                                      {item.status}
-                                    </span>
-                                  </div>
-                                </div>
-                                <div className="flex items-center gap-4 text-xs color-fg-muted">
-                                  <span>Source: {item.source}</span>
-                                  {item.dueDate && (
-                                    <span>Due: {new Date(item.dueDate).toLocaleDateString()}</span>
-                                  )}
-                                  {item.labels.length > 0 && (
-                                    <span>Labels: {item.labels.join(', ')}</span>
-                                  )}
-                                  {item.assignees.length > 0 && (
-                                    <span>Assignees: {item.assignees.join(', ')}</span>
-                                  )}
-                                </div>
-                                <div className="mt-2">
-                                  <a 
-                                    href={item.url} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="text-xs color-fg-accent hover:color-fg-accent-emphasis"
-                                  >
-                                    View {item.source === 'github' ? 'Issue' : 'Task'} →
-                                  </a>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      ) : project.markdownContent?.roadmap ? (
-                        <MarkdownRenderer content={project.markdownContent.roadmap.content} />
+                        <RoadmapView 
+                          tasks={project.portfolioRoadmap.tasks}
+                          groupedByStatus={project.portfolioRoadmap.groupedByStatus}
+                          groupedByPriority={project.portfolioRoadmap.groupedByPriority}
+                          showFilters={true}
+                        />
                       ) : (
-                        <Text className="text-normal color-fg-default">
-                          {project.roadmap}
-                        </Text>
+                        <div style={{ padding: '24px' }}>
+                          <Text className="text-normal color-fg-muted">
+                            No roadmap items available for this project.
+                          </Text>
+                          <Text className="text-small color-fg-muted mt-2">
+                            This could be because:
+                          </Text>
+                          <ul className="text-small color-fg-muted mt-1 ml-4">
+                            <li>• No tasks are linked to this project in Notion</li>
+                            <li>• The project filtering is not working correctly</li>
+                            <li>• The Notion API is not returning the expected data</li>
+                          </ul>
+                        </div>
                       )}
                     </div>
                   )}
                 </div>
-              </div>
-            </PageLayout.Content>
+              </Box>
+            </Box>
+          </PageLayout.Content>
 
-            <PageLayout.Pane position="end">
-              {/* Timeline Section */}
-              <div>
-                <NavList.Group title="Project Timeline">
-                  <Timeline aria-label="Project development timeline">
-                    {project.timeline.map((item, idx) => (
-                      <TimelineItem key={idx} item={item} />
-                    ))}
-                  </Timeline>
-                </NavList.Group>
-              </div>
-            </PageLayout.Pane>
-          </PageLayout>
-        </div>
+          <PageLayout.Pane position="end" resizable>
+            {/* Timeline Section */}
+            <Box>
+              <NavList.Group title="Project Timeline">
+                <Timeline aria-label="Project development timeline">
+                  {project.timeline.map((item, idx) => (
+                    <TimelineItem key={idx} item={item} />
+                  ))}
+                </Timeline>
+              </NavList.Group>
+            </Box>
+          </PageLayout.Pane>
+        </PageLayout>
       </MainLayout>
     </>
   );

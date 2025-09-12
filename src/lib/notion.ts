@@ -70,6 +70,33 @@ export interface NotionBlogPost {
   slug: string;
 }
 
+// Helper function to extract property values from Notion pages
+function getPropertyValue(properties: any, propertyName: string, propertyType: string): any {
+  const property = properties[propertyName];
+  if (!property) return null;
+
+  switch (propertyType) {
+    case 'title':
+      return property.title?.[0]?.text?.content || '';
+    case 'rich_text':
+      return property.rich_text?.[0]?.text?.content || '';
+    case 'select':
+      return property.select?.name || '';
+    case 'multi_select':
+      return property.multi_select?.map((item: any) => item.name) || [];
+    case 'checkbox':
+      return property.checkbox || false;
+    case 'url':
+      return property.url || '';
+    case 'date':
+      return property.date?.start || '';
+    case 'number':
+      return property.number || 0;
+    default:
+      return null;
+  }
+}
+
 export interface NotionTask {
   id: string;
   title: string;
@@ -134,7 +161,7 @@ export async function getNotionProjects(): Promise<NotionProject[]> {
           includeInPortfolio: properties['Include in Portfolio']?.checkbox || false,
           privacyLevel: properties['Privacy Level']?.select?.name || 'Public',
           createdTime: page.created_time,
-          lastEditedTime: page.last_edited_time,
+          lastEditedTime: 'last_edited_time' in page ? page.last_edited_time : new Date().toISOString(),
           slug: properties.Slug?.rich_text?.[0]?.plain_text || 
                 properties.Title?.title?.[0]?.plain_text?.toLowerCase().replace(/\s+/g, '-') || 'untitled',
         };
@@ -192,7 +219,7 @@ export async function getNotionActivities(projectId?: string): Promise<NotionAct
         date: properties.Date?.date?.start || page.created_time,
         year: properties.Year?.number || new Date().getFullYear(),
         month: properties.Month?.select?.name || new Date().toLocaleString('default', { month: 'long' }),
-        externalUrl: properties['External URL']?.url || undefined,
+        externalUrl: properties['External URL']?.url || null,
         repository: properties.Repository?.rich_text?.[0]?.plain_text || '',
         evidenceQuality: properties['Evidence Quality']?.select?.name || 'Medium',
         includeInPortfolio: properties['Include in Portfolio']?.checkbox || false,
@@ -394,8 +421,11 @@ export async function getNotionBlogPostBySlug(slug: string): Promise<NotionBlogP
 /**
  * Get all tasks from Notion Tasks database
  */
-export async function getNotionTasks(projectId?: string): Promise<NotionTask[]> {
+export async function getNotionTasks(projectId?: string, projectName?: string): Promise<NotionTask[]> {
   try {
+    console.log('🔍 getNotionTasks called with projectId:', projectId);
+    console.log('🔑 NOTION_TASKS_DATABASE_ID:', process.env.NOTION_TASKS_DATABASE_ID);
+    
     const response = await notion.search({
       query: '',
       filter: {
@@ -408,34 +438,191 @@ export async function getNotionTasks(projectId?: string): Promise<NotionTask[]> 
       },
     });
 
+    console.log('📊 Notion search response total results:', response.results.length);
+
+    // Debug: Log all database IDs found in search results
+    const databaseIds = response.results.map((page: any) => page.parent?.database_id).filter(Boolean);
+    const uniqueDatabaseIds = [...new Set(databaseIds)];
+    console.log('🗄️ Unique database IDs found:', uniqueDatabaseIds);
+
     // Filter pages that belong to our tasks database
-    let taskPages = response.results.filter((page: any) => 
-      page.parent?.database_id === process.env.NOTION_TASKS_DATABASE_ID
-    );
+    // Handle both formats: with and without dashes
+    const tasksDbId = process.env.NOTION_TASKS_DATABASE_ID;
+    const tasksDbIdWithDashes = tasksDbId?.replace(/(.{8})(.{4})(.{4})(.{4})(.{12})/, '$1-$2-$3-$4-$5');
+    
+    console.log('🔍 Comparing database IDs:');
+    console.log('  - Environment variable (no dashes):', tasksDbId);
+    console.log('  - Environment variable (with dashes):', tasksDbIdWithDashes);
+    
+    let taskPages = response.results.filter((page: any) => {
+      const pageDbId = page.parent?.database_id;
+      return pageDbId === tasksDbId || pageDbId === tasksDbIdWithDashes;
+    });
+    
+    console.log('📋 Task pages found:', taskPages.length);
 
     // Additional filtering by project if specified
     if (projectId) {
-      taskPages = taskPages.filter((page: any) => 
-        page.properties?.Project?.relation?.some((rel: any) => rel.id === projectId)
-      );
+      console.log('🔍 Filtering tasks by project ID:', projectId);
+      
+      // Debug: Log all project relationships found in tasks
+      const taskProjectIds = taskPages.map((page: any) => {
+        const projects = page.properties?.Projects || [];
+        const projectsArray = Array.isArray(projects) ? projects : [];
+        
+        return {
+          title: page.properties?.Task?.title?.[0]?.plain_text || page.properties?.Title?.title?.[0]?.plain_text || 'Untitled',
+          projects: projectsArray,
+          projectsRaw: page.properties?.Projects,
+          projectsType: typeof page.properties?.Projects,
+          isArray: Array.isArray(page.properties?.Projects),
+          projectUrls: projectsArray.map((url: string) => {
+            // Extract project ID from URL
+            const match = url.match(/notion\.so\/([a-f0-9-]+)/);
+            return match ? match[1] : null;
+          }).filter(Boolean)
+        };
+      });
+      console.log('📋 Task project relationships:', taskProjectIds);
+      
+      // Log the first few raw pages to see the actual structure
+      console.log('🔍 Raw Notion page structure sample:');
+      if (taskPages.length > 0) {
+        const samplePage = taskPages[0] as any;
+        console.log('  Sample page properties keys:', Object.keys(samplePage.properties || {}));
+        console.log('  Projects property:', samplePage.properties?.Projects);
+        console.log('  Projects property type:', typeof samplePage.properties?.Projects);
+        console.log('  Projects property constructor:', samplePage.properties?.Projects?.constructor?.name);
+      }
+      
+      // Filter tasks by project ID - check if the project ID is in the Projects array
+      console.log('🔍 Looking for project ID:', projectId);
+      console.log('🔍 Project ID format check:', {
+        original: projectId,
+        withDashes: projectId?.replace(/(.{8})(.{4})(.{4})(.{4})(.{12})/, '$1-$2-$3-$4-$5'),
+        withoutDashes: projectId?.replace(/-/g, '')
+      });
+      
+      taskPages = taskPages.filter((page: any) => {
+        // Check if Projects is a relation object or other formats
+        const projectsProperty = page.properties?.Projects;
+        console.log('📋 Task projects property:', projectsProperty);
+        console.log('📋 Property type field:', projectsProperty?.type);
+        
+        // Handle Notion relation type (the actual structure)
+        if (projectsProperty && projectsProperty.type === 'relation') {
+          const relations = projectsProperty.relation || [];
+          
+          if (relations.length === 0) {
+            return false;
+          }
+          
+          // Check if any of the related projects match our target project ID
+          return relations.some((rel: any) => {
+            
+            // Compare both formats - with and without dashes
+            const relIdNoDashes = rel.id?.replace(/-/g, '');
+            const projectIdNoDashes = projectId?.replace(/-/g, '');
+            
+            const matches = rel.id === projectId || 
+                          relIdNoDashes === projectIdNoDashes;
+            
+            
+            return matches;
+          });
+        } else if (typeof projectsProperty === 'string') {
+          // Handle text field case (legacy or different structure)
+          console.log('📋 Projects is text field:', projectsProperty);
+          console.log('📋 Project name to match:', projectName);
+          
+          // Compare the project name in the task with the target project name
+          const matches = projectsProperty === projectName;
+          console.log('🔍 Project name comparison:', {
+            taskProjectName: projectsProperty,
+            targetProjectName: projectName,
+            matches
+          });
+          
+          return matches;
+        } else if (Array.isArray(projectsProperty)) {
+          // Handle URL array case (legacy)
+          console.log('📋 Projects is array:', projectsProperty);
+          return projectsProperty.some((projectUrl: string) => {
+            // Extract project ID from URL and compare
+            const match = projectUrl.match(/notion\.so\/([a-f0-9-]+)/);
+            const extractedId = match ? match[1] : null;
+            console.log('🔗 Project URL:', projectUrl, 'Extracted ID:', extractedId);
+            
+            // Compare both formats - with and without dashes
+            const projectIdNoDashes = projectId?.replace(/-/g, '');
+            const extractedIdNoDashes = extractedId?.replace(/-/g, '');
+            
+            const matches = match && (
+              match[1] === projectId || 
+              match[1] === projectIdNoDashes ||
+              extractedIdNoDashes === projectIdNoDashes
+            );
+            
+            console.log('🔍 Comparison:', {
+              extractedId,
+              projectId,
+              extractedIdNoDashes,
+              projectIdNoDashes,
+              matches
+            });
+            
+            return matches;
+          });
+        } else {
+          console.log('📋 Projects property has unexpected type:', typeof projectsProperty);
+          return false;
+        }
+      });
+      
+      console.log('📋 Tasks after project filtering:', taskPages.length);
     }
 
-    const tasks = taskPages.map((page: any) => {
+    const tasks = taskPages.map((page: any, index: number) => {
       const properties: NotionPageProperties = page.properties;
+
+      // Try multiple possible field names for the title
+      const title = properties.Task?.title?.[0]?.plain_text || 
+                    properties.Title?.title?.[0]?.plain_text || 
+                    properties.Name?.title?.[0]?.plain_text ||
+                    properties['Task Name']?.title?.[0]?.plain_text ||
+                    'Untitled';
+
+      // Debug: Log first few tasks' status and priority values
+      if (index < 3) {
+        console.log(`📊 Task ${index + 1} - Status:`, properties.Status?.select?.name, 'Priority:', properties.Priority?.select?.name);
+      }
 
       return {
         id: page.id,
-        title: properties.Title?.title?.[0]?.plain_text || 'Untitled',
+        title,
         description: properties.Description?.rich_text?.[0]?.plain_text || '',
         status: properties.Status?.select?.name || 'To Do',
         priority: properties.Priority?.select?.name || 'Medium',
-        dueDate: properties['Due Date']?.date?.start || undefined,
-        projectId: properties.Project?.relation?.[0]?.id || undefined,
+        dueDate: properties['Due Date']?.date?.start || null,
+        projectId: (() => {
+          // Handle both text field and URL array cases
+          const projects = properties.Projects;
+          
+          if (typeof projects === 'string') {
+            // Text field case (e.g., "Composa")
+            return projects; // Return the project name as projectId for now
+          } else if (Array.isArray(projects) && projects.length > 0) {
+            // URL array case
+            const match = projects[0].match(/notion\.so\/([a-f0-9-]+)/);
+            return match ? match[1] : null;
+          }
+          return null;
+        })(),
         labels: properties.Labels?.multi_select?.map((label: any) => label.name) || [],
         source: properties.Source?.select?.name || 'Manual',
-        githubIssueNumber: properties['GitHub Issue Number']?.number || undefined,
-        githubRepository: properties['GitHub Repository']?.rich_text?.[0]?.plain_text || undefined,
-        githubUrl: properties['GitHub URL']?.url || undefined,
+        githubIssueNumber: properties['GitHub Issue Number']?.number || null,
+        githubRepository: properties['GitHub Repository']?.rich_text?.[0]?.plain_text || null,
+        githubUrl: properties['GitHub URL']?.url || null,
         createdTime: page.created_time,
         lastEditedTime: page.last_edited_time,
       };
@@ -525,5 +712,135 @@ export async function updateNotionTask(taskId: string, updates: Partial<NotionTa
   } catch (error) {
     console.error('Error updating Notion task:', error);
     return null;
+  }
+}
+
+// Blog/Publications interfaces and functions
+export interface NotionPublication {
+  id: string;
+  title: string;
+  description: string;
+  type: string;
+  status: string;
+  url?: string;
+  date?: string;
+  tags: string[];
+  includeInPortfolio: boolean;
+  featured: boolean;
+  content: string;
+  lastEditedTime: string;
+}
+
+export async function getNotionPublications(): Promise<NotionPublication[]> {
+  try {
+    if (!process.env.NOTION_BLOG_DATABASE_ID) {
+      console.warn('NOTION_BLOG_DATABASE_ID not set, returning empty publications');
+      return [];
+    }
+
+    const response = await notion.search({
+      query: '',
+      filter: {
+        property: 'object',
+        value: 'page'
+      },
+      sort: {
+        direction: 'descending',
+        timestamp: 'last_edited_time'
+      }
+    });
+
+    const publications: NotionPublication[] = [];
+
+    for (const page of response.results) {
+      if ('properties' in page) {
+        const properties = page.properties;
+        
+        const publication: NotionPublication = {
+          id: page.id,
+          title: getPropertyValue(properties, 'Title', 'title') || 'Untitled',
+          description: getPropertyValue(properties, 'Description', 'rich_text') || '',
+          type: getPropertyValue(properties, 'Type', 'select') || 'Blog Post',
+          status: getPropertyValue(properties, 'Status', 'select') || 'Draft',
+          url: getPropertyValue(properties, 'URL', 'url') || null,
+          date: getPropertyValue(properties, 'Date', 'date') || null,
+          tags: getPropertyValue(properties, 'Tags', 'multi_select') || [],
+          includeInPortfolio: getPropertyValue(properties, 'Include in Portfolio', 'checkbox') || false,
+          featured: getPropertyValue(properties, 'Featured', 'checkbox') || false,
+          content: getPropertyValue(properties, 'Content', 'rich_text') || '',
+          lastEditedTime: 'last_edited_time' in page ? page.last_edited_time : new Date().toISOString(),
+        };
+
+        publications.push(publication);
+      }
+    }
+
+    return publications;
+  } catch (error) {
+    console.error('Error fetching Notion publications:', error);
+    return [];
+  }
+}
+
+export async function getFeaturedPublications(): Promise<NotionPublication[]> {
+  try {
+    if (!process.env.NOTION_BLOG_DATABASE_ID) {
+      console.warn('NOTION_BLOG_DATABASE_ID not set, returning empty featured publications');
+      return [];
+    }
+
+    const response = await notion.search({
+      query: '',
+      filter: {
+        property: 'object',
+        value: 'page'
+      },
+      sort: {
+        direction: 'descending',
+        timestamp: 'last_edited_time'
+      }
+    });
+
+    // Filter pages that belong to our blog database
+    const blogDbId = process.env.NOTION_BLOG_DATABASE_ID;
+    const blogDbIdWithDashes = blogDbId?.replace(/(.{8})(.{4})(.{4})(.{4})(.{12})/, '$1-$2-$3-$4-$5');
+    
+    let blogPages = response.results.filter((page: any) => {
+      const pageDbId = page.parent?.database_id;
+      return pageDbId === blogDbId || pageDbId === blogDbIdWithDashes;
+    });
+
+    console.log('📚 Blog database ID:', blogDbId);
+    console.log('📚 Blog pages found:', blogPages.length);
+
+    const publications: NotionPublication[] = [];
+
+    for (const page of blogPages) {
+      if ('properties' in page) {
+        const properties = page.properties;
+        
+        const publication: NotionPublication = {
+          id: page.id,
+          title: getPropertyValue(properties, 'Title', 'title') || 'Untitled',
+          description: getPropertyValue(properties, 'Description', 'rich_text') || '',
+          type: getPropertyValue(properties, 'Type', 'select') || 'Blog Post',
+          status: getPropertyValue(properties, 'Status', 'select') || 'Draft',
+          url: getPropertyValue(properties, 'URL', 'url') || null,
+          date: getPropertyValue(properties, 'Date', 'date') || null,
+          tags: getPropertyValue(properties, 'Tags', 'multi_select') || [],
+          includeInPortfolio: getPropertyValue(properties, 'Include in Portfolio', 'checkbox') || false,
+          featured: getPropertyValue(properties, 'Featured', 'checkbox') || false,
+          content: getPropertyValue(properties, 'Content', 'rich_text') || '',
+          lastEditedTime: 'last_edited_time' in page ? page.last_edited_time : new Date().toISOString(),
+        };
+
+        publications.push(publication);
+      }
+    }
+
+    return publications;
+  } catch (error) {
+    console.error('Error fetching featured Notion publications:', error);
+    return [];
   }
 }
