@@ -805,7 +805,7 @@ export async function getFeaturedPublications(): Promise<NotionPublication[]> {
     const blogDbId = process.env.NOTION_BLOG_DATABASE_ID;
     const blogDbIdWithDashes = blogDbId?.replace(/(.{8})(.{4})(.{4})(.{4})(.{12})/, '$1-$2-$3-$4-$5');
     
-    let blogPages = response.results.filter((page: any) => {
+    const blogPages = response.results.filter((page: any) => {
       const pageDbId = page.parent?.database_id;
       return pageDbId === blogDbId || pageDbId === blogDbIdWithDashes;
     });

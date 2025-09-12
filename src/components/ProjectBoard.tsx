@@ -3,14 +3,8 @@ import {
   Box, 
   Heading, 
   Text, 
-  CounterLabel,
-  Button
+  CounterLabel
 } from '@primer/react';
-import { 
-  IssueOpenedIcon,
-  GitPullRequestIcon,
-  IssueClosedIcon
-} from '@primer/octicons-react';
 import IssueCard from './IssueCard';
 import { NotionTask } from '../lib/notion';
 
@@ -100,7 +94,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
   );
 };
 
-const ProjectBoard: React.FC<ProjectBoardProps> = ({ tasks, groupedByStatus }) => {
+const ProjectBoard: React.FC<ProjectBoardProps> = ({ groupedByStatus }) => {
   // Convert NotionTask to mock issue format for display
   const convertTaskToIssue = (task: NotionTask) => {
     let status: 'open' | 'closed' | 'merged' = 'open';

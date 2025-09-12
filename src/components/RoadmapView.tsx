@@ -4,9 +4,6 @@ import {
   Box,
   Text, 
   Label, 
-  Link,
-  Heading,
-  Button,
   ActionMenu,
   ActionList
 } from '@primer/react';
@@ -15,7 +12,6 @@ import {
   IssueOpenedIcon, 
   CheckIcon, 
   ClockIcon, 
-  AlertIcon,
   ProjectIcon,
   TableIcon,
   ChevronDownIcon
@@ -40,9 +36,7 @@ interface RoadmapViewProps {
 
 const RoadmapView: React.FC<RoadmapViewProps> = ({ 
   tasks, 
-  groupedByStatus, 
-  groupedByPriority, 
-  showFilters = true 
+  groupedByStatus
 }) => {
   const [viewMode, setViewMode] = useState<'board' | 'table'>('board');
 
@@ -75,7 +69,7 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({
   };
 
   // Helper function to get status label variant
-  const getStatusVariant = (status: string): any => {
+  const getStatusVariant = (status: string): "default" | "primary" | "secondary" | "accent" | "success" | "attention" | "severe" | "danger" | "done" | "sponsors" => {
     switch (status) {
       case 'Done':
         return 'success';

@@ -2,9 +2,7 @@ import React from 'react';
 import { 
   Box, 
   Text, 
-  Link,
-  Label,
-  Button
+  Label
 } from '@primer/react';
 import { 
   IssueOpenedIcon,
@@ -20,7 +18,7 @@ interface IssueCardProps {
   task?: NotionTask;
 }
 
-const IssueCard: React.FC<IssueCardProps> = ({ id, title, status, task }) => {
+const IssueCard: React.FC<IssueCardProps> = ({ title, status, task }) => {
   const getStatusIcon = () => {
     switch (status) {
       case 'closed':
