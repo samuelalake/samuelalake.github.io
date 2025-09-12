@@ -1,7 +1,9 @@
 import Head from 'next/head'
+import { GetStaticProps } from 'next'
 import { Heading, Text, PageLayout, NavList, Avatar } from "@primer/react";
 import Link from "next/link";
 import MainLayout from '../components/layout/MainLayout'
+import { getNotionProjects, NotionProject } from '../lib/notion'
 
 function SectionHeader({ title }: { title: string }) {
   return (
@@ -16,7 +18,11 @@ function SectionHeader({ title }: { title: string }) {
 }
 
 
-export default function Home() {
+interface HomeProps {
+  projects: NotionProject[]
+}
+
+export default function Home({ projects = [] }: HomeProps) {
   return (
     <>
       <Head>
@@ -61,57 +67,33 @@ export default function Home() {
                   gap: '12px'
                 }}
               >
-                <Link href="/projects/composa">
-                  <div className="border rounded-2 p-3 color-bg-default cursor-pointer hover:color-bg-subtle transition-colors">
-                    <div 
-                      className="w-full color-bg-inset color-border-muted" 
-                      style={{ 
-                        aspectRatio: '16/9',
-                        border: '1px solid'
-                      }} 
-                    />
-                    <div className="mt-2">
-                      <Text className="text-large text-semibold color-fg-default">Composa</Text>
-                      <div>
-                        <Text className="text-small color-fg-muted">Design system and component library</Text>
+                {projects.length > 0 ? (
+                  projects.map((project) => (
+                    <Link key={project.id} href={`/projects/${project.slug}`}>
+                      <div className="border rounded-2 p-3 color-bg-default cursor-pointer hover:color-bg-subtle transition-colors">
+                        <div 
+                          className="w-full color-bg-inset color-border-muted" 
+                          style={{ 
+                            aspectRatio: '16/9',
+                            border: '1px solid'
+                          }} 
+                        />
+                        <div className="mt-2">
+                          <Text className="text-large text-semibold color-fg-default">{project.title}</Text>
+                          <div>
+                            <Text className="text-small color-fg-muted">{project.description}</Text>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-8">
+                    <Text className="text-normal color-fg-muted">
+                      No projects found. Make sure your Notion Projects database has projects marked as &quot;Include in Portfolio&quot;.
+                    </Text>
                   </div>
-                </Link>
-                <Link href="/projects/portfolio-site">
-                  <div className="border rounded-2 p-3 color-bg-default cursor-pointer hover:color-bg-subtle transition-colors">
-                    <div 
-                      className="w-full color-bg-inset color-border-muted" 
-                      style={{ 
-                        aspectRatio: '16/9',
-                        border: '1px solid'
-                      }} 
-                    />
-                    <div className="mt-2">
-                      <Text className="text-large text-semibold color-fg-default">Portfolio Site</Text>
-                      <div>
-                        <Text className="text-small color-fg-muted">This portfolio website built with Next.js</Text>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-                <Link href="/projects/mobile-app">
-                  <div className="border rounded-2 p-3 color-bg-default cursor-pointer hover:color-bg-subtle transition-colors">
-                    <div 
-                      className="w-full color-bg-inset color-border-muted" 
-                      style={{ 
-                        aspectRatio: '16/9',
-                        border: '1px solid'
-                      }} 
-                    />
-                    <div className="mt-2">
-                      <Text className="text-large text-semibold color-fg-default">Mobile App</Text>
-                      <div>
-                        <Text className="text-small color-fg-muted">React Native mobile application</Text>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
+                )}
               </div>
 
               {/* Publications section */}
@@ -182,4 +164,24 @@ export default function Home() {
       </MainLayout>
     </>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  try {
+    const projects = await getNotionProjects()
+    
+    return {
+      props: {
+        projects: projects || [],
+      },
+    }
+  } catch (error) {
+    console.error('Error fetching projects:', error)
+    
+    return {
+      props: {
+        projects: [],
+      },
+    }
+  }
 }
