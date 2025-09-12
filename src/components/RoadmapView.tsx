@@ -53,7 +53,7 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({
         return <CheckIcon size={16} />;
       case 'In Progress':
         return <ClockIcon size={16} />;
-      case 'Todo':
+      case 'To Do':
         return <IssueOpenedIcon size={16} />;
       default:
         return <IssueOpenedIcon size={16} />;
@@ -67,7 +67,7 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({
         return 'purple'; // Purple for closed/merged
       case 'In Progress':
         return 'green'; // Green for open/in progress
-      case 'Todo':
+      case 'To Do':
         return 'green'; // Green for open
       default:
         return 'green'; // Green for open by default
@@ -75,13 +75,13 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({
   };
 
   // Helper function to get status label variant
-  const getStatusVariant = (status: string) => {
+  const getStatusVariant = (status: string): any => {
     switch (status) {
       case 'Done':
         return 'success';
       case 'In Progress':
         return 'attention';
-      case 'Todo':
+      case 'To Do':
         return 'default';
       default:
         return 'secondary';
@@ -97,9 +97,7 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({
         {/* View Header */}
         <Box sx={{ 
           bg: 'canvas.inset',
-          pt: 3, px: 3,
-          borderBottom: '1px solid',
-          borderBottomColor: 'border.default'
+          pt: 3, px: 3
         }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
             {/* Sprint Selector */}
@@ -123,128 +121,183 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({
             </ActionMenu>
           </Box>
 
-                   {/* View Tabs */}
-                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                     <Box sx={{ 
-                       display: 'flex',
-                       height: '37px',
-                       alignItems: 'center',
-                       px: 3,
-                       py: 2,
-                       borderRadius: '6px 6px 0 0',
-                       //border: viewMode === 'board' ? '1px solid' : '1px solid',
-                       borderColor: 'border.default',
-                       //borderBottom: viewMode === 'board' ? 'none' : '1px solid',
-                       //borderBottomColor: viewMode === 'board' ? 'transparent' : 'border.default',
-                       bg: viewMode === 'board' ? 'canvas.default' : 'transparent',
-                       gap: 1,
-                       cursor: 'pointer',
-                       color: viewMode === 'board' ? 'fg.default' : 'fg.muted'
-                     }}
-                     onClick={() => setViewMode('board')}
-                     >
-                       <ProjectIcon size={16} />
-                       <Text sx={{ fontSize: 1, fontWeight: 'normal' }}>Board view</Text>
-                     </Box>
-                     <Box sx={{ 
-                       display: 'flex',
-                       height: '37px',
-                       alignItems: 'center',
-                       px: 3,
-                       py: 2,
-                       borderRadius: '6px 6px 0 0',
-                       //border: viewMode === 'table' ? '1px solid' : '1px solid',
-                       borderColor: 'border.default',
-                       //borderBottom: viewMode === 'table' ? 'none' : '1px solid',
-                       //borderBottomColor: viewMode === 'table' ? 'transparent' : 'border.default',
-                       bg: viewMode === 'table' ? 'canvas.default' : 'transparent',
-                       gap: 1,
-                       cursor: 'pointer',
-                       color: viewMode === 'table' ? 'fg.default' : 'fg.muted'
-                     }}
-                     onClick={() => setViewMode('table')}
-                     >
-                       <TableIcon size={16} />
-                       <Text sx={{ fontSize: 1, fontWeight: 'normal' }}>Table view</Text>
-                     </Box>
-                   </Box>
+          {/* View Tabs with Cutout Effect */}
+          <Box sx={{ 
+            //boxShadow: 'inset 0 -1px 0 0',
+            //boxShadowColor: 'border.default',
+            bg: 'canvas.inset',
+            display: 'flex',
+            //px: 3,
+            py: 0
+          }}>
+            <Box sx={{ 
+              display: 'flex',
+              alignItems: 'center',
+              appearance: 'none',
+              border: 0,
+              bg: 'transparent',
+              px: 3,
+              py: 2,
+              cursor: 'pointer',
+              color: viewMode === 'board' ? 'fg.default' : 'fg.muted',
+              textDecoration: 'none',
+              transition: 'color 0.2s ease-in-out',
+              mb: '-1px',
+              ...(viewMode === 'board' && {
+                borderTop: '1px solid',
+                borderLeft: '1px solid', 
+                borderRight: '1px solid',
+                borderBottom: 0,
+                borderColor: 'border.default',
+                borderRadius: '6px 6px 0 0',
+                bg: 'canvas.default',
+                position: 'relative',
+                zIndex: 1,
+                mb: 0
+              })
+            }}
+            onClick={() => setViewMode('board')}
+            >
+              <ProjectIcon size={16} />
+              <Text sx={{ fontSize: 1, fontWeight: 'normal', ml: 1 }}>Board view</Text>
+            </Box>
+            <Box sx={{ 
+              display: 'flex',
+              alignItems: 'center',
+              appearance: 'none',
+              border: 0,
+              bg: 'transparent',
+              px: 3,
+              py: 2,
+              cursor: 'pointer',
+              color: viewMode === 'table' ? 'fg.default' : 'fg.muted',
+              textDecoration: 'none',
+              transition: 'color 0.2s ease-in-out',
+              mb: '-1px',
+              ...(viewMode === 'table' && {
+                borderTop: '1px solid',
+                borderLeft: '1px solid',
+                borderRight: '1px solid', 
+                borderBottom: 0,
+                borderColor: 'border.default',
+                borderRadius: '6px 6px 0 0',
+                bg: 'canvas.default',
+                position: 'relative',
+                zIndex: 1,
+                mb: 0
+              })
+            }}
+            onClick={() => setViewMode('table')}
+            >
+              <TableIcon size={16} />
+              <Text sx={{ fontSize: 1, fontWeight: 'normal', ml: 1 }}>Table view</Text>
+            </Box>
+          </Box>
         </Box>
 
-        {/* Project Board */}
-        {viewMode === 'board' ? (
-          <ProjectBoard 
-            tasks={tasks}
-            groupedByStatus={groupedByStatus}
-          />
-        ) : (
-          <Box 
-            sx={{
-              // Only target the table container to remove border radius
-              '& [class*="Table"]': {
+        {/* Content Area - Connected to Selected Tab */}
+        <Box sx={{ 
+          bg: 'canvas.default',
+          borderTop: '1px solid',
+          borderTopColor: 'border.default',
+          mt: '-1px' // Pull content up to meet the tab line
+        }}>
+          {viewMode === 'board' ? (
+            <ProjectBoard 
+              tasks={tasks}
+              groupedByStatus={groupedByStatus}
+            />
+          ) : (
+            <Box 
+              sx={{
+                '& td, & th': {
+                  //border: 'none',
+                  borderRight: '1px solid',
+                  borderRightColor: 'border.subtle',
+                  // '&:last-child': {
+                  //   borderRight: 'none'
+                  // }
+                },
+                '& thead tr th': {
+                  backgroundColor: 'transparent',
+                  color: 'fg.muted',
+                  fontWeight: 'normal',
+                  borderTop: 'none !important',
+                  borderBottom: '1px solid',
+                  borderBottomColor: 'border.default',
+                },
+                //Remove left border from first column
+                '& td:first-child, & th:first-child': {
+                  borderLeft: 'none !important'
+                },
+                // // Remove right border from last column
+                '& td:last-child, & th:last-child': {
+                  borderRight: 'none !important'
+                },
+                //Remove bottom border from last row
+                '& tbody tr:last-child td, & tbody tr:last-child th': {
+                  borderBottom: 'none !important'
+                }
+              }}
+            >
+              <Table.Container sx={{ 
+                //border: 'none !important',
                 borderRadius: '0 !important',
-                //border: 'none !important'
-              },
-              // Style the header to look like regular rows
-              '& thead tr th': {
-                backgroundColor: 'transparent',
-                //borderBottom: '1px solid',
-                //borderBottomColor: 'border.default',
-                color: 'fg.muted',
-              }
-            }}
-          >
-            <Table.Container sx={{ border: 'none', borderRadius: 0 }}>
-              <DataTable
-                aria-labelledby="tasks-table"
-                data={tasks}
-                columns={[
-                {
-                  header: 'Title',
-                  field: 'title',
-                  rowHeader: true,
-                  renderCell: (row) => {
-                    const task = row as NotionTask;
-                    return (
-                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                        <Box sx={{ color: getStatusColor(task.status) }}>
-                          {getStatusIcon(task.status)}
-                        </Box>
-                        <Box>
-                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <Text sx={{ fontWeight: 'normal' }}>{task.title}</Text>
-                            {task.githubIssueNumber && (
-                              <Text sx={{ fontSize: 0, color: 'fg.muted', fontWeight: 'normal' }}>
-                                #{task.githubIssueNumber}
+                boxShadow: 'none !important',
+                overflow: 'visible'
+              }}>
+                <DataTable
+                  aria-labelledby="tasks-table"
+                  data={tasks}
+                  columns={[
+                  {
+                    header: 'Title',
+                    field: 'title',
+                    rowHeader: true,
+                    renderCell: (row) => {
+                      const task = row as NotionTask;
+                      return (
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                          <Box sx={{ color: getStatusColor(task.status) }}>
+                            {getStatusIcon(task.status)}
+                          </Box>
+                          <Box>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                              <Text sx={{ fontWeight: 'normal' }}>{task.title}</Text>
+                              {task.githubIssueNumber && (
+                                <Text sx={{ fontSize: 0, color: 'fg.muted', fontWeight: 'normal' }}>
+                                  #{task.githubIssueNumber}
+                                </Text>
+                              )}
+                            </Box>
+                            {task.description && (
+                              <Text sx={{ fontSize: 0, color: 'fg.muted', mt: 1 }}>
+                                {task.description}
                               </Text>
                             )}
                           </Box>
-                          {task.description && (
-                            <Text sx={{ fontSize: 0, color: 'fg.muted', mt: 1 }}>
-                              {task.description}
-                            </Text>
-                          )}
                         </Box>
-                      </Box>
-                    );
+                      );
+                    },
                   },
-                },
-                {
-                  header: 'Status',
-                  field: 'status',
-                  renderCell: (row) => {
-                    const task = row as NotionTask;
-                    return (
-                      <Label size="small" variant={getStatusVariant(task.status)}>
-                        {task.status || 'No Status'}
-                      </Label>
-                    );
+                  {
+                    header: 'Status',
+                    field: 'status',
+                    renderCell: (row) => {
+                      const task = row as NotionTask;
+                      return (
+                        <Label size="small" variant={getStatusVariant(task.status)}>
+                          {task.status || 'No Status'}
+                        </Label>
+                      );
+                    },
                   },
-                },
-              ]}
-              />
-            </Table.Container>
-          </Box>
-        )}
+                ]}
+                />
+              </Table.Container>
+            </Box>
+          )}
+        </Box>
       </Box>
     </Box>
   );

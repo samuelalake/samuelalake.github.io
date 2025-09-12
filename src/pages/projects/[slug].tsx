@@ -249,10 +249,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 overflow: 'hidden'
               }}>
                 {/* Tabs Header */}
-                <Box sx={{ 
-                  borderBottom: '1px solid',
-                  borderBottomColor: 'border.default'
-                }}>
+                <Box>
                   <UnderlineNav aria-label="Project views">
                     <UnderlineNav.Item 
                       aria-current={activeTab === 'brief' ? 'page' : undefined}
