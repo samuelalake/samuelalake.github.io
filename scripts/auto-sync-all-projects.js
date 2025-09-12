@@ -52,7 +52,7 @@ async function syncProjectIssues(project) {
     console.log(`🔗 GitHub Repo: ${githubRepo}`);
     
     // Extract owner and repo from URL
-    const repoMatch = githubRepo.match(/github\\.com\\/([^\\/]+)\\/([^\\/]+)/);
+    const repoMatch = githubRepo.match(/github\.com\/([^\/]+)\/([^\/]+)/);
     if (!repoMatch) {
       console.log(`❌ Invalid GitHub URL: ${githubRepo}`);
       return { synced: 0, errors: 0 };
@@ -153,8 +153,8 @@ async function syncProjectIssues(project) {
                   rich_text: convertInlineMarkdown(content)
                 }
               });
-            } else if (line.match(/^\\d+\\. /)) {
-              const content = line.replace(/^\\d+\\. /, '');
+            } else if (line.match(/^\d+\. /)) {
+              const content = line.replace(/^\d+\. /, '');
               blocks.push({
                 object: 'block',
                 type: 'numbered_list_item',
@@ -184,7 +184,7 @@ async function syncProjectIssues(project) {
           let currentText = text;
           
           // Handle **bold**, *italic*, and `code` with proper regex
-          const parts = currentText.split(/(\\*\\*.*?\\*\\*|\\*.*?\\*|`.*?`)/);
+          const parts = currentText.split(/(\*\*.*?\*\*|\*.*?\*|`.*?`)/);
           
           for (const part of parts) {
             if (part.startsWith('**') && part.endsWith('**')) {
