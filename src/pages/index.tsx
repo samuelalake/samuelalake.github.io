@@ -178,9 +178,35 @@ export const getStaticProps: GetStaticProps = async () => {
   } catch (error) {
     console.error('Error fetching projects:', error)
     
+    // Return fallback data when Notion is unavailable
+    const fallbackProjects = [
+      {
+        id: 'fallback-1',
+        title: 'Portfolio Website',
+        description: 'This portfolio website built with Next.js and TypeScript',
+        type: 'Code Project',
+        status: 'Active',
+        organization: 'Personal',
+        brief: 'A modern portfolio website showcasing my work and experience as a product designer and design engineer.',
+        milestones: '',
+        okrs: '',
+        phases: 'Development',
+        primaryRepository: 'https://github.com/samuelalake/samuelalake.github.io',
+        figmaFile: '',
+        externalLinks: '',
+        tags: ['Next.js', 'TypeScript', 'Portfolio'],
+        priority: 'Medium',
+        includeInPortfolio: true,
+        privacyLevel: 'Public',
+        createdTime: new Date().toISOString(),
+        lastEditedTime: new Date().toISOString(),
+        slug: 'portfolio-site'
+      }
+    ]
+    
     return {
       props: {
-        projects: [],
+        projects: fallbackProjects,
       },
     }
   }
