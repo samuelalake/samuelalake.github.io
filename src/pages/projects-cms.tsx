@@ -149,7 +149,7 @@ function ProjectCard({ project }: { project: UnifiedProject }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const cmsProvider = (process.env.CMS_PROVIDER as CMSProvider) || 'hybrid';
+  const cmsProvider = (process.env.CMS_PROVIDER as CMSProvider) || 'notion';
   
   try {
     const projects = await getAllProjects(cmsProvider);
