@@ -12,10 +12,10 @@ export interface GitHubProject {
   homepage: string;
   language: string;
   topics: string[];
-  created_at: string;
-  updated_at: string;
-  stargazers_count: number;
-  forks_count: number;
+  created_at: string | null | undefined;
+  updated_at: string | null | undefined;
+  stargazers_count: number | undefined;
+  forks_count: number | undefined;
   brief?: string;
   roadmap?: string;
 }
@@ -33,6 +33,45 @@ export interface GitHubBlogPost {
   type: string;
   created_at: string;
   updated_at: string;
+}
+
+export interface GitHubIssue {
+  id: number;
+  number: number;
+  title: string;
+  body: string;
+  state: 'open' | 'closed';
+  html_url: string;
+  created_at: string;
+  updated_at: string;
+  closed_at: string | null;
+  labels: Array<{
+    id: number;
+    name: string;
+    color: string;
+    description: string | null;
+  }>;
+  assignees: Array<{
+    id: number;
+    login: string;
+    avatar_url: string;
+    html_url: string;
+  }>;
+  milestone: {
+    id: number;
+    title: string;
+    description: string | null;
+    state: 'open' | 'closed';
+    created_at: string;
+    updated_at: string;
+    due_on: string | null;
+    closed_at: string | null;
+  } | null;
+  repository: {
+    name: string;
+    full_name: string;
+    html_url: string;
+  };
 }
 
 /**
@@ -105,7 +144,7 @@ export async function getGitHubBlogPosts(repoName: string = 'blog'): Promise<Git
             path: item.path,
           });
 
-          const content = Buffer.from(fileContent.content, 'base64').toString('utf-8');
+          const content = Buffer.from((fileContent as any).content, 'base64').toString('utf-8');
 
           return {
             name: item.name,
@@ -175,5 +214,95 @@ export async function getGitHubBlogPostByName(postName: string, repoName: string
   } catch (error) {
     console.error('Error fetching blog post by name:', error);
     return null;
+  }
+}
+
+/**
+ * Get all issues from a specific GitHub repository
+ */
+export async function getGitHubIssues(repoName: string, state: 'open' | 'closed' | 'all' = 'all'): Promise<GitHubIssue[]> {
+  try {
+    const { data: issues } = await octokit.issues.listForRepo({
+      owner: process.env.GITHUB_USERNAME || 'samuelalake',
+      repo: repoName,
+      state,
+      per_page: 100,
+      sort: 'updated',
+      direction: 'desc',
+    });
+
+    return issues.map(issue => ({
+      id: issue.id,
+      number: issue.number,
+      title: issue.title,
+      body: issue.body || '',
+      state: issue.state as 'open' | 'closed',
+      html_url: issue.html_url,
+      created_at: issue.created_at,
+      updated_at: issue.updated_at,
+      closed_at: issue.closed_at,
+      labels: issue.labels.map(label => ({
+        id: typeof label === 'string' ? 0 : label.id || 0,
+        name: typeof label === 'string' ? label : label.name || '',
+        color: typeof label === 'string' ? '000000' : label.color || '000000',
+        description: typeof label === 'string' ? null : label.description || null,
+      })),
+      assignees: (issue.assignees || []).map(assignee => ({
+        id: assignee.id,
+        login: assignee.login,
+        avatar_url: assignee.avatar_url,
+        html_url: assignee.html_url,
+      })),
+      milestone: issue.milestone ? {
+        id: issue.milestone.id,
+        title: issue.milestone.title,
+        description: issue.milestone.description,
+        state: issue.milestone.state as 'open' | 'closed',
+        created_at: issue.milestone.created_at,
+        updated_at: issue.milestone.updated_at,
+        due_on: issue.milestone.due_on,
+        closed_at: issue.milestone.closed_at,
+      } : null,
+      repository: {
+        name: repoName,
+        full_name: `${process.env.GITHUB_USERNAME || 'samuelalake'}/${repoName}`,
+        html_url: `https://github.com/${process.env.GITHUB_USERNAME || 'samuelalake'}/${repoName}`,
+      },
+    }));
+  } catch (error) {
+    console.error(`Error fetching GitHub issues for ${repoName}:`, error);
+    return [];
+  }
+}
+
+/**
+ * Get issues from all repositories
+ */
+export async function getAllGitHubIssues(state: 'open' | 'closed' | 'all' = 'all'): Promise<GitHubIssue[]> {
+  try {
+    const projects = await getGitHubProjects();
+    const allIssues: GitHubIssue[] = [];
+
+    for (const project of projects) {
+      const issues = await getGitHubIssues(project.name, state);
+      allIssues.push(...issues);
+    }
+
+    return allIssues.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
+  } catch (error) {
+    console.error('Error fetching all GitHub issues:', error);
+    return [];
+  }
+}
+
+/**
+ * Get issues for a specific project
+ */
+export async function getGitHubIssuesForProject(projectName: string, state: 'open' | 'closed' | 'all' = 'all'): Promise<GitHubIssue[]> {
+  try {
+    return await getGitHubIssues(projectName, state);
+  } catch (error) {
+    console.error(`Error fetching GitHub issues for project ${projectName}:`, error);
+    return [];
   }
 }

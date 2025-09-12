@@ -159,7 +159,6 @@ export const getStaticProps: GetStaticProps = async () => {
         projects,
         cmsProvider,
       },
-      revalidate: 3600, // Revalidate every hour
     };
   } catch (error) {
     console.error('Error fetching projects:', error);
@@ -169,7 +168,6 @@ export const getStaticProps: GetStaticProps = async () => {
         projects: [],
         cmsProvider,
       },
-      revalidate: 60, // Retry in 1 minute on error
     };
   }
 };

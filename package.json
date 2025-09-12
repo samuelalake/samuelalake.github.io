@@ -8,7 +8,11 @@
     "export": "next build && next export",
     "start": "next start",
     "lint": "eslint",
-    "deploy": "npm run build && touch out/.nojekyll"
+    "deploy": "npm run build && touch out/.nojekyll",
+    "sync:github-to-notion": "node scripts/sync-github-to-notion.js",
+    "sync:project": "node scripts/sync-github-to-notion.js",
+    "sync:auto": "node scripts/auto-sync-from-notion.js",
+    "sync:auto-project": "node scripts/auto-sync-from-notion.js"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
@@ -19,6 +23,7 @@
     "@primer/octicons-react": "^19.17.0",
     "@primer/react": "^37.31.0",
     "date-fns": "^4.1.0",
+    "dotenv": "^17.2.2",
     "gray-matter": "^4.0.3",
     "next": "15.5.2",
     "notion-to-md": "^3.1.9",

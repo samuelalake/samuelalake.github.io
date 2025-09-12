@@ -7,13 +7,22 @@ export interface UnifiedProject {
   id: string;
   title: string;
   description: string;
-  brief: string;
-  roadmap: string;
+  type: string;
   status: string;
+  organization: string;
+  brief: string;
+  milestones: string;
+  okrs: string;
+  phases: string;
+  primaryRepository?: string;
+  figmaFile?: string;
+  externalLinks: string;
   tags: string[];
+  priority: string;
+  includeInPortfolio: boolean;
+  privacyLevel: string;
   createdTime: string;
   lastEditedTime: string;
-  coverImage?: string;
   slug: string;
   provider: CMSProvider;
   externalUrl?: string;
@@ -85,13 +94,22 @@ function convertNotionToUnified(project: NotionProject): UnifiedProject {
     id: project.id,
     title: project.title,
     description: project.description,
-    brief: project.brief,
-    roadmap: project.roadmap,
+    type: project.type,
     status: project.status,
+    organization: project.organization,
+    brief: project.brief,
+    milestones: project.milestones,
+    okrs: project.okrs,
+    phases: project.phases,
+    primaryRepository: project.primaryRepository,
+    figmaFile: project.figmaFile,
+    externalLinks: project.externalLinks,
     tags: project.tags,
+    priority: project.priority,
+    includeInPortfolio: project.includeInPortfolio,
+    privacyLevel: project.privacyLevel,
     createdTime: project.createdTime,
     lastEditedTime: project.lastEditedTime,
-    coverImage: project.coverImage,
     slug: project.slug,
     provider: 'notion',
   };
@@ -105,12 +123,22 @@ function convertGitHubToUnified(project: GitHubProject): UnifiedProject {
     id: project.name,
     title: project.name,
     description: project.description,
-    brief: project.brief || '',
-    roadmap: project.roadmap || '',
+    type: 'Code Project',
     status: 'Published',
+    organization: 'Personal',
+    brief: project.brief || '',
+    milestones: '',
+    okrs: '',
+    phases: 'Development',
+    primaryRepository: project.html_url,
+    figmaFile: undefined,
+    externalLinks: project.homepage || '',
     tags: project.topics,
-    createdTime: project.created_at,
-    lastEditedTime: project.updated_at,
+    priority: 'Medium',
+    includeInPortfolio: true,
+    privacyLevel: 'Public',
+    createdTime: project.created_at || new Date().toISOString(),
+    lastEditedTime: project.updated_at || new Date().toISOString(),
     slug: project.name,
     provider: 'github',
     externalUrl: project.html_url,
