@@ -104,7 +104,6 @@ export async function syncGitHubIssuesToNotionTasks(projectName: string, project
     // Get existing Notion tasks
     const notionTasks = await getNotionTasks(projectId);
     
-    console.log(`Found ${githubIssues.length} GitHub issues and ${notionTasks.length} existing Notion tasks`);
 
     for (const issue of githubIssues) {
       try {
@@ -124,7 +123,6 @@ export async function syncGitHubIssuesToNotionTasks(projectName: string, project
             const updated = await updateNotionTask(existingTask.id, taskData);
             if (updated) {
               result.updatedTasks++;
-              console.log(`Updated task: ${taskData.title}`);
             } else {
               result.errors.push(`Failed to update task for issue #${issue.number}`);
             }
@@ -134,7 +132,6 @@ export async function syncGitHubIssuesToNotionTasks(projectName: string, project
           const created = await createNotionTask(taskData);
           if (created) {
             result.newTasks++;
-            console.log(`Created new task: ${taskData.title}`);
           } else {
             result.errors.push(`Failed to create task for issue #${issue.number}`);
           }
@@ -143,16 +140,13 @@ export async function syncGitHubIssuesToNotionTasks(projectName: string, project
         result.syncedTasks++;
       } catch (error) {
         result.errors.push(`Error syncing issue #${issue.number}: ${error}`);
-        console.error(`Error syncing issue #${issue.number}:`, error);
       }
     }
 
-    console.log(`Sync complete: ${result.syncedTasks} total, ${result.newTasks} new, ${result.updatedTasks} updated`);
     return result;
 
   } catch (error) {
     result.errors.push(`Sync failed: ${error}`);
-    console.error('GitHub to Notion sync failed:', error);
     return result;
   }
 }
@@ -175,7 +169,6 @@ export async function syncAllGitHubIssuesToNotionTasks(): Promise<GitHubTaskSync
     // Get existing Notion tasks
     const notionTasks = await getNotionTasks();
     
-    console.log(`Found ${allGitHubIssues.length} GitHub issues and ${notionTasks.length} existing Notion tasks`);
 
     for (const issue of allGitHubIssues) {
       try {
@@ -195,7 +188,6 @@ export async function syncAllGitHubIssuesToNotionTasks(): Promise<GitHubTaskSync
             const updated = await updateNotionTask(existingTask.id, taskData);
             if (updated) {
               result.updatedTasks++;
-              console.log(`Updated task: ${taskData.title}`);
             } else {
               result.errors.push(`Failed to update task for issue #${issue.number}`);
             }
@@ -205,7 +197,6 @@ export async function syncAllGitHubIssuesToNotionTasks(): Promise<GitHubTaskSync
           const created = await createNotionTask(taskData);
           if (created) {
             result.newTasks++;
-            console.log(`Created new task: ${taskData.title}`);
           } else {
             result.errors.push(`Failed to create task for issue #${issue.number}`);
           }
@@ -214,16 +205,13 @@ export async function syncAllGitHubIssuesToNotionTasks(): Promise<GitHubTaskSync
         result.syncedTasks++;
       } catch (error) {
         result.errors.push(`Error syncing issue #${issue.number}: ${error}`);
-        console.error(`Error syncing issue #${issue.number}:`, error);
       }
     }
 
-    console.log(`Sync complete: ${result.syncedTasks} total, ${result.newTasks} new, ${result.updatedTasks} updated`);
     return result;
 
   } catch (error) {
     result.errors.push(`Sync failed: ${error}`);
-    console.error('GitHub to Notion sync failed:', error);
     return result;
   }
 }
@@ -246,11 +234,9 @@ export async function getPortfolioRoadmap(projectSlug?: string): Promise<{
   };
 }> {
   try {
-    console.log('🔍 getPortfolioRoadmap called with projectSlug:', projectSlug);
     
     // Get all tasks (includes synced GitHub issues)
     const allTasks = await getNotionTasks();
-    console.log('📊 Total tasks found:', allTasks.length);
     
     // Filter tasks by project if projectSlug is provided
     let tasks = allTasks;
@@ -261,46 +247,15 @@ export async function getPortfolioRoadmap(projectSlug?: string): Promise<{
       const project = await getNotionProjectBySlug(projectSlug);
       
       if (project) {
-        console.log('🎯 Found project:', project.title, 'with ID:', project.id);
-        console.log('🔍 Project ID format:', {
-          original: project.id,
-          withDashes: project.id?.replace(/(.{8})(.{4})(.{4})(.{4})(.{12})/, '$1-$2-$3-$4-$5'),
-          withoutDashes: project.id?.replace(/-/g, '')
-        });
         
         // Get tasks directly with project ID filter instead of filtering afterwards
         const { getNotionTasks } = await import('./notion');
         tasks = await getNotionTasks(project.id, project.title);
-        console.log('📋 Tasks fetched directly for project:', tasks.length);
         
         // Also try getting all tasks to see what we have
         const allTasks = await getNotionTasks();
-        console.log('📊 Total tasks available:', allTasks.length);
         
-        // Log a few sample tasks to see their project relationships
-        if (allTasks.length > 0) {
-          console.log('📋 Sample tasks and their project relationships:');
-          allTasks.slice(0, 3).forEach((task, index) => {
-            console.log(`  Task ${index + 1}:`, {
-              title: task.title,
-              projectId: task.projectId,
-              hasProjectId: !!task.projectId
-            });
-          });
-        }
-        
-        // Also log the raw Notion data to see what Projects property looks like
-        console.log('🔍 Raw Notion task data sample:');
-        const rawTasks = await getNotionTasks();
-        if (rawTasks.length > 0) {
-          console.log('  Raw task data structure:', {
-            title: rawTasks[0].title,
-            projectId: rawTasks[0].projectId,
-            // Let's also check what the raw Notion API returns
-          });
-        }
       } else {
-        console.log('❌ Project not found for slug:', projectSlug);
         tasks = [];
       }
     }

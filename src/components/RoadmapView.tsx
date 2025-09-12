@@ -36,7 +36,9 @@ interface RoadmapViewProps {
 
 const RoadmapView: React.FC<RoadmapViewProps> = ({ 
   tasks, 
-  groupedByStatus
+  groupedByStatus, 
+  groupedByPriority, 
+  showFilters = true 
 }) => {
   const [viewMode, setViewMode] = useState<'board' | 'table'>('board');
 
@@ -117,11 +119,8 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({
 
           {/* View Tabs with Cutout Effect */}
           <Box sx={{ 
-            //boxShadow: 'inset 0 -1px 0 0',
-            //boxShadowColor: 'border.default',
             bg: 'canvas.inset',
             display: 'flex',
-            //px: 3,
             py: 0
           }}>
             <Box sx={{ 
@@ -205,12 +204,8 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({
             <Box 
               sx={{
                 '& td, & th': {
-                  //border: 'none',
                   borderRight: '1px solid',
                   borderRightColor: 'border.subtle',
-                  // '&:last-child': {
-                  //   borderRight: 'none'
-                  // }
                 },
                 '& thead tr th': {
                   backgroundColor: 'transparent',
@@ -224,7 +219,7 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({
                 '& td:first-child, & th:first-child': {
                   borderLeft: 'none !important'
                 },
-                // // Remove right border from last column
+                // Remove right border from last column
                 '& td:last-child, & th:last-child': {
                   borderRight: 'none !important'
                 },
@@ -235,7 +230,6 @@ const RoadmapView: React.FC<RoadmapViewProps> = ({
               }}
             >
               <Table.Container sx={{ 
-                //border: 'none !important',
                 borderRadius: '0 !important',
                 boxShadow: 'none !important',
                 overflow: 'visible'

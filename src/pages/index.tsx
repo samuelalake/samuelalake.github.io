@@ -4,15 +4,16 @@ import { Heading, Text, PageLayout, NavList, Avatar } from "@primer/react";
 import Link from "next/link";
 import MainLayout from '../components/layout/MainLayout'
 import { getNotionProjects, NotionProject, getFeaturedPublications, NotionPublication } from '../lib/notion'
+import { getGitHubUser, GitHubUser } from '../lib/github-cms'
 
 function SectionHeader({ title }: { title: string }) {
   return (
     <div className="py-4">
       <Heading as="h2" className="h2 text-bold color-fg-default">{title}</Heading>
-      <div className="d-flex flex-items-center" style={{ gap: '4px' }}>
+      {/* <div className="d-flex flex-items-center" style={{ gap: '4px' }}>
         <Text className="text-small color-fg-muted">arturcraft</Text>
         <Text className="text-small color-fg-muted">created 5 days ago</Text>
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -21,9 +22,10 @@ function SectionHeader({ title }: { title: string }) {
 interface HomeProps {
   projects: NotionProject[]
   publications: NotionPublication[]
+  githubUser: GitHubUser | null
 }
 
-export default function Home({ projects = [], publications = [] }: HomeProps) {
+export default function Home({ projects = [], publications = [], githubUser = null }: HomeProps) {
   return (
     <>
       <Head>
@@ -38,7 +40,11 @@ export default function Home({ projects = [], publications = [] }: HomeProps) {
             className="mx-auto max-w-[1200px] px-4 py-6 d-flex flex-items-center" 
             style={{ gap: '16px' }}
           >
-            <Avatar size={64} src="https://api.builder.io/api/v1/image/assets/TEMP/1c55008f7e2de64711394977be83af423879a9c7?width=128" />
+            <Avatar 
+              size={64} 
+              src={githubUser?.avatar_url || "https://api.builder.io/api/v1/image/assets/TEMP/1c55008f7e2de64711394977be83af423879a9c7?width=128"} 
+              alt={githubUser?.name || "Samuel Alake"}
+            />
             <div>
               <h1 className="h1 text-bold color-fg-default mb-1">Samuel Alake</h1>
               <Text className="text-normal color-fg-muted">Product Designer & Design Engineer</Text>
@@ -161,15 +167,17 @@ export default function Home({ projects = [], publications = [] }: HomeProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const [projects, publications] = await Promise.all([
+    const [projects, publications, githubUser] = await Promise.all([
       getNotionProjects(),
-      getFeaturedPublications()
+      getFeaturedPublications(),
+      getGitHubUser()
     ])
     
     return {
       props: {
         projects: projects || [],
         publications: publications || [],
+        githubUser: githubUser || null,
       },
     }
   } catch (error) {
@@ -205,6 +213,7 @@ export const getStaticProps: GetStaticProps = async () => {
       props: {
         projects: fallbackProjects,
         publications: [],
+        githubUser: null,
       },
     }
   }

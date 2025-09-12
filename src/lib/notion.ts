@@ -423,8 +423,6 @@ export async function getNotionBlogPostBySlug(slug: string): Promise<NotionBlogP
  */
 export async function getNotionTasks(projectId?: string, projectName?: string): Promise<NotionTask[]> {
   try {
-    console.log('🔍 getNotionTasks called with projectId:', projectId);
-    console.log('🔑 NOTION_TASKS_DATABASE_ID:', process.env.NOTION_TASKS_DATABASE_ID);
     
     const response = await notion.search({
       query: '',
@@ -438,32 +436,25 @@ export async function getNotionTasks(projectId?: string, projectName?: string): 
       },
     });
 
-    console.log('📊 Notion search response total results:', response.results.length);
 
     // Debug: Log all database IDs found in search results
     const databaseIds = response.results.map((page: any) => page.parent?.database_id).filter(Boolean);
     const uniqueDatabaseIds = [...new Set(databaseIds)];
-    console.log('🗄️ Unique database IDs found:', uniqueDatabaseIds);
 
     // Filter pages that belong to our tasks database
     // Handle both formats: with and without dashes
     const tasksDbId = process.env.NOTION_TASKS_DATABASE_ID;
     const tasksDbIdWithDashes = tasksDbId?.replace(/(.{8})(.{4})(.{4})(.{4})(.{12})/, '$1-$2-$3-$4-$5');
     
-    console.log('🔍 Comparing database IDs:');
-    console.log('  - Environment variable (no dashes):', tasksDbId);
-    console.log('  - Environment variable (with dashes):', tasksDbIdWithDashes);
     
     let taskPages = response.results.filter((page: any) => {
       const pageDbId = page.parent?.database_id;
       return pageDbId === tasksDbId || pageDbId === tasksDbIdWithDashes;
     });
     
-    console.log('📋 Task pages found:', taskPages.length);
 
     // Additional filtering by project if specified
     if (projectId) {
-      console.log('🔍 Filtering tasks by project ID:', projectId);
       
       // Debug: Log all project relationships found in tasks
       const taskProjectIds = taskPages.map((page: any) => {
@@ -483,31 +474,17 @@ export async function getNotionTasks(projectId?: string, projectName?: string): 
           }).filter(Boolean)
         };
       });
-      console.log('📋 Task project relationships:', taskProjectIds);
       
       // Log the first few raw pages to see the actual structure
-      console.log('🔍 Raw Notion page structure sample:');
       if (taskPages.length > 0) {
         const samplePage = taskPages[0] as any;
-        console.log('  Sample page properties keys:', Object.keys(samplePage.properties || {}));
-        console.log('  Projects property:', samplePage.properties?.Projects);
-        console.log('  Projects property type:', typeof samplePage.properties?.Projects);
-        console.log('  Projects property constructor:', samplePage.properties?.Projects?.constructor?.name);
       }
       
       // Filter tasks by project ID - check if the project ID is in the Projects array
-      console.log('🔍 Looking for project ID:', projectId);
-      console.log('🔍 Project ID format check:', {
-        original: projectId,
-        withDashes: projectId?.replace(/(.{8})(.{4})(.{4})(.{4})(.{12})/, '$1-$2-$3-$4-$5'),
-        withoutDashes: projectId?.replace(/-/g, '')
-      });
       
       taskPages = taskPages.filter((page: any) => {
         // Check if Projects is a relation object or other formats
         const projectsProperty = page.properties?.Projects;
-        console.log('📋 Task projects property:', projectsProperty);
-        console.log('📋 Property type field:', projectsProperty?.type);
         
         // Handle Notion relation type (the actual structure)
         if (projectsProperty && projectsProperty.type === 'relation') {
@@ -532,26 +509,17 @@ export async function getNotionTasks(projectId?: string, projectName?: string): 
           });
         } else if (typeof projectsProperty === 'string') {
           // Handle text field case (legacy or different structure)
-          console.log('📋 Projects is text field:', projectsProperty);
-          console.log('📋 Project name to match:', projectName);
           
           // Compare the project name in the task with the target project name
           const matches = projectsProperty === projectName;
-          console.log('🔍 Project name comparison:', {
-            taskProjectName: projectsProperty,
-            targetProjectName: projectName,
-            matches
-          });
           
           return matches;
         } else if (Array.isArray(projectsProperty)) {
           // Handle URL array case (legacy)
-          console.log('📋 Projects is array:', projectsProperty);
           return projectsProperty.some((projectUrl: string) => {
             // Extract project ID from URL and compare
             const match = projectUrl.match(/notion\.so\/([a-f0-9-]+)/);
             const extractedId = match ? match[1] : null;
-            console.log('🔗 Project URL:', projectUrl, 'Extracted ID:', extractedId);
             
             // Compare both formats - with and without dashes
             const projectIdNoDashes = projectId?.replace(/-/g, '');
@@ -563,23 +531,13 @@ export async function getNotionTasks(projectId?: string, projectName?: string): 
               extractedIdNoDashes === projectIdNoDashes
             );
             
-            console.log('🔍 Comparison:', {
-              extractedId,
-              projectId,
-              extractedIdNoDashes,
-              projectIdNoDashes,
-              matches
-            });
-            
             return matches;
           });
         } else {
-          console.log('📋 Projects property has unexpected type:', typeof projectsProperty);
           return false;
         }
       });
       
-      console.log('📋 Tasks after project filtering:', taskPages.length);
     }
 
     const tasks = taskPages.map((page: any, index: number) => {
@@ -594,7 +552,6 @@ export async function getNotionTasks(projectId?: string, projectName?: string): 
 
       // Debug: Log first few tasks' status and priority values
       if (index < 3) {
-        console.log(`📊 Task ${index + 1} - Status:`, properties.Status?.select?.name, 'Priority:', properties.Priority?.select?.name);
       }
 
       return {
@@ -810,8 +767,6 @@ export async function getFeaturedPublications(): Promise<NotionPublication[]> {
       return pageDbId === blogDbId || pageDbId === blogDbIdWithDashes;
     });
 
-    console.log('📚 Blog database ID:', blogDbId);
-    console.log('📚 Blog pages found:', blogPages.length);
 
     const publications: NotionPublication[] = [];
 

@@ -209,7 +209,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 {/* Back navigation */}
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
                   <Link 
-                    href="/projects" 
+                    href="/" 
                     sx={{ 
                       display: 'flex', 
                       alignItems: 'center', 
@@ -220,7 +220,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     }}
                   >
                     <ArrowLeftIcon size={16} />
-                    Back to Projects
+                    Back to Home
                   </Link>
                 </Box>
 
@@ -262,7 +262,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                       onClick={() => setActiveTab('roadmap')}
                       style={{ cursor: 'pointer' }}
                     >
-                      Planning
+                      Roadmap
                     </UnderlineNav.Item>
                   </UnderlineNav>
                 </Box>

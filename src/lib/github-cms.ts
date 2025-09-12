@@ -35,6 +35,24 @@ export interface GitHubBlogPost {
   updated_at: string;
 }
 
+export interface GitHubUser {
+  login: string;
+  id: number;
+  avatar_url: string;
+  name: string | null;
+  company: string | null;
+  blog: string | null;
+  location: string | null;
+  email: string | null;
+  bio: string | null;
+  public_repos: number;
+  public_gists: number;
+  followers: number;
+  following: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface GitHubIssue {
   id: number;
   number: number;
@@ -304,5 +322,37 @@ export async function getGitHubIssuesForProject(projectName: string, state: 'ope
   } catch (error) {
     console.error(`Error fetching GitHub issues for project ${projectName}:`, error);
     return [];
+  }
+}
+
+/**
+ * Get GitHub user profile data
+ */
+export async function getGitHubUser(username?: string): Promise<GitHubUser | null> {
+  try {
+    const { data: user } = await octokit.users.getByUsername({
+      username: username || process.env.GITHUB_USERNAME || 'samuelalake',
+    });
+
+    return {
+      login: user.login,
+      id: user.id,
+      avatar_url: user.avatar_url,
+      name: user.name,
+      company: user.company,
+      blog: user.blog,
+      location: user.location,
+      email: user.email,
+      bio: user.bio,
+      public_repos: user.public_repos,
+      public_gists: user.public_gists,
+      followers: user.followers,
+      following: user.following,
+      created_at: user.created_at,
+      updated_at: user.updated_at,
+    };
+  } catch (error) {
+    console.error('Error fetching GitHub user:', error);
+    return null;
   }
 }
