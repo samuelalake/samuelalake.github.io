@@ -78,13 +78,27 @@ export default function Home({ projects = [], publications = [], githubUser = nu
                   projects.map((project) => (
                     <Link key={project.id} href={`/projects/${project.slug}`}>
                       <div className="border rounded-2 p-3 color-bg-default cursor-pointer hover:color-bg-subtle transition-colors">
-                        <div 
-                          className="w-full color-bg-inset color-border-muted" 
-                          style={{ 
-                            aspectRatio: '16/9',
-                            border: '1px solid'
-                          }} 
-                        />
+                        {project.coverImage ? (
+                          <div 
+                            className="w-full" 
+                            style={{ 
+                              aspectRatio: '16/9',
+                              backgroundImage: `url(${project.coverImage})`,
+                              backgroundSize: 'cover',
+                              backgroundPosition: 'center',
+                              borderRadius: '6px'
+                            }} 
+                          />
+                        ) : (
+                          <div 
+                            className="w-full color-bg-inset color-border-muted" 
+                            style={{ 
+                              aspectRatio: '16/9',
+                              border: '1px solid',
+                              borderRadius: '6px'
+                            }} 
+                          />
+                        )}
                         <div className="mt-2">
                           <Text className="text-large text-semibold color-fg-default">{project.title}</Text>
                           <div>
@@ -121,7 +135,8 @@ export default function Home({ projects = [], publications = [], githubUser = nu
                           className="w-full color-bg-inset color-border-muted" 
                           style={{ 
                             aspectRatio: '16/9',
-                            border: '1px solid'
+                            border: '1px solid',
+                            borderRadius: '6px'
                           }} 
                         />
                         <div className="mt-2">
@@ -205,7 +220,8 @@ export const getStaticProps: GetStaticProps = async () => {
         privacyLevel: 'Public',
         createdTime: new Date().toISOString(),
         lastEditedTime: new Date().toISOString(),
-        slug: 'portfolio-site'
+        slug: 'portfolio-site',
+        coverImage: undefined
       }
     ]
     

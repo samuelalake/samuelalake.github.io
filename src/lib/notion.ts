@@ -35,6 +35,7 @@ export interface NotionProject {
   createdTime: string;
   lastEditedTime: string;
   slug: string;
+  coverImage?: string;
   tasks?: any[];
 }
 
@@ -142,6 +143,11 @@ export async function getNotionProjects(): Promise<NotionProject[]> {
       projectPages.map(async (page: any) => {
         const properties: NotionPageProperties = page.properties;
 
+        // Extract cover image URL from page.cover
+        const coverImage = page.cover?.external?.url || 
+                          page.cover?.file?.url || 
+                          undefined;
+
         return {
           id: page.id,
           title: properties.Title?.title?.[0]?.plain_text || 'Untitled',
@@ -164,6 +170,7 @@ export async function getNotionProjects(): Promise<NotionProject[]> {
           lastEditedTime: 'last_edited_time' in page ? page.last_edited_time : new Date().toISOString(),
           slug: properties.Slug?.rich_text?.[0]?.plain_text || 
                 properties.Title?.title?.[0]?.plain_text?.toLowerCase().replace(/\s+/g, '-') || 'untitled',
+          coverImage,
         };
       })
     );
