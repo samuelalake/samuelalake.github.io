@@ -10,6 +10,9 @@ Status: draft for issue #11. This document covers copy only, not UI.
 4. Short bio
 5. Contact or call to action
 
+The sections below are intentionally organized in the same order as the
+homepage flow, with editorial notes kept close to the copy they affect.
+
 ## Positioning Goal
 
 Present Samuel Alake as a product designer and design engineer for AI-native
@@ -33,33 +36,6 @@ usable software.
 ### Alternate Short Headline
 
 Design + engineering for AI-native products.
-
-## Short Bio
-
-Samuel Alake is a product designer evolving into an AI-native product builder.
-He combines large-scale product judgment from Meta with hands-on design
-engineering through Rem and focused mobile prototyping through Wayfind. He works
-best with teams building new product surfaces, complex interaction models, or
-early-stage products that need someone who can move between design, code, and
-product strategy.
-
-## Capability Framing
-
-### Capability Strip
-
-- AI-native product design
-- Design engineering
-- UX engineering
-- AI prototyping
-- Interaction systems
-- Mobile product architecture
-
-### Supporting Capability Copy
-
-I work best where product direction, interface craft, and implementation need
-to stay tightly connected. That includes shaping AI-native workflows, designing
-trust-sensitive interactions, prototyping product behavior in code, and helping
-teams turn ambiguous ideas into durable product decisions.
 
 ## Selected Work Intro
 
@@ -124,13 +100,53 @@ Mobile EV navigation prototype
 #### Card Description
 
 Prototyped a SwiftUI, MapKit, and Firebase EV navigation experience focused on
-charging-aware routing, map-first search, route confidence, and serious mobile
-product architecture.
+charging-aware routing, map-first search, route confidence, and real mobile app
+architecture.
 
 #### Role-Fit Signal
 
 Shows mobile product judgment, prototyping depth, and the ability to make an
 early product feel concrete and testable.
+
+## Capability Framing
+
+### Capability Strip
+
+- AI-native product design
+- Design engineering
+- UX engineering
+- AI prototyping
+- Interaction systems
+- Mobile product architecture
+
+### Supporting Capability Copy
+
+I work best where product direction, interface craft, and implementation need
+to stay tightly connected. That includes shaping AI-native workflows, designing
+trust-sensitive interactions, prototyping product behavior in code, and helping
+teams turn ambiguous ideas into durable product decisions.
+
+## Short Bio
+
+Samuel Alake is a product designer and AI-native product builder. He combines
+large-scale product judgment from Meta with hands-on design engineering through
+Rem and focused mobile prototyping through Wayfind. He works best with teams
+building new product surfaces, complex interaction models, or early-stage
+products that need someone who can move between design, code, and product
+strategy.
+
+## Contact Or Call To Action
+
+### CTA Copy
+
+For AI-native product, design engineering, UX engineering, or founding-designer
+work, reach out to Samuel.
+
+## Voice Notes
+
+- Use first person for homepage hero and CTA copy so the site speaks directly.
+- Use third person for short bio copy so it can also support about-page,
+  recruiting, and profile contexts.
 
 ## Tone Guardrails
 
