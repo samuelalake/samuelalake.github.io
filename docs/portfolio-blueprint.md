@@ -1,6 +1,7 @@
 # Portfolio Blueprint v1
 
-Status: approved strategic source of truth for the jobs-first portfolio pass.
+Status: approved.
+Version: v1.
 
 This blueprint is the strategic source of truth for the first jobs-focused pass
 of Samuel Alake's GitHub-backed portfolio. It should guide copy, case-study
@@ -21,10 +22,10 @@ Secondary audiences:
 
 - school/program reviewers;
 - founder/VC/accelerator readers;
-- NIW-adjacent credibility reviewers.
+- long-term credibility reviewers.
 
-Secondary outcomes matter, but the site must not read like an immigration
-petition, grant application, or exhaustive archive.
+Secondary outcomes matter, but the site must not read like a grant application
+or exhaustive credentials archive.
 
 ## Positioning
 
@@ -62,7 +63,7 @@ market signal is the combination of:
 
 The site should make that arc legible without over-explaining it:
 
-```text
+```plaintext
 Meta: product systems at scale
   -> Rem: working AI-native design engineering
   -> Wayfind: focused mobile product prototyping
@@ -231,7 +232,7 @@ Evaluation standard:
   Meta = scale and product systems; Rem = AI design engineering; Wayfind =
   serious mobile prototype/design-to-code execution.
 
-Reference standards used for this rubric:
+Supplementary point-in-time references used for this rubric:
 
 - [Google UX Design Portfolio Tips](https://services.google.com/fh/files/misc/ux_design_portfolio_tips_19.pdf)
   emphasizes clarifying role and impact in case studies.
@@ -381,7 +382,7 @@ portfolio direction explicitly needs them.
 
 ## Immediate Next Steps
 
-1. Samuel/Descartes reviews and approves or edits this blueprint.
+1. Samuel reviews and approves or edits this blueprint.
 2. Activate #11 as the first copy task.
 3. Activate case-study skeleton issues after copy direction is clear.
 4. Build the evidence target list before any screenshot capture.
