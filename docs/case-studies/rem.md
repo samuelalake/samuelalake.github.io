@@ -3,6 +3,10 @@
 Status: working draft for issue #13. Remove or update this line before
 converting the skeleton into a public case-study page.
 
+Routing note: this file is an internal planning artifact under `docs/`. The
+current portfolio content loader reads public project markdown from
+`content/projects/`, so this skeleton is not the `/projects/rem` page.
+
 ## Case Thesis
 
 Public headline candidate:
@@ -27,6 +31,9 @@ useful for showing exploration, but not authoritative when it conflicts with the
 built product.
 
 Primary evidence sources:
+
+The Rem repo is a separate evidence source. Paths below are internal reference
+pointers for synthesis; confirm public path/name usage before publishing.
 
 | Source | What It Supports |
 |---|---|
