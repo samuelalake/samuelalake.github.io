@@ -1,6 +1,7 @@
 # Rem Case Study Skeleton
 
-Status: working draft for issue #13.
+Status: working draft for issue #13. Remove or update this line before
+converting the skeleton into a public case-study page.
 
 ## Case Thesis
 
@@ -284,7 +285,7 @@ issue or product question
 | iOS Settings/permissions/connectors/linked devices | High | Shows trust boundaries, settings IA, and productized capability model. | needs capture | Must avoid private account data. |
 | Mac main window/menu bar/settings/gateway status | High | Shows Mac as first-class app and local gateway host. | needs capture | Must use a safe local/demo state. |
 | Architecture diagram: iOS, Mac, backend, per-user gateway, OpenClaw | High | Makes the system understandable in two minutes. | needs capture | Create as a portfolio diagram. |
-| App Store review fixes summary | Medium-high | Shows platform judgment and compliance response. | available | Needs public-safe excerpt/summary. |
+| App Store review fixes summary | Medium-high | Shows platform judgment and compliance response. | available | Summarize carefully; do not quote raw review correspondence without checking public-sharing rules. |
 | Source snippets for gateway dual sessions and command routing | Medium-high | Proves implementation depth without exposing secrets. | available | Public path/name usage must be verified. |
 | Deploy architecture and pre-warmed pool | Medium | Shows backend/gateway maturity and onboarding performance thinking. | available | Use as architecture evidence, not traction evidence. |
 | TestFlight/App Store/Gmail evidence | Medium-high | Proves product status. | needs capture | Needs verified artifact list and public-safe handling. |
@@ -292,8 +293,9 @@ issue or product question
 
 ### 7. Draft Case Narrative
 
-This section is for conversion to public prose. It should not be rendered as a
-standalone public section heading without editorial revision.
+> Not for direct rendering: this section is for conversion to public prose. It
+> should not be rendered as a standalone public section heading without editorial
+> revision.
 
 Rem started as a question: what would it take for a personal AI assistant to
 move from conversation into useful execution?
