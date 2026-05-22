@@ -2,10 +2,18 @@
 
 Status: draft for issue #11. This document covers copy only, not UI.
 
+## Suggested Homepage Section Order
+
+1. Hero
+2. Selected work
+3. Capability strip
+4. Short bio
+5. Contact or call to action
+
 ## Positioning Goal
 
 Present Samuel Alake as a product designer and design engineer for AI-native
-tools, complex workflows, and working prototypes. The copy should read
+tools, complex workflows, and product prototypes. The copy should read
 credible, specific, and jobs-first without drifting into petition language.
 
 ## Homepage Hero
@@ -24,16 +32,16 @@ usable software.
 
 ### Alternate Short Headline
 
-Product designer and design engineer for AI-native tools and complex workflows.
+Design + engineering for AI-native products.
 
 ## Short Bio
 
 Samuel Alake is a product designer evolving into an AI-native product builder.
 He combines large-scale product judgment from Meta with hands-on design
-engineering through Rem and focused mobile prototyping through Wayfind. He is
-best suited to teams building new product surfaces, complex interaction models,
-or early-stage products that need someone who can move between design, code,
-and product strategy.
+engineering through Rem and focused mobile prototyping through Wayfind. He works
+best with teams building new product surfaces, complex interaction models, or
+early-stage products that need someone who can move between design, code, and
+product strategy.
 
 ## Capability Framing
 
@@ -73,8 +81,9 @@ Product systems at scale
 #### Card Description
 
 Designed interaction systems and growth-facing product experiences inside
-Meta-scale complexity, with work spanning notifications, social experiences,
-prototyping culture, and cross-functional product judgment.
+Meta-scale complexity, including notifications, social celebration surfaces,
+video/web growth explorations, prototyping culture, and cross-functional product
+judgment.
 
 #### Role-Fit Signal
 
@@ -132,12 +141,3 @@ early product feel concrete and testable.
   "creating meaningful experiences."
 - Keep Meta, Rem, and Wayfind framed as distinct proof types: scale, working AI
   system, and serious prototype.
-
-## Suggested Homepage Section Order
-
-1. Hero
-2. Selected work
-3. Capability strip
-4. Short bio
-5. Contact or call to action
-
