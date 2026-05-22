@@ -4,6 +4,11 @@ Status: working draft for issue #13.
 
 ## Case Thesis
 
+Public headline candidate:
+
+> Designing and building a cross-platform AI assistant that turns intent into
+> permissioned action.
+
 Rem proves Samuel can turn an AI-native product idea into a working
 cross-platform system: an iOS and macOS assistant with chat, voice, Agenda,
 tasks, connectors, gateway routing, OpenClaw integration, permissions, account
@@ -76,6 +81,9 @@ This gives the case a product center: Rem is about moving from intention to
 execution with enough structure that the assistant can actually help.
 
 ### 2. Role
+
+> Unverified: this role framing must be confirmed with Samuel before any public
+> case page is generated.
 
 Provisional role framing to verify with Samuel:
 
@@ -270,19 +278,22 @@ issue or product question
 
 ### 6. Evidence Gallery Plan
 
-| Evidence | Strength | Needed For | Status |
-|---|---:|---|---|
-| iOS home/Agenda/chat/voice screenshots | High | Shows everyday assistant surface and intent-to-action loop. | Needs capture. |
-| iOS Settings/permissions/connectors/linked devices | High | Shows trust boundaries, settings IA, and productized capability model. | Needs capture. |
-| Mac main window/menu bar/settings/gateway status | High | Shows Mac as first-class app and local gateway host. | Needs capture. |
-| Architecture diagram: iOS, Mac, backend, per-user gateway, OpenClaw | High | Makes the system understandable in two minutes. | Needs creation. |
-| App Store review fixes summary | Medium-high | Shows platform judgment and compliance response. | Available as doc; needs public-safe excerpt/summary. |
-| Source snippets for gateway dual sessions and command routing | Medium-high | Proves implementation depth without exposing secrets. | Available; needs public-safe snippet selection. |
-| Deploy architecture and pre-warmed pool | Medium | Shows backend/gateway maturity and onboarding performance thinking. | Available as doc. |
-| TestFlight/App Store/Gmail evidence | Medium-high | Proves product status. | Needs verified artifact list and public-safe handling. |
-| Older Rem Figma | Medium | Shows design history and early exploration. | Use selectively; not product truth. |
+| Evidence | Strength | Needed For | Status | Notes |
+|---|---:|---|---|---|
+| iOS home/Agenda/chat/voice screenshots | High | Shows everyday assistant surface and intent-to-action loop. | needs capture | Capture after target flow list is approved. |
+| iOS Settings/permissions/connectors/linked devices | High | Shows trust boundaries, settings IA, and productized capability model. | needs capture | Must avoid private account data. |
+| Mac main window/menu bar/settings/gateway status | High | Shows Mac as first-class app and local gateway host. | needs capture | Must use a safe local/demo state. |
+| Architecture diagram: iOS, Mac, backend, per-user gateway, OpenClaw | High | Makes the system understandable in two minutes. | needs capture | Create as a portfolio diagram. |
+| App Store review fixes summary | Medium-high | Shows platform judgment and compliance response. | available | Needs public-safe excerpt/summary. |
+| Source snippets for gateway dual sessions and command routing | Medium-high | Proves implementation depth without exposing secrets. | available | Public path/name usage must be verified. |
+| Deploy architecture and pre-warmed pool | Medium | Shows backend/gateway maturity and onboarding performance thinking. | available | Use as architecture evidence, not traction evidence. |
+| TestFlight/App Store/Gmail evidence | Medium-high | Proves product status. | needs capture | Needs verified artifact list and public-safe handling. |
+| Older Rem Figma | Medium | Shows design history and early exploration. | optional | Use selectively; not product truth. |
 
 ### 7. Draft Case Narrative
+
+This section is for conversion to public prose. It should not be rendered as a
+standalone public section heading without editorial revision.
 
 Rem started as a question: what would it take for a personal AI assistant to
 move from conversation into useful execution?
@@ -362,10 +373,14 @@ Questions for Samuel before publishing:
 - Which Rem screenshots are acceptable to show publicly?
 - Should the case use "Rem" only, or mention the internal `RemClaw` repo name in
   evidence captions?
+- Can source file paths such as `RemClaw/Sources/...` be referenced publicly, or
+  should code evidence be abstracted into diagrams and redacted snippets?
 - Can App Store review submission ID or review date be public, or should it be
   summarized more generally?
 - Which AI development tools should be named publicly: Codex, Claude, Cursor,
   Symphony, or a more generic "AI coding agents" label?
+- Should the public case page use first person throughout, or keep third-person
+  captions around source/evidence artifacts?
 
 ## Rubric Self-Review
 
