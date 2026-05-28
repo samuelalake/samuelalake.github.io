@@ -14,8 +14,11 @@
     />
     <meta property="og:type" content="website" />
     <title>Samuel Alake Portfolio</title>
+    <script>
+      document.documentElement.classList.add('js')
+    </script>
     <style>
-      #root:has(.repo-preview) .static-portfolio-fallback {
+      .js .static-portfolio-fallback {
         display: none;
       }
 
@@ -66,57 +69,56 @@
     <link rel="stylesheet" crossorigin href="/assets/index-BBCN1pFg.css">
   </head>
   <body>
-    <div id="root">
-      <main class="static-portfolio-fallback">
-        <h1>Samuel Alake Portfolio</h1>
+    <main class="static-portfolio-fallback">
+      <h1>Samuel Alake Portfolio</h1>
+      <p>
+        Product designer and design engineer building software where design meets code:
+        systems, prototypes, SwiftUI products, and AI tools for focused, complex work.
+      </p>
+      <p>
+        This portfolio is a React app. If JavaScript is unavailable, the project summaries
+        below provide a readable fallback for search engines, link previews, and AI readers.
+      </p>
+      <section aria-labelledby="selected-work-fallback">
+        <h2 id="selected-work-fallback">Selected work</h2>
+        <div class="static-portfolio-list">
+          <article>
+            <h3><a href="/projects/facebook">Facebook</a></h3>
+            <p>
+              Product design at scale across growth and engagement systems: notifications,
+              video, feed, birthdays, live audio rooms, and prototyping work for billion-user
+              Facebook surfaces.
+            </p>
+          </article>
+          <article>
+            <h3><a href="/projects/rem">Rem</a></h3>
+            <p>
+              A voice-first AI assistant for capturing intent, clarifying work, and moving
+              toward approved action. Includes App Store release evidence, chat iteration,
+              gateway strategy, and agentic control research.
+            </p>
+          </article>
+          <article>
+            <h3><a href="/projects/wayfind">Wayfind</a></h3>
+            <p>
+              An EV mobility product exploring charger discovery, vehicle context, route
+              planning, Figma flows, SwiftUI UI library work, and data-backed prototypes
+              using charging-station data.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section aria-labelledby="contact-fallback">
+        <h2 id="contact-fallback">Links</h2>
         <p>
-          Product designer and design engineer building software where design meets code:
-          systems, prototypes, SwiftUI products, and AI tools for focused, complex work.
+          <a href="https://linkedin.com/in/samuel-alake">LinkedIn</a> ·
+          <a href="https://github.com/samuelalake">GitHub</a>
         </p>
-        <p>
-          This portfolio is a React app. If JavaScript is unavailable, the project summaries
-          below provide a readable fallback for search engines, link previews, and AI readers.
-        </p>
-        <section aria-labelledby="selected-work-fallback">
-          <h2 id="selected-work-fallback">Selected work</h2>
-          <div class="static-portfolio-list">
-            <article>
-              <h3><a href="/projects/facebook">Facebook</a></h3>
-              <p>
-                Product design at scale across growth and engagement systems: notifications,
-                video, feed, birthdays, live audio rooms, and prototyping work for billion-user
-                Facebook surfaces.
-              </p>
-            </article>
-            <article>
-              <h3><a href="/projects/rem">Rem</a></h3>
-              <p>
-                A voice-first AI assistant for capturing intent, clarifying work, and moving
-                toward approved action. Includes App Store release evidence, chat iteration,
-                gateway strategy, and agentic control research.
-              </p>
-            </article>
-            <article>
-              <h3><a href="/projects/wayfind">Wayfind</a></h3>
-              <p>
-                An EV mobility product exploring charger discovery, vehicle context, route
-                planning, Figma flows, SwiftUI UI library work, and data-backed prototypes
-                using charging-station data.
-              </p>
-            </article>
-          </div>
-        </section>
-        <section aria-labelledby="contact-fallback">
-          <h2 id="contact-fallback">Links</h2>
-          <p>
-            <a href="https://linkedin.com/in/samuel-alake">LinkedIn</a> ·
-            <a href="https://github.com/samuelalake">GitHub</a>
-          </p>
-        </section>
-        <noscript>
-          <p>Enable JavaScript to view the full interactive portfolio experience.</p>
-        </noscript>
-      </main>
-    </div>
+      </section>
+      <noscript>
+        <p>Enable JavaScript to view the full interactive portfolio experience.</p>
+      </noscript>
+    </main>
+    <div id="root"></div>
   </body>
 </html>
