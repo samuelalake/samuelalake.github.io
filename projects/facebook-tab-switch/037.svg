@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080">
-  <path fill="#EBF5FF" d="M-0 -0L1920 0L1920 1080L-0 1080L0 -0Z"></path>
+  <path fill="#FFFFFF" d="M-0 -0L1920 0L1920 1080L-0 1080L0 -0Z"></path>
   <clipPath id="cl_72">
     <rect x="276.47675" y="398.87454" width="1367.0464" height="282.25095"></rect>
   </clipPath>
