@@ -176,6 +176,78 @@
     seqEls.forEach(playSeq);
   }
 
+  // --- muted recordings: meaningful posters at rest, playback only while visible ---
+  var autoplayVideos = [].slice.call(document.querySelectorAll("video[autoplay]"));
+  autoplayVideos.forEach(function (video) { video.muted = true; });
+
+  // Compact play, restart, and sound controls appear over recordings on hover/focus.
+  function mediaIcon(name) {
+    if (name === "play") return '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5-9-5.5Z"/></svg>';
+    if (name === "pause") return '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg>';
+    if (name === "restart") return '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.25a5.75 5.75 0 1 1-5.2 8.2l1.36-.65A4.25 4.25 0 1 0 5.2 4.7L7 6.5H2V1.5l2.13 2.13A5.72 5.72 0 0 1 8 2.25Z"/></svg>';
+    if (name === "sound") return '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2V6Zm9.1-.75a4 4 0 0 1 0 5.5l-1-1.05a2.5 2.5 0 0 0 0-3.4l1-1.05Z"/></svg>';
+    return '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2V6Zm9.2-.6 1.05-1.05L14 6.1l1.75-1.75 1.05 1.05L15.05 7.15l1.75 1.75-1.05 1.05L14 8.2l-1.75 1.75L11.2 8.9l1.75-1.75-1.75-1.75Z" transform="translate(-2)"/></svg>';
+  }
+  autoplayVideos.forEach(function (video) {
+    var host = video.closest(".cs-device") || video.closest(".cs-figure") || video.parentElement;
+    if (!host || host.querySelector(":scope > .cs-media-controls")) return;
+    host.classList.add("cs-media-control-host");
+    var controls = document.createElement("div");
+    controls.className = "cs-media-controls";
+    controls.setAttribute("aria-label", "Recording controls");
+    controls.innerHTML =
+      '<button class="cs-media-control-button" type="button" data-media-play aria-label="Pause recording"></button>' +
+      '<button class="cs-media-control-button" type="button" data-media-restart aria-label="Restart recording">' + mediaIcon("restart") + '</button>' +
+      '<button class="cs-media-control-button" type="button" data-media-sound aria-label="Turn sound on"></button>';
+    host.appendChild(controls);
+    var playButton = controls.querySelector("[data-media-play]");
+    var soundButton = controls.querySelector("[data-media-sound]");
+    function updateMediaControls() {
+      playButton.innerHTML = mediaIcon(video.paused ? "play" : "pause");
+      playButton.setAttribute("aria-label", video.paused ? "Play recording" : "Pause recording");
+      soundButton.innerHTML = mediaIcon(video.muted ? "mute" : "sound");
+      soundButton.setAttribute("aria-label", video.muted ? "Turn sound on" : "Mute recording");
+    }
+    playButton.addEventListener("click", function () {
+      if (video.paused) {
+        video.dataset.userPaused = "false";
+        video.play().catch(function () {});
+      } else {
+        video.dataset.userPaused = "true";
+        video.pause();
+      }
+      updateMediaControls();
+    });
+    controls.querySelector("[data-media-restart]").addEventListener("click", function () {
+      video.currentTime = 0;
+      video.dataset.userPaused = "false";
+      video.play().catch(function () {});
+      updateMediaControls();
+    });
+    soundButton.addEventListener("click", function () {
+      video.muted = !video.muted;
+      updateMediaControls();
+    });
+    video.addEventListener("play", updateMediaControls);
+    video.addEventListener("pause", updateMediaControls);
+    host.addEventListener("touchstart", function () { host.classList.add("is-controls-visible"); }, { passive: true });
+    updateMediaControls();
+  });
+
+  if (!reduce && "IntersectionObserver" in window) {
+    var videoIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && entry.target.dataset.userPaused !== "true") entry.target.play().catch(function () {});
+        else entry.target.pause();
+      });
+    }, { threshold: 0.1 });
+    autoplayVideos.forEach(function (video) { videoIO.observe(video); });
+  } else if (!reduce) {
+    autoplayVideos.forEach(function (video) { video.play().catch(function () {}); });
+  } else {
+    autoplayVideos.forEach(function (video) { video.pause(); });
+  }
+
   // --- custom overlay scrollbar (native bar hidden in CSS; no layout shift between pages) ---
   var thumb = document.createElement("div");
   thumb.className = "scroll-thumb";
@@ -213,16 +285,98 @@
     navLinks.forEach(function (a) {
       var id = (a.getAttribute("href") || "").replace("#", "");
       var el = id && document.getElementById(id);
-      if (el) spyTargets.push({ id: id, el: el, link: a });
+      if (el) {
+        spyTargets.push({ id: id, el: el, link: a });
+        a.addEventListener("click", function () {
+          navLinks.forEach(function (link) { link.classList.toggle("active", link === a); });
+        });
+      }
     });
     function absTop(el) { return el.getBoundingClientRect().top + (window.scrollY || 0); }
     function updateSpy() {
-      var y = (window.scrollY || 0) + 150, current = spyTargets.length ? spyTargets[0].id : null;
+      // Anchored chapters settle below the fixed header and, on wide screens,
+      // beside the fixed case-study nav. Activate the chapter once its opening
+      // block enters the upper third instead of waiting for it to reach 150px.
+      var activationLine = Math.max(150, Math.min(360, window.innerHeight * 0.36));
+      var y = (window.scrollY || 0) + activationLine, current = spyTargets.length ? spyTargets[0].id : null;
       spyTargets.forEach(function (t) { if (absTop(t.el) <= y) current = t.id; });
+      if ((window.scrollY || 0) + window.innerHeight >= document.documentElement.scrollHeight - 2 && spyTargets.length) {
+        current = spyTargets[spyTargets.length - 1].id;
+      }
       spyTargets.forEach(function (t) { t.link.classList.toggle("active", t.id === current); });
     }
     window.addEventListener("scroll", updateSpy, { passive: true });
     window.addEventListener("resize", updateSpy);
     updateSpy();
   }
+
+  // --- compact case-study carousels ---
+  [].slice.call(document.querySelectorAll("[data-carousel]")).forEach(function (carousel) {
+    var slides = [].slice.call(carousel.querySelectorAll("[data-carousel-slide]"));
+    var previous = carousel.querySelector("[data-carousel-prev]");
+    var next = carousel.querySelector("[data-carousel-next]");
+    var status = carousel.querySelector("[data-carousel-status]");
+    var index = Math.max(0, slides.findIndex(function (slide) { return slide.classList.contains("is-active"); }));
+    var duration = 6000, timer = null, inView = false, pointerInside = false;
+    var progress = null, progressSteps = [];
+    if (slides.length > 1) {
+      progress = document.createElement("div");
+      progress.className = "cs-carousel-progress";
+      progress.style.setProperty("--carousel-steps", slides.length);
+      progress.style.setProperty("--carousel-duration", duration + "ms");
+      progress.setAttribute("aria-label", "Carousel progress");
+      progress.innerHTML = slides.map(function (_, slideIndex) {
+        return '<button class="cs-carousel-progress-step" type="button" data-carousel-step="' + slideIndex + '" aria-label="Show slide ' + (slideIndex + 1) + '"></button>';
+      }).join("");
+      carousel.insertBefore(progress, carousel.querySelector(".cs-carousel-controls"));
+      progressSteps = [].slice.call(progress.querySelectorAll("[data-carousel-step]"));
+    }
+    function scheduleAuto() {
+      clearTimeout(timer);
+      carousel.classList.remove("is-running");
+      if (reduce || slides.length <= 1 || !inView || pointerInside || carousel.matches(":focus-within") || document.hidden) return;
+      void carousel.offsetWidth;
+      carousel.classList.add("is-running");
+      timer = setTimeout(function () { showSlide(index + 1); }, duration);
+    }
+    function showSlide(nextIndex) {
+      if (!slides.length) return;
+      index = (nextIndex + slides.length) % slides.length;
+      slides.forEach(function (slide, slideIndex) {
+        var active = slideIndex === index;
+        slide.classList.toggle("is-active", active);
+        slide.setAttribute("aria-hidden", active ? "false" : "true");
+      });
+      if (status) status.textContent = (index + 1) + " of " + slides.length;
+      progressSteps.forEach(function (step, stepIndex) {
+        step.classList.toggle("is-complete", stepIndex < index);
+        step.classList.toggle("is-current", stepIndex === index);
+        step.setAttribute("aria-current", stepIndex === index ? "step" : "false");
+      });
+      scheduleAuto();
+    }
+    if (previous) previous.addEventListener("click", function () { showSlide(index - 1); });
+    if (next) next.addEventListener("click", function () { showSlide(index + 1); });
+    if (slides.length <= 1) {
+      if (previous) previous.disabled = true;
+      if (next) next.disabled = true;
+    }
+    progressSteps.forEach(function (step) {
+      step.addEventListener("click", function () { showSlide(parseInt(step.getAttribute("data-carousel-step"), 10)); });
+    });
+    carousel.addEventListener("mouseenter", function () { pointerInside = true; scheduleAuto(); });
+    carousel.addEventListener("mouseleave", function () { pointerInside = false; scheduleAuto(); });
+    carousel.addEventListener("focusin", scheduleAuto);
+    carousel.addEventListener("focusout", function () { setTimeout(scheduleAuto, 0); });
+    document.addEventListener("visibilitychange", scheduleAuto);
+    if (slides.length > 1 && "IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        inView = entries[0].isIntersecting;
+        scheduleAuto();
+      }, { threshold: 0.35 }).observe(carousel);
+    } else {
+      inView = true;
+    }
+    showSlide(index);
+  });
 })();

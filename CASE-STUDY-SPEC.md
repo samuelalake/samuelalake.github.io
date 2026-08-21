@@ -25,23 +25,24 @@ Reference case studies (Rachel Chen): `rachelchen.tech/projects/openai`
 
 ## 2. Page structure
 
-Order top to bottom. Not every project uses every section; drop what has no real
-material rather than padding it.
+Order top to bottom. Keep all seven beats visible while a case study is being
+assembled; when real material is missing, use a clearly marked placeholder
+instead of jumping past the beat or inventing content.
 
 1. **Cover** — branded hero, straight from the homepage card asset (§4.1).
 2. **Metadata** — Role / Timeline / Team / Skills.
 3. **Context** (Overview → Problem → Opportunity) — why this exists.
-4. **Solution** — the one-line what-it-is, plus the payoff.
-5. **Core flows** — the shipped experience, walked step by step (§4.3). Put an
-   **Onboarding** sub-section here when the project has one (Rachel does).
-6. **Key design moments** — research, exploration, prototyping, design decisions,
-   designing under constraints. This is the middle of the page and the part that
-   shows judgement. Draw these from the truth input.
-7. **Impact / Where it landed** — the concrete outcome first, then meaning.
-8. **Reflection** — real lessons only, as a grid of one-liner + gloss (§4).
-
-Maps to the 7-part frame: cover, metadata, context, final artifacts (solution +
-core flows), key design moments, impact, reflections.
+4. **Solution / final artifacts** — the one-line solution plus the finished experience,
+   walked through as core flows (§4.3). Put an **Onboarding** artifact here when
+   the project has one. Readers should see what shipped before the process.
+5. **Key design moments** — the structural taxonomy only; use a specific visible
+   label for each project subsection. This beat includes research, exploration,
+   prototyping, design decisions, and designing under constraints. It is the
+   middle of the page and the part that shows judgement. Draw these from the
+   truth input.
+6. **Impact / Where it landed** — concrete outcomes first, preferably as a
+   scannable grid, then the meaning or supporting evidence.
+7. **Reflection** — real lessons only, as a grid of one-liner + gloss (§4).
 
 ---
 
@@ -52,10 +53,13 @@ core flows), key design moments, impact, reflections.
 - **Micro-labels are monospace** uppercase (`--cs-mono`): section eyebrows, frame
   labels, metadata `dt`, flow step numbers, the back link.
 - **Display headings** use `--font-display` (Hubot Sans). **Body** is sans.
-- **Outer image containers are square — no border-radius.** Phones inside keep
-  their rounded bezel; that is the only roundness.
-- **Fixed left section nav** (`.cs-nav`) with scroll-spy, plus a `← Selected work`
-  back link. Collapses under 1200px to an inline back link.
+- **Outer image containers default to square — no border-radius.** A 4:5 portrait
+  stage is allowed when a final mobile flow needs more device height; 16:9 is
+  reserved for wide artifacts such as onboarding. Phones inside keep their
+  rounded bezel; that is the only roundness.
+- **Back link and section nav are one group** (`.cs-nav`) with scroll-spy. The
+  group is fixed at desktop widths and becomes an inline, wrapping group under
+  1200px; do not show the back link while hiding the section links.
 - No divider lines inside info grids.
 
 ---
@@ -71,19 +75,26 @@ Never a product screenshot as the cover.
 **4.2 Product reveal / final artifacts** — real photography or hero shots, 2-up
 or full width, `.cs-figure` (flat, square, no frame).
 
-**4.3 Core-flow step** — mobile screen in a **phone device frame** inset in a
-**square container** (`.cs-device` → `.cs-device-screen`). **Media always on the
-left, text always on the right, unchanging down the sequence** (`.cs-flow`). One
-step per row. For web products, use a flat `.cs-figure` on the left instead of a
-device frame — the flow structure is identical, minus the phone.
+**4.3 Core-flow step** — mobile screen in the real phone SVG frame
+`/projects/wayfind-evidence/iphone-14-pro-no-notch.svg`, inset in a square or 4:5
+portrait container (`.cs-device` → `.cs-device-media` → `.cs-device-media-screen`, with
+`.cs-device-media-frame` layered above). Do not draw a substitute bezel in CSS.
+**Media stays on the left and bottom-aligned text stays on the right** (`.cs-flow`).
+One step per row. For web products, use a flat `.cs-figure` on the left instead
+of a device frame — the flow structure is identical, minus the phone.
 
-**4.4 Onboarding** — a full-width contextual/lifestyle image under core flows.
+**4.4 Onboarding** — a full-width 16:9 contextual/lifestyle image under core
+flows, with its explanation below rather than beside the image.
 
-**4.5 Collage / exploration frame** — ONLY for messy, freeform, overlapping piles
-of research or exploration artifacts. Tinted square, mono label inside top-left,
-no radius (`.cs-figma` → `.cs-figma-frame` → `.cs-figma-label`). Clean rectangular
-screenshots do NOT go in here (that is double-containment — they carry their own
-background).
+**4.5 Collage / exploration frame** — ONLY for grouped research, references, or
+exploration artifacts. Use `.cs-board` with `.cs-board-label`: tinted surface,
+thin border, no radius, and a body-font label with 4px padding, a 4px radius,
+and a thin theme-aware stroke on the page background.
+Clean standalone screenshots do not need this extra container.
+
+For a problem statement that benefits from synthesis rather than raw evidence,
+prefer a purpose-built, theme-aware illustration. Move research screenshots and
+exploration boards into the relevant key-design-moment subsection.
 
 **4.6 Clean screenshot grid** — plain 2-up/3-up shots (`.cs-media` → `.cs-grid-2`
 / `.cs-grid-3`), caption below, no frame. Optional `.cs-media-label` above.
@@ -91,8 +102,8 @@ background).
 **4.7 Prototyping concepts** — grouped device frames with a mono caption under
 each and text to the right.
 
-**4.8 Where-we-landed** — device frames in square containers (gradient bg via
-`.cs-device.bg-gradient`), 2-up, caption tied to a named insight.
+**4.8 Where-we-landed** — device frames in equal-height square containers using
+the shared muted-gray surface (`.cs-device`), 2-up, caption tied to a named insight.
 
 **4.9 Comparison** — competitor/reference screens device-framed in a 16:9
 container (`.cs-device.wide`), 2-up.
@@ -110,38 +121,51 @@ All classes live in `case-study.css`. Page shell:
 <main class="cs">
   <nav class="cs-nav" aria-label="Sections">
     <a class="cs-nav-back" href="/">← Selected work</a>
+    <p class="cs-nav-title">In this case study</p>
     <ul class="cs-nav-list"><li><a href="#SECTION_ID">Label</a></li>…</ul>
   </nav>
-  <a class="cs-back" href="/">← Selected work</a>            <!-- narrow fallback -->
   <section class="cs-hero"><p class="cs-kicker">…</p><h1 class="cs-title">…</h1><p class="cs-lede">…</p></section>
   <div class="cs-cover"><img class="cs-cover-media seq" data-seq="/projects/<card-seq>" data-count="N" src="…/000.svg" alt="…" /></div>
   <dl class="cs-meta">…</dl>
-  <section class="cs-section" id="SECTION_ID"><p class="cs-label">Eyebrow</p><h2>Thesis heading</h2><p>…</p></section>
+  <div class="cs-chapter" id="SECTION_ID"><section class="cs-section"><p class="cs-label">Eyebrow</p><h2>Thesis heading</h2><p>…</p></section></div>
 </main>
 ```
 
 Device frame (mobile). Light/dark pairs use `.only-light` / `.only-dark`:
 
 ```html
-<div class="cs-device bg-gradient"><div class="cs-device-screen">
-  <img class="only-light" src="…-light.png" alt="…" /><img class="only-dark" src="…-dark.png" alt="…" />
+<div class="cs-device"><div class="cs-device-media">
+  <div class="cs-device-media-screen">
+    <img class="cs-device-media-content only-light" src="…-light.png" alt="…" />
+    <img class="cs-device-media-content only-dark" src="…-dark.png" alt="…" />
+  </div>
+  <img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" />
 </div></div>
 ```
+
+Recorded media must include a meaningful `poster` frame so a phone never renders
+as an empty black device when autoplay is paused. Playback should be attempted
+only while the video is in view. Expose play/pause, restart, and sound controls
+on hover and keyboard focus. Multi-state carousels may auto-advance with a
+stepped progress indicator; pause during interaction and honor reduced motion.
+
+Core-flow count is evidence-led. Add, remove, or reorder rows instead of treating
+the two rows in the Rem scaffold as a required count.
 
 Core flow (media left, text right — do not alternate sides):
 
 ```html
 <div class="cs-flow">
   <div class="cs-flow-step">
-    <figure class="cs-flow-media"><div class="cs-device bg-gradient"><div class="cs-device-screen">…</div></div></figure>
+    <figure class="cs-flow-media"><div class="cs-device"><div class="cs-device-media">…</div></div></figure>
     <div class="cs-flow-text"><p class="cs-flow-num">01 · Capture</p><h3>…</h3><p>…</p></div>
   </div>
 </div>
 ```
 
 Every section that appears in `.cs-nav-list` needs a matching `id` on its
-`<section class="cs-section">`. Scroll-spy is in `homepage.js` (loaded on every
-case page); it highlights the last section whose top has passed.
+`.cs-chapter`. Scroll-spy is in `homepage.js` (loaded on every case page); it
+highlights the last chapter whose top has passed.
 
 ---
 

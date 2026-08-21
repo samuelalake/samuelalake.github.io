@@ -1,120 +1,392 @@
-/* ============================================================
-   Case-study layout — Rachel-influenced, scannable hierarchy.
-   One centered reading column with a fixed left section nav.
-   Section rhythm: eyebrow label -> point-first heading -> lede
-   -> info grid, core flow, or tightened prose. Reusable across
-   all cases (mobile app OR web product).
-
-   Type signature: monospace micro-labels, sans display headings,
-   sans body. Outer image containers are square (no radius);
-   phones inside keep their rounded bezel.
-
-   Image rules:
-   - Mobile screen  -> wrap in .cs-device (phone bezel in a square)
-   - Web screen     -> .cs-figure (flat rectangle, no frame)
-   - Messy collage  -> .cs-figma (tinted frame, mono label inside)
-   - Clean shots    -> .cs-grid-2 / .cs-grid-3 (no frame, no divider)
-   ============================================================ */
+/* Case-study layout: cover → metadata → context → final artifacts → design moments → impact → reflection. */
 
 .cs {
   --cs-read: 760px;
   --cs-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --cs-accent: #fd8c73;
 }
 
-/* ---- fixed left section nav (TOC) + back link. Collapses below 1200px. ---- */
-.cs-nav { display: none; }
-.cs-nav-back { display: inline-flex; align-items: center; gap: 8px; font-family: var(--cs-mono); font-size: 12px; letter-spacing: .02em; color: var(--portfolio-fg-muted); text-decoration: none; }
+/* Back link and table of contents remain one visible group. */
+.cs-nav {
+  max-width: var(--cs-read);
+  margin: 20px auto 0;
+  padding: 0 24px;
+}
+.cs-nav-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--cs-mono);
+  font-size: 12px;
+  letter-spacing: .02em;
+  color: var(--portfolio-fg-muted);
+  text-decoration: none;
+}
 .cs-nav-back:hover { color: var(--portfolio-fg); }
-@media (min-width: 1200px) {
-  .cs-nav { display: block; position: fixed; top: 92px; left: 40px; width: 176px; z-index: 15; }
-  .cs-nav-list { list-style: none; margin: 22px 0 0; padding: 0; border-left: 1px solid var(--portfolio-border-muted); }
-  .cs-nav-list a { display: block; padding: 5px 0 5px 14px; margin-left: -1px; border-left: 2px solid transparent; font-size: 13px; line-height: 1.35; color: var(--portfolio-fg-muted); text-decoration: none; }
-  .cs-nav-list a:hover { color: var(--portfolio-fg); }
-  .cs-nav-list a.active { color: var(--portfolio-fg); border-left-color: var(--portfolio-fg-accent); }
+.cs-nav-title {
+  margin: 20px 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--portfolio-fg);
 }
-/* inline back button for narrow screens (nav hidden) */
-.cs-back { display: inline-flex; align-items: center; gap: 8px; font-family: var(--cs-mono); font-size: 12px; letter-spacing: .02em; color: var(--portfolio-fg-muted); text-decoration: none; max-width: var(--cs-read); margin: 20px auto 0; padding: 0 24px; }
-.cs-back:hover { color: var(--portfolio-fg); }
-@media (min-width: 1200px) { .cs-back { display: none; } }
+.cs-nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cs-nav-list a {
+  display: block;
+  padding: 5px 0;
+  border-bottom: 2px solid transparent;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--portfolio-fg-muted);
+  text-decoration: none;
+}
+.cs-nav-list a:hover { color: var(--portfolio-fg); text-decoration: none; }
+.cs-nav-list a.active {
+  color: var(--portfolio-fg);
+  border-bottom-color: var(--cs-accent);
+}
+@media (min-width: 1200px) {
+  .cs-nav {
+    position: fixed;
+    top: 92px;
+    left: 40px;
+    z-index: 15;
+    width: 184px;
+    margin: 0;
+    padding: 0;
+  }
+  .cs-nav-title { margin-top: 22px; }
+  .cs-nav-list {
+    display: block;
+    border-left: 1px solid var(--portfolio-border-muted);
+  }
+  .cs-nav-list a {
+    padding: 6px 0 6px 14px;
+    margin-left: -1px;
+    border-bottom: 0;
+    border-left: 2px solid transparent;
+  }
+  .cs-nav-list a.active { border-left-color: var(--cs-accent); }
+}
 
-/* eyebrow kicker line (client · status · year) */
-.cs-kicker { font-family: var(--cs-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--portfolio-fg-muted); margin: 0 0 16px; }
+.cs-kicker,
+.cs-label {
+  font-family: var(--cs-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--portfolio-fg-muted);
+}
 
-/* ---- hero ---- */
+/* Cover. */
 .cs-hero { max-width: var(--cs-read); margin: 0 auto; padding: 40px 24px 0; }
-.cs-title { font-family: var(--font-display); font-size: clamp(32px, 4.6vw, 54px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; margin: 0; color: var(--portfolio-fg); }
-.cs-lede { font-size: 19px; line-height: 1.55; color: var(--portfolio-fg-muted); margin: 18px 0 0; }
-
-/* ---- cover: branded hero straight from the homepage card, at reading width ---- */
+.cs-kicker { margin: 0 0 16px; }
+.cs-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.6vw, 54px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--portfolio-fg);
+}
+.cs-lede { margin: 18px 0 0; font-size: 19px; line-height: 1.55; color: var(--portfolio-fg-muted); }
 .cs-cover { max-width: var(--cs-read); margin: 30px auto 0; padding: 0 24px; }
 .cs-cover-media { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--portfolio-bg-muted); }
+.cs-cover-media.seq { object-fit: contain; }
 
-/* ---- status tag ---- */
-.cs-status { display: inline-flex; align-items: center; gap: 6px; padding: 3px 11px; border-radius: 999px; border: 1px solid var(--portfolio-border); font-size: 12.5px; font-weight: 500; color: var(--portfolio-fg); }
-.cs-status[data-tone="live"] { color: #3fb950; border-color: #3fb95055; }
-.cs-status .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-
-/* ---- metadata ---- */
-.cs-meta { max-width: var(--cs-read); margin: 34px auto 0; padding: 24px 24px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; border-top: 1px solid var(--portfolio-border-muted); border-bottom: 1px solid var(--portfolio-border-muted); }
-.cs-meta dt { font-family: var(--cs-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .07em; color: var(--portfolio-fg-muted); margin: 0 0 8px; }
+/* Metadata is intentionally open: no divider rules. */
+.cs-meta {
+  max-width: var(--cs-read);
+  margin: 38px auto 0;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+.cs-meta dt {
+  margin: 0 0 8px;
+  font-family: var(--cs-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--portfolio-fg-muted);
+}
 .cs-meta dd { margin: 0; font-size: 13.5px; line-height: 1.45; color: var(--portfolio-fg); }
+.cs-meta-list { display: flex; flex-direction: column; gap: 3px; }
 
-/* ---- reading-column sections ---- */
-.cs-section { max-width: var(--cs-read); margin: 0 auto; padding: 0 24px; }
-.cs-label { font-family: var(--cs-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--portfolio-fg-muted); margin: 96px 0 14px; }
-.cs-section > .cs-lede { font-size: 18px; margin: 0 0 6px; }
-.cs-section h2 { font-family: var(--font-display); font-size: clamp(24px, 3vw, 34px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.14; margin: 0 0 20px; color: var(--portfolio-fg); }
-.cs-section p { font-size: 17px; line-height: 1.7; color: var(--portfolio-fg-muted); margin: 0 0 20px; }
+/* Chapters create the larger rhythm; related text, grids, and evidence stay together inside. */
+.cs-chapter { max-width: var(--cs-read); margin: 128px auto 0; padding: 0 24px; scroll-margin-top: 80px; }
+.cs-section { margin: 0; padding: 0; }
+.cs-label { margin: 0 0 14px; }
+.cs-section h2 {
+  margin: 0 0 20px;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.14;
+  color: var(--portfolio-fg);
+}
+.cs-section p { margin: 0 0 20px; font-size: 17px; line-height: 1.7; color: var(--portfolio-fg-muted); }
+.cs-section > .cs-lede { margin: 0 0 6px; font-size: 18px; }
 .cs-section p strong { color: var(--portfolio-fg); font-weight: 600; }
+.cs-subsection { margin-top: 72px; }
 
-/* ---- info grid: parallel items. No dividers. ---- */
-.cs-grid { max-width: var(--cs-read); margin: 28px auto 0; padding: 0 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+/* Parallel information and outcomes. */
+.cs-grid { margin: 28px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
 .cs-grid.cols-2 { grid-template-columns: repeat(2, 1fr); gap: 40px; }
-.cs-grid-item h4 { font-size: 17px; font-weight: 600; color: var(--portfolio-fg); margin: 0 0 10px; line-height: 1.3; }
+.cs-grid-item h4 { margin: 0 0 10px; font-size: 17px; font-weight: 600; line-height: 1.3; color: var(--portfolio-fg); }
+.cs-grid-item p { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--portfolio-fg-muted); }
 .cs-grid.reflect { gap: 44px 40px; }
-.cs-grid.reflect .cs-grid-item h4 { font-size: 20px; }
-.cs-grid-item p { font-size: 14.5px; line-height: 1.6; color: var(--portfolio-fg-muted); margin: 0; }
+.cs-grid.reflect .cs-grid-item h4 { font-family: var(--font-display); font-size: 22px; font-weight: 500; }
+.cs-impact-grid h4 { font-size: 20px; }
 
-/* ---- device frame: a phone bezel inset in a square container with a background.
-   The outer square is sharp-cornered; the phone inside keeps its rounded bezel. ---- */
-.cs-device { aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; background: var(--portfolio-bg-muted); padding: 22px; overflow: hidden; }
-.cs-device.bg-gradient { background: linear-gradient(150deg, #fdece6 0%, #efe6ff 100%); }
-[data-color-mode="dark"] .cs-device.bg-gradient { background: linear-gradient(150deg, #2a201d 0%, #211c2e 100%); }
-.cs-device.wide { aspect-ratio: 16 / 9; }
-.cs-device-screen { height: 100%; aspect-ratio: 9 / 19.5; max-width: 100%; box-sizing: border-box; border-radius: 26px; background: #0a0c10; padding: 5px; box-shadow: 0 14px 34px rgba(10, 12, 16, 0.22); }
-.cs-device-screen img, .cs-device-screen video { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 22px; }
-
-/* ---- core flow: a vertical sequence of steps. Media ALWAYS on the left,
-   text on the right, unchanging down the sequence. ---- */
-.cs-flow { max-width: var(--cs-read); margin: 34px auto 0; padding: 0 24px; display: flex; flex-direction: column; gap: 56px; }
-.cs-flow-step { display: flex; gap: 44px; align-items: center; }
-.cs-flow-media { flex: 0 0 300px; margin: 0; }
-.cs-flow-media > .cs-figure img, .cs-flow-media > .cs-figure video, .cs-flow-media > img, .cs-flow-media > video { width: 100%; display: block; border: 1px solid var(--portfolio-border-muted); background: var(--portfolio-bg-muted); }
-.cs-flow-text { flex: 1; }
-.cs-flow-num { font-family: var(--cs-mono); font-size: 12px; letter-spacing: .06em; color: var(--portfolio-fg-accent); margin: 0 0 8px; }
-.cs-flow-text h3 { font-family: var(--font-display); font-size: 22px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; margin: 0 0 10px; color: var(--portfolio-fg); }
-.cs-flow-text p { font-size: 15.5px; line-height: 1.65; color: var(--portfolio-fg-muted); margin: 0; }
-
-/* ---- titled exploration frame: ONLY for messy, freeform, overlapping collages
-   (research boards, form-factor explorations). Tinted square, mono label inside,
-   no radius. Clean rectangular screenshots do NOT go in here. ---- */
-.cs-figma { max-width: var(--cs-read); margin: 44px auto; padding: 0 24px; }
-.cs-figma-frame { position: relative; background: var(--portfolio-bg-muted); border: 1px solid var(--portfolio-border-muted); padding: 46px 18px 18px; }
-.cs-figma-label { position: absolute; top: 16px; left: 18px; font-family: var(--cs-mono); font-size: 11px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--portfolio-fg-muted); margin: 0; }
-.cs-figma-frame .cs-figure img, .cs-figma-frame .cs-figure video { background: var(--portfolio-bg); }
-.cs-figma-frame .cs-caption { padding: 0 2px; }
-
-/* ---- flat media at the reading width (web screenshots, clean grids). Square, no radius. ---- */
-.cs-media { max-width: var(--cs-read); margin: 40px auto; padding: 0 24px; }
-.cs-media-label { font-family: var(--cs-mono); font-size: 11px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--portfolio-fg-muted); margin: 0 0 12px; }
-.cs-figure { margin: 0; }
-.cs-figure img, .cs-figure video { width: 100%; display: block; border: 1px solid var(--portfolio-border-muted); background: var(--portfolio-bg-muted); }
+/* Figma/FigJam-like evidence boards. */
+.cs-board {
+  position: relative;
+  margin: 36px 0 0;
+  padding: 56px 18px 18px;
+  border: 1px solid var(--portfolio-border-muted);
+  background: var(--portfolio-bg-muted);
+}
+.cs-board-label {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  margin: 0;
+  padding: 4px;
+  border: 1px solid var(--portfolio-border-muted);
+  border-radius: 4px;
+  background: var(--portfolio-bg);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.3;
+  text-transform: none;
+  color: var(--portfolio-fg);
+}
+.cs-board .cs-figure img,
+.cs-board .cs-figure video { background: var(--portfolio-bg); }
 .cs-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .cs-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.cs-caption { font-size: 13px; line-height: 1.5; color: var(--portfolio-fg-muted); margin: 12px 0 0; }
+.cs-figure { margin: 0; }
+.cs-figure img,
+.cs-figure video { display: block; width: 100%; border: 1px solid var(--portfolio-border-muted); background: var(--portfolio-bg-muted); }
+.cs-caption { margin: 12px 0 0; font-size: 13px; line-height: 1.5; color: var(--portfolio-fg-muted); }
 .cs-caption b { color: var(--portfolio-fg); font-weight: 600; }
 
-/* theme-aware media pairs — scoped to .cs so a lone image never doubles up */
+/* Programmatic problem illustration: one intention fragmented across four tools. */
+.cs-problem-illustration {
+  margin-top: 36px;
+  padding: 38px 34px 32px;
+  border: 1px solid var(--portfolio-border-muted);
+  background: var(--portfolio-bg-muted);
+}
+.cs-problem-tools { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.cs-problem-tool {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 22px 10px 18px;
+  border: 1px solid var(--portfolio-border-muted);
+  background: var(--portfolio-bg);
+  color: var(--portfolio-fg-muted);
+  font-size: 13px;
+}
+.cs-problem-tool svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.cs-problem-fragments { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 14px 0 12px; }
+.cs-problem-fragments span { height: 1px; background: repeating-linear-gradient(90deg, var(--portfolio-border) 0 6px, transparent 6px 11px); }
+.cs-problem-outcome { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding: 18px 20px; border: 1px solid var(--portfolio-border-muted); background: var(--portfolio-bg); }
+.cs-problem-outcome span { color: var(--portfolio-fg-muted); font-size: 13px; }
+.cs-problem-outcome strong { color: var(--portfolio-fg); font-size: 15px; font-weight: 600; text-align: right; }
+
+/* Real SVG phone frame and its calibrated screen crop. */
+.cs-device {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 22px;
+  background: var(--portfolio-bg-muted);
+}
+.cs-device-media { position: relative; display: block; height: 100%; width: auto; aspect-ratio: 433 / 892; overflow: visible; }
+.cs-device-media-screen {
+  position: absolute;
+  z-index: 2;
+  top: 2.24%;
+  left: 4.62%;
+  width: 90.76%;
+  height: 95.52%;
+  overflow: hidden;
+  border-radius: 13% / 6%;
+  background: #05070a;
+}
+.cs-device-media-content { position: relative; z-index: 1; display: block; width: 100%; height: 100%; border: 0; object-fit: cover; }
+.cs-device-media-frame { position: absolute; z-index: 1; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+
+/* Recording controls stay out of the composition until the media is hovered or keyboard-focused. */
+.cs-media-control-host { position: relative; }
+.cs-media-controls {
+  position: absolute;
+  z-index: 6;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(-3px);
+  transition: opacity .16s ease, transform .16s ease;
+  pointer-events: none;
+}
+.cs-media-control-host:hover .cs-media-controls,
+.cs-media-control-host:focus-within .cs-media-controls,
+.cs-media-control-host.is-controls-visible .cs-media-controls {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.cs-media-control-button {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 50%;
+  background: rgba(17,24,32,.78);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.18);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+.cs-media-control-button:hover,
+.cs-media-control-button:focus-visible { background: rgba(17,24,32,.94); outline: none; }
+.cs-media-control-button svg { display: block; width: 14px; height: 14px; fill: currentColor; }
+
+/* Final artifact and flow rows. Copy is bottom-aligned to its media. */
+.cs-flow { margin: 44px 0 0; display: flex; flex-direction: column; gap: 64px; }
+.cs-flow-step { display: flex; align-items: stretch; gap: 44px; }
+.cs-flow-media { flex: 0 0 300px; margin: 0; }
+.cs-flow-text { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 2px; }
+.cs-flow-num { margin: 0 0 8px; font-family: var(--cs-mono); font-size: 12px; letter-spacing: .06em; color: var(--cs-accent); }
+.cs-flow-text h3,
+.cs-decision-copy h3 { margin: 0 0 10px; font-family: var(--font-display); font-size: 22px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; color: var(--portfolio-fg); }
+.cs-flow-text p,
+.cs-decision-copy p { margin: 0; font-size: 15.5px; line-height: 1.65; color: var(--portfolio-fg-muted); }
+.cs-flow-step-wide .cs-flow-media { flex-basis: 440px; }
+.cs-flow-step-onboarding { display: block; }
+.cs-flow-step-onboarding .cs-flow-media { width: 100%; }
+.cs-flow-step-onboarding .cs-flow-text { min-height: 0; padding: 22px 0 0; }
+.cs-artifact-placeholder {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  border: 1px solid var(--portfolio-border-muted);
+  background: var(--portfolio-bg-muted);
+  color: var(--portfolio-fg-muted);
+  font-family: var(--cs-mono);
+  font-size: 11px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.cs-artifact-placeholder-device { aspect-ratio: 4 / 5; }
+.cs-artifact-placeholder-device > .cs-device { width: 100%; height: 100%; aspect-ratio: auto; background: transparent; }
+.cs-device-placeholder .cs-device-media-screen {
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: var(--portfolio-bg);
+  color: var(--portfolio-fg-muted);
+  text-align: center;
+}
+.cs-artifact-placeholder-wide { aspect-ratio: 16 / 9; }
+
+/* Two-column design-decision comparison with a compact carousel. */
+.cs-decision-grid { margin-top: 44px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.cs-decision-card { display: flex; min-width: 0; flex-direction: column; }
+.cs-decision-card > .cs-device,
+.cs-carousel-stage { width: 100%; aspect-ratio: 1 / 1; }
+.cs-carousel-slide { display: none; }
+.cs-carousel-slide.is-active { display: block; }
+.cs-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 34px;
+  border: 1px solid var(--portfolio-border-muted);
+  border-top: 0;
+  color: var(--portfolio-fg-muted);
+  font-family: var(--cs-mono);
+  font-size: 11px;
+}
+.cs-carousel-controls button {
+  align-self: stretch;
+  width: 38px;
+  border: 0;
+  background: transparent;
+  color: var(--portfolio-fg-muted);
+  cursor: pointer;
+}
+.cs-carousel-controls button:hover { background: var(--portfolio-bg-muted); color: var(--portfolio-fg); }
+.cs-carousel-controls button:disabled { opacity: .35; background: transparent; color: var(--portfolio-fg-muted); }
+.cs-carousel-progress {
+  display: grid;
+  grid-template-columns: repeat(var(--carousel-steps), 1fr);
+  gap: 5px;
+  padding: 9px 10px 0;
+  border: 1px solid var(--portfolio-border-muted);
+  border-bottom: 0;
+  background: var(--portfolio-bg);
+}
+.cs-carousel-progress-step {
+  position: relative;
+  height: 3px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999px;
+  background: var(--portfolio-border-muted);
+  cursor: pointer;
+}
+.cs-carousel-progress-step::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--cs-accent);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.cs-carousel-progress-step.is-complete::after { transform: scaleX(1); }
+.cs-carousel.is-running .cs-carousel-progress-step.is-current::after { animation: cs-carousel-progress var(--carousel-duration) linear forwards; }
+@keyframes cs-carousel-progress { to { transform: scaleX(1); } }
+.cs-decision-copy { display: flex; min-height: 150px; flex-direction: column; justify-content: flex-end; padding-top: 24px; }
+.cs-decision-copy .cs-flow-num { margin-bottom: 8px; }
+
+.cs-supporting-evidence { margin-top: 48px; border-top: 1px solid var(--portfolio-border-muted); }
+.cs-supporting-evidence summary {
+  padding: 14px 0;
+  color: var(--portfolio-fg-muted);
+  font-family: var(--cs-mono);
+  font-size: 11px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.cs-supporting-evidence > .cs-figure { padding-top: 28px; }
+.cs-supporting-evidence .cs-figure img { display: block; width: 100%; border: 1px solid var(--portfolio-border-muted); }
+.cs-app-store-grid { padding-top: 12px; }
+
+/* Theme-aware pairs. */
 .cs .only-dark { display: none; }
 [data-color-mode="dark"] .cs .only-light { display: none; }
 [data-color-mode="dark"] .cs .only-dark { display: block; }
@@ -122,10 +394,30 @@
 .cs-end { height: 96px; }
 
 @media (max-width: 700px) {
-  .cs-grid, .cs-grid.cols-2 { grid-template-columns: 1fr; gap: 28px; }
-  .cs-meta { grid-template-columns: repeat(2, 1fr); }
-  .cs-grid-2, .cs-grid-3 { grid-template-columns: 1fr; }
-  .cs-flow-step { flex-direction: column; align-items: stretch; gap: 18px; }
-  .cs-flow-media { flex: 0 0 auto; max-width: 300px; }
-  .cs-label { margin-top: 72px; }
+  .cs-hero { padding-top: 48px; }
+  .cs-meta { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
+  .cs-chapter { margin-top: 96px; }
+  .cs-subsection { margin-top: 56px; }
+  .cs-grid,
+  .cs-grid.cols-2,
+  .cs-grid-2,
+  .cs-grid-3,
+  .cs-decision-grid { grid-template-columns: 1fr; }
+  .cs-grid { gap: 28px; }
+  .cs-flow-step { flex-direction: column; gap: 20px; }
+  .cs-flow-media,
+  .cs-flow-step-wide .cs-flow-media { flex: 0 0 auto; width: 100%; max-width: none; }
+  .cs-flow-text { min-height: 132px; }
+  .cs-artifact-placeholder-device { aspect-ratio: 4 / 5; }
+  .cs-decision-copy { min-height: 132px; }
+  .cs-problem-illustration { padding: 24px 18px 20px; }
+  .cs-problem-tools { grid-template-columns: repeat(2, 1fr); }
+  .cs-problem-fragments { grid-template-columns: repeat(2, 1fr); }
+  .cs-problem-outcome { align-items: flex-start; flex-direction: column; gap: 6px; }
+  .cs-problem-outcome strong { text-align: left; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-media-controls { transition: none; }
+  .cs-carousel.is-running .cs-carousel-progress-step.is-current::after { animation: none; transform: scaleX(1); }
 }
