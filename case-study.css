@@ -182,6 +182,7 @@
 .cs-figure video { display: block; width: 100%; border: 1px solid var(--portfolio-border-muted); background: var(--portfolio-bg-muted); }
 .cs-caption { margin: 12px 0 0; font-size: 13px; line-height: 1.5; color: var(--portfolio-fg-muted); }
 .cs-caption b { color: var(--portfolio-fg); font-weight: 600; }
+.cs-reference-item { min-width: 0; }
 
 /* Programmatic problem illustration: one intention fragmented across four tools. */
 .cs-problem-illustration {
@@ -300,6 +301,7 @@
 }
 .cs-artifact-placeholder-device { aspect-ratio: 4 / 5; }
 .cs-artifact-placeholder-device > .cs-device { width: 100%; height: 100%; aspect-ratio: auto; background: transparent; }
+.cs-artifact-placeholder-wide > .cs-device { width: 100%; height: 100%; aspect-ratio: auto; background: transparent; }
 .cs-device-placeholder .cs-device-media-screen {
   display: grid;
   place-items: center;
@@ -367,6 +369,7 @@
   transform-origin: left;
 }
 .cs-carousel-progress-step.is-complete::after { transform: scaleX(1); }
+.cs-carousel-progress-step.is-static::after { transform: scaleX(1); }
 .cs-carousel.is-running .cs-carousel-progress-step.is-current::after { animation: cs-carousel-progress var(--carousel-duration) linear forwards; }
 @keyframes cs-carousel-progress { to { transform: scaleX(1); } }
 .cs-decision-copy { display: flex; min-height: 150px; flex-direction: column; justify-content: flex-end; padding-top: 24px; }

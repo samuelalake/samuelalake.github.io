@@ -44,6 +44,7 @@ The SME supplies facts, decisions, constraints, chronology, and evidence. The po
 - Do not invent final page styling or a unique device/cursor treatment for the project.
 - If an approved basic-compositor preset is available, the SME may use it to produce consistent device framing, cursor or tap cues, simple zoom, a poster, and a web video.
 - Leave advanced 3D device and project-cover direction to the portfolio-level compositor workflow.
+- For Rem specifically, treat the agentic-control timeline as a future freeform evidence-composition candidate rather than a finished grid treatment.
 
 ## Evidence rules
 

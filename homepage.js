@@ -188,8 +188,8 @@
     if (name === "sound") return '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2V6Zm9.1-.75a4 4 0 0 1 0 5.5l-1-1.05a2.5 2.5 0 0 0 0-3.4l1-1.05Z"/></svg>';
     return '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2V6Zm9.2-.6 1.05-1.05L14 6.1l1.75-1.75 1.05 1.05L15.05 7.15l1.75 1.75-1.05 1.05L14 8.2l-1.75 1.75L11.2 8.9l1.75-1.75-1.75-1.75Z" transform="translate(-2)"/></svg>';
   }
-  autoplayVideos.forEach(function (video) {
-    var host = video.closest(".cs-device") || video.closest(".cs-figure") || video.parentElement;
+  function attachMediaControls(videos, host) {
+    videos = [].slice.call(videos);
     if (!host || host.querySelector(":scope > .cs-media-controls")) return;
     host.classList.add("cs-media-control-host");
     var controls = document.createElement("div");
@@ -203,35 +203,53 @@
     var playButton = controls.querySelector("[data-media-play]");
     var soundButton = controls.querySelector("[data-media-sound]");
     function updateMediaControls() {
-      playButton.innerHTML = mediaIcon(video.paused ? "play" : "pause");
-      playButton.setAttribute("aria-label", video.paused ? "Play recording" : "Pause recording");
-      soundButton.innerHTML = mediaIcon(video.muted ? "mute" : "sound");
-      soundButton.setAttribute("aria-label", video.muted ? "Turn sound on" : "Mute recording");
+      var allPaused = videos.every(function (video) { return video.paused; });
+      var allMuted = videos.every(function (video) { return video.muted; });
+      playButton.innerHTML = mediaIcon(allPaused ? "play" : "pause");
+      playButton.setAttribute("aria-label", allPaused ? "Play recordings" : "Pause recordings");
+      soundButton.innerHTML = mediaIcon(allMuted ? "mute" : "sound");
+      soundButton.setAttribute("aria-label", allMuted ? "Turn sound on" : "Mute recordings");
     }
     playButton.addEventListener("click", function () {
-      if (video.paused) {
-        video.dataset.userPaused = "false";
-        video.play().catch(function () {});
-      } else {
-        video.dataset.userPaused = "true";
-        video.pause();
-      }
+      var shouldPlay = videos.every(function (video) { return video.paused; });
+      videos.forEach(function (video) {
+        video.dataset.userPaused = shouldPlay ? "false" : "true";
+        if (shouldPlay) video.play().catch(function () {});
+        else video.pause();
+      });
       updateMediaControls();
     });
     controls.querySelector("[data-media-restart]").addEventListener("click", function () {
-      video.currentTime = 0;
-      video.dataset.userPaused = "false";
-      video.play().catch(function () {});
+      videos.forEach(function (video) {
+        video.currentTime = 0;
+        video.dataset.userPaused = "false";
+        video.play().catch(function () {});
+      });
       updateMediaControls();
     });
     soundButton.addEventListener("click", function () {
-      video.muted = !video.muted;
+      var shouldUnmute = videos.every(function (video) { return video.muted; });
+      videos.forEach(function (video) { video.muted = !shouldUnmute; });
       updateMediaControls();
     });
-    video.addEventListener("play", updateMediaControls);
-    video.addEventListener("pause", updateMediaControls);
+    videos.forEach(function (video) {
+      video.addEventListener("play", updateMediaControls);
+      video.addEventListener("pause", updateMediaControls);
+    });
     host.addEventListener("touchstart", function () { host.classList.add("is-controls-visible"); }, { passive: true });
     updateMediaControls();
+  }
+  var groupedVideos = [];
+  [].slice.call(document.querySelectorAll("[data-shared-media-controls]")).forEach(function (group) {
+    var videos = [].slice.call(group.querySelectorAll("video[autoplay]"));
+    if (!videos.length) return;
+    groupedVideos = groupedVideos.concat(videos);
+    attachMediaControls(videos, group);
+  });
+  autoplayVideos.forEach(function (video) {
+    if (groupedVideos.indexOf(video) !== -1) return;
+    var host = video.closest(".cs-device") || video.closest(".cs-figure") || video.parentElement;
+    attachMediaControls([video], host);
   });
 
   if (!reduce && "IntersectionObserver" in window) {
@@ -319,13 +337,14 @@
     var index = Math.max(0, slides.findIndex(function (slide) { return slide.classList.contains("is-active"); }));
     var duration = 6000, timer = null, inView = false, pointerInside = false;
     var progress = null, progressSteps = [];
-    if (slides.length > 1) {
+    if (slides.length) {
       progress = document.createElement("div");
       progress.className = "cs-carousel-progress";
       progress.style.setProperty("--carousel-steps", slides.length);
       progress.style.setProperty("--carousel-duration", duration + "ms");
       progress.setAttribute("aria-label", "Carousel progress");
       progress.innerHTML = slides.map(function (_, slideIndex) {
+        if (slides.length === 1) return '<span class="cs-carousel-progress-step is-static" data-carousel-step="0" aria-hidden="true"></span>';
         return '<button class="cs-carousel-progress-step" type="button" data-carousel-step="' + slideIndex + '" aria-label="Show slide ' + (slideIndex + 1) + '"></button>';
       }).join("");
       carousel.insertBefore(progress, carousel.querySelector(".cs-carousel-controls"));
@@ -362,6 +381,7 @@
       if (next) next.disabled = true;
     }
     progressSteps.forEach(function (step) {
+      if (slides.length <= 1) return;
       step.addEventListener("click", function () { showSlide(parseInt(step.getAttribute("data-carousel-step"), 10)); });
     });
     carousel.addEventListener("mouseenter", function () { pointerInside = true; scheduleAuto(); });
