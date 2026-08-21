@@ -1,0 +1,15 @@
+# Dev-only files (never part of the live site)
+CASE-STUDY-SPEC.md
+.claude
+
+# Heavy source recordings replaced by optimized .mp4 on the pages.
+# Kept locally as source; excluded from deploy to keep the bundle small.
+projects/rem-evidence/rem-chat-conversational-light.mov
+projects/rem-evidence/huxe-daily-brief.mov
+projects/rem-evidence/todoist-ramble.mov
+projects/rem-evidence/claude-dispatch-light.mov
+projects/rem-evidence/codex-control-light.mov
+projects/facebook-evidence/huddle-comet-grid-feed-entry.mov
+projects/facebook-evidence/huddle-comet-grid-stories-entry.mov
+projects/facebook-evidence/huddle-web-speaker-grid.mov
+projects/facebook-evidence/notifications-surface-recording.mov
