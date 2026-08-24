@@ -3,351 +3,124 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Rem — a personal AI assistant that captures intent, clarifies it into work, and runs approved actions through a gateway the user controls. Case study by Samuel Alake." />
-    <meta property="og:title" content="Rem · Samuel Alake" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://samuelalake.com/projects/rem" />
-    <meta property="og:image" content="https://samuelalake.com/og-image.png" />
-    <link rel="canonical" href="https://samuelalake.com/projects/rem" />
-    <link rel="icon" type="image/svg+xml" href="/caricature.svg" />
+    <meta name="description" content="Rem narrative case-study review by Samuel Alake." />
     <title>Rem · Samuel Alake</title>
     <link rel="stylesheet" href="/assets/index-DcLK9jS5.css" />
-    <link rel="stylesheet" href="/homepage.css?v=20260821-rem-layout-3" />
-    <link rel="stylesheet" href="/case-study.css?v=20260821-rem-layout-5" />
+    <link rel="stylesheet" href="/projects/product-page.css?v=20260824-1" />
     <script>
-      (function () {
-        try {
-          var t = localStorage.getItem("theme");
-          if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-          document.documentElement.setAttribute("data-color-mode", t);
-        } catch (e) {}
-      })();
+      try { document.documentElement.setAttribute("data-color-mode", localStorage.getItem("theme") || "light"); } catch (e) {}
     </script>
   </head>
   <body>
-    <div data-color-mode="light" data-light-theme="light" data-dark-theme="dark">
-      <div data-component="BaseStyles" class="prc-src-BaseStyles-aopSS">
+    <header class="np-header">
+      <div class="np-header-inner">
+        <a class="np-brand" href="/">samuelalake / product designer + engineer</a>
+        <nav aria-label="Sections"><a href="/">Work</a><a href="/about">About</a></nav>
+      </div>
+    </header>
 
-        <div class="prc-PageHeader-PageHeader-YLwBQ repo-page-header">
-          <div class="prc-PageHeader-TitleArea-2n2J0" data-component="TitleArea" data-size-variant="medium">
-            <div class="prc-PageHeader-LeadingVisual-njece" data-component="PH_LeadingVisual">
-              <a class="repo-avatar" href="/" aria-label="Samuel Alake profile"><span aria-hidden="true" class="site-caricature site-caricature-header"></span></a>
-            </div>
-            <h1 class="prc-PageHeader-Title-p0Mgh prc-Heading-Heading-MtWFE" data-component="PH_Title" data-hidden="false">
-              <span class="repo-title-path"><a class="repo-owner prc-Link-Link-9ZwDx" data-component="Link" href="/">samuelalake</a><span aria-hidden="true">/</span><a class="repo-name prc-Link-Link-9ZwDx" data-component="Link" href="/">product designer + engineer</a></span>
-            </h1>
-          </div>
-          <div class="prc-PageHeader-Actions-wawWm" data-component="PH_Actions">
-            <nav class="header-nav" aria-label="Sections">
-              <a href="/">Work</a>
-              <a href="/about">About</a>
-            </nav>
-            <button id="cursor-toggle" data-component="IconButton" type="button" class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7" data-loading="false" data-no-visuals="true" data-size="medium" data-variant="default" aria-label="Cursor color"><span class="cursor-dot" aria-hidden="true"></span></button>
-            <button id="theme-toggle" data-component="IconButton" type="button" class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7" data-loading="false" data-no-visuals="true" data-size="medium" data-variant="default" aria-label="Toggle color mode">
-              <svg class="octicon octicon-moon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M9.598 1.591a.749.749 0 0 1 .785-.175 7.001 7.001 0 1 1-8.967 8.967.75.75 0 0 1 .961-.96 5.5 5.5 0 0 0 7.046-7.046.75.75 0 0 1 .175-.786Zm1.616 1.945a7 7 0 0 1-7.678 7.678 5.499 5.499 0 1 0 7.678-7.678Z"></path></svg>
-              <svg class="octicon octicon-sun" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-1.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm5.657-8.157a.75.75 0 0 1 0 1.061l-1.061 1.06a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.06-1.06a.75.75 0 0 1 1.06 0Zm-9.193 9.193a.75.75 0 0 1 0 1.06l-1.06 1.061a.75.75 0 1 1-1.061-1.06l1.06-1.061a.75.75 0 0 1 1.061 0ZM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0ZM3 8a.75.75 0 0 1-.75.75H.75a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 3 8Zm13 0a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 16 8Zm-3.343 3.157a.75.75 0 0 1 1.061 0l1.06 1.061a.75.75 0 0 1-1.06 1.06l-1.061-1.06a.75.75 0 0 1 0-1.061ZM2.343 2.343a.75.75 0 0 1 1.061 0l1.06 1.061a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-1.06-1.06a.75.75 0 0 1 0-1.061ZM8 13a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13Z"></path></svg>
-            </button>
+    <main class="np-main">
+      <header class="np-hero">
+        <p class="np-label">Rem · iOS · 2026</p>
+        <h1>Turning everyday intent into work an assistant can actually do</h1>
+        <p class="np-lede">Rem captures what you mean to do, turns it into a task, and runs approved actions through a gateway you control.</p>
+        <div class="np-reserved" aria-label="Reserved space for future cover media"></div>
+      </header>
+
+      <dl class="np-meta">
+        <div><dt>Role</dt><dd>Product design<br />and engineering</dd></div>
+        <div><dt>Timeline</dt><dd>2026–present</dd></div>
+        <div><dt>Platform</dt><dd>iOS</dd></div>
+        <div><dt>Focus</dt><dd>Product design<br />Design engineering</dd></div>
+      </dl>
+
+      <section class="np-section">
+        <p class="np-label">Project context</p>
+        <h2>Work gets scattered across too many apps</h2>
+        <p class="np-copy">Tasks, messages, notes, and calendar commitments live in different places. Keeping up means switching between them, rebuilding the plan in your head, and still doing the work yourself. Rem brings those priorities into one assistant that can help decide what matters and move approved tasks forward.</p>
+      </section>
+
+      <section class="np-section">
+        <p class="np-label">Solution</p>
+        <h2>One loop: capture, orient, work, brief, repeat</h2>
+        <p class="np-copy">Rem brings capture, planning, and action into one assistant. A task persists after the conversation moves on, giving the person and the assistant one place to clarify the work, approve the next step, and follow the result.</p>
+
+        <article class="np-flow"><div class="np-flow-media">Capture portrait media</div><div class="np-flow-copy"><p class="np-count">01 · Capture</p><h3>Get intent in before it disappears</h3><p>Someone can talk or type in their own words. Rem clarifies what they mean and turns it into a task, an event, or an action for a connected tool.</p></div></article>
+        <article class="np-flow"><div class="np-flow-media">Agenda portrait media</div><div class="np-flow-copy"><p class="np-count">02 · Orient</p><h3>See tasks and time in one agenda</h3><p>Calendar commitments provide the timed context. Tasks hold the work. The agenda brings both together in a plan that can change with the day.</p></div></article>
+        <article class="np-flow"><div class="np-flow-media">Approved-action portrait media</div><div class="np-flow-copy"><p class="np-count">03 · Work</p><h3>Approve the next step before it runs</h3><p>Rem proposes an action, waits for confirmation, runs it through a gateway or connector, and reports the result back in the task’s log.</p></div></article>
+        <article class="np-flow"><div class="np-flow-media">Daily Brief portrait media</div><div class="np-flow-copy"><p class="np-count">04 · Brief</p><h3>Roll useful updates into one brief</h3><p>A daily brief gathers the work worth noticing into one update. When nothing needs attention, Rem can stay quiet.</p></div></article>
+        <article class="np-wide"><div class="np-flow-media">Onboarding media</div><div class="np-flow-copy"><p class="np-count">05 · Onboarding</p><h3>Set expectations before Rem starts acting</h3><p>Onboarding introduces the assistant, the approval model, and connected tools before someone asks Rem to do work.</p></div></article>
+      </section>
+
+      <section class="np-section">
+        <p class="np-label">Design explorations</p>
+        <h2>How people communicate with an assistant</h2>
+        <p class="np-copy">I looked at Gemini, HUXE, Todoist, Claude, and Codex to understand who leads the conversation, how much context the assistant packages, and when voice replaces typing.</p>
+        <div class="np-reference-board">
+          <p class="np-board-tag">References</p>
+          <div class="np-reference-grid">
+            <article class="np-reference"><video autoplay muted loop playsinline poster="/projects/rem-evidence/huxe-daily-brief-poster.jpg" src="/projects/rem-evidence/huxe-daily-brief-web.mp4"></video><p><strong>HUXE.</strong> An assistant-led daily brief packages context and leads the conversation.</p></article>
+            <article class="np-reference"><video autoplay muted loop playsinline poster="/projects/rem-evidence/todoist-ramble-poster.jpg" src="/projects/rem-evidence/todoist-ramble-web.mp4"></video><p><strong>Todoist Ramble.</strong> Loose user input becomes structured task context.</p></article>
           </div>
         </div>
+      </section>
 
-        <main class="cs">
-          <nav class="cs-nav" aria-label="On this page">
-            <a class="cs-nav-back" href="/">
-              <svg class="octicon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L5.06 7h8.19a.75.75 0 0 1 0 1.5H5.06l2.72 2.72a.75.75 0 0 1 0 1.06Z"></path></svg>
-              Back
-            </a>
-            <p class="cs-nav-title">In this case study</p>
-            <ul class="cs-nav-list">
-              <li><a href="#context">Project context</a></li>
-              <li><a href="#final-artifacts">Solution</a></li>
-              <li><a href="#design-moments">Key design moments</a></li>
-              <li><a href="#impact">Impact</a></li>
-              <li><a href="#reflection">Reflection</a></li>
-            </ul>
-          </nav>
+      <section class="np-section">
+        <p class="np-label">Exploring the interaction model</p>
+        <h2>Finding the balance between assistant-led and user-led</h2>
+        <p class="np-copy">Early concepts either showed every mode at once or reduced the experience to a voice call. The final direction keeps the chat thread visible and treats voice as another way to participate in it.</p>
+        <div class="np-grid two">
+          <article class="np-card"><h3>Before</h3><p>Two directions tested a dense all-in-one surface and a minimal voice-only call.</p></article>
+          <article class="np-card"><h3>After</h3><p>Chat, Daily Brief listening, and Live Activity share one interaction model.</p></article>
+        </div>
+      </section>
 
-          <header class="cs-hero">
-            <p class="cs-kicker">Rem · 2025</p>
-            <h1 class="cs-title">Turning everyday context into self-executing AI tasks</h1>
-            <p class="cs-lede">Rem is a personal AI assistant that captures intent, clarifies it into work, and runs approved actions through a cloud or Mac gateway the user controls.</p>
-          </header>
+      <section class="np-section">
+        <p class="np-label">Product positioning</p>
+        <h2>Deciding where Rem should sit in a changing market</h2>
+        <p class="np-copy">We started with two assumptions: people would want more privacy than a conventional cloud assistant offers, but less setup than a fully local agent requires. I mapped the market to see how that tradeoff should shape where Rem runs, how it is controlled, and which device stays in charge.</p>
+        <div class="np-positioning">
+          <section class="np-position-row">
+            <h3>Where does the agent run?</h3>
+            <div class="np-axis-labels"><strong>Cloud</strong><strong>Local</strong></div>
+            <div class="np-axis"><span class="np-axis-line"></span><span class="np-axis-tick"></span><span class="np-rem-dot middle"><i></i><b>Rem</b></span></div>
+            <div class="np-axis-lists"><div class="np-app-list"><span class="np-app"><i></i>Claude</span><span class="np-app"><i></i>OpenAI</span></div><div class="np-app-list"><span class="np-app"><i></i>Clovy</span><span class="np-app"><i></i>Hermes</span><span class="np-app"><i></i>OpenClaw</span></div></div>
+            <p class="np-axis-note">Rem’s assumption: cloud-backup convenience with local-style ownership. Back it up, move it, or delete it.</p>
+          </section>
+          <section class="np-position-row">
+            <h3>How do you control it?</h3>
+            <div class="np-axis-labels"><strong>Keyboard</strong><strong>Voice</strong></div>
+            <div class="np-axis"><span class="np-axis-line"></span><span class="np-axis-tick"></span><span class="np-rem-dot voice"><i></i><b>Rem</b></span></div>
+            <div class="np-axis-lists"><div class="np-app-list"><span class="np-app"><i></i>Claude</span><span class="np-app"><i></i>OpenAI</span></div><div class="np-app-list"><span class="np-app"><i></i>Clicky</span></div></div>
+          </section>
+          <section class="np-position-row">
+            <h3>Where do you control it from?</h3>
+            <div class="np-axis-labels three"><strong>Desktop app</strong><strong>Mobile assistant</strong><strong>Phone as remote</strong></div>
+            <div class="np-axis"><span class="np-axis-line"></span><span class="np-axis-tick"></span><span class="np-rem-dot remote"><i></i><b>Rem</b></span></div>
+            <div class="np-axis-lists three"><div class="np-app-list"><span class="np-app"><i></i>Claude</span><span class="np-app"><i></i>OpenAI</span></div><div class="np-app-list"><span class="np-app"><i></i>AGI · confirm</span></div><div class="np-app-list"></div></div>
+          </section>
+        </div>
+      </section>
 
-          <div class="cs-cover">
-            <img class="cs-cover-media seq" data-seq="/projects/rem-logo-transition-inverted" data-count="241" src="/projects/rem-logo-transition-inverted/000.svg" alt="Rem identity animation" />
-          </div>
+      <section class="np-section">
+        <p class="np-label">Future explorations</p>
+        <h2>Exploring a Mac home and wearable capture</h2>
+        <p class="np-copy">These concepts extend the product direction beyond the current iPhone release. They remain gated until the supporting mockups are ready.</p>
+        <div class="np-grid two"><article class="np-card"><h3>Give approved work a visible home on the Mac</h3><p>A desktop surface could make running work, status, and recovery easier to follow.</p></article><article class="np-card"><h3>Capture intent without reaching for the phone</h3><p>Wearables could make quick capture and lightweight updates available in motion.</p></article></div>
+      </section>
 
-          <dl class="cs-meta">
-            <div><dt>Role</dt><dd>Lead Product Designer &amp; Engineer</dd></div>
-            <div><dt>Timeline</dt><dd>2025–present</dd></div>
-            <div><dt>Team</dt><dd class="cs-meta-list"><span>2 engineers</span><span>1 designer and design engineer (me)</span></dd></div>
-            <div><dt>Skills</dt><dd class="cs-meta-list"><span>Product design</span><span>Design engineering</span></dd></div>
-          </dl>
+      <section class="np-section">
+        <p class="np-label">Where it stands</p>
+        <h2>Shipped on iPhone, then opened at the core</h2>
+        <p class="np-copy">Rem is live on the App Store for iPhone and has been released as an Apache-2.0 open-source project. The product is still being simplified and made more reliable as the open-core model takes shape.</p>
+      </section>
 
-          <div class="cs-chapter" id="context">
-            <section class="cs-section">
-              <p class="cs-label">Project context</p>
-              <h2>How might an assistant turn everyday intent into protected time, and real progress?</h2>
-              <p class="cs-lede">Rem started from my own workflow. I could capture what I meant to do, but turning intentions into protected time was the hard part, and I spent more time managing tools than doing the work.</p>
-            </section>
-            <div class="cs-grid">
-              <div class="cs-grid-item"><h4>Product direction</h4><p>Initiated the idea, brought collaborators in, and set the strategy across the capture-to-action loop.</p></div>
-              <div class="cs-grid-item"><h4>Interaction design</h4><p>Designed how the assistant serves multiple jobs and communicates its status clearly.</p></div>
-              <div class="cs-grid-item"><h4>Implementation</h4><p>Built the core app experience in SwiftUI, moving between design and engineering.</p></div>
-            </div>
-
-            <section class="cs-section cs-subsection">
-              <p class="cs-label">Problem</p>
-              <h2>Today, work is split across apps that capture but never follow through</h2>
-              <p>A task app captures intent, a calendar protects time, a notes app holds context. AI chat can summarize or rewrite, but it rarely moves work forward in a way you can trust. People manage more tools instead of finishing more work.</p>
-            </section>
-            <div class="cs-problem-illustration" role="img" aria-label="A single intention fragmented across tasks, calendar, notes, and AI chat while the work remains unfinished">
-              <div class="cs-problem-tools">
-                <div class="cs-problem-tool"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 12 3 3 7-7"/><rect x="3" y="3" width="18" height="18" rx="5"/></svg><span>Tasks</span></div>
-                <div class="cs-problem-tool"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v4M17 2v4M3 9h18"/><rect x="3" y="4" width="18" height="17" rx="4"/></svg><span>Calendar</span></div>
-                <div class="cs-problem-tool"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8h10M7 12h10M7 16h6"/><rect x="3" y="3" width="18" height="18" rx="4"/></svg><span>Notes</span></div>
-                <div class="cs-problem-tool"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 13.8 8.2 19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="m18 16 .8 2.2L21 19l-2.2.8L18 22l-.8-2.2L15 19l2.2-.8L18 16Z"/></svg><span>AI chat</span></div>
-              </div>
-              <div class="cs-problem-fragments" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-              <div class="cs-problem-outcome"><span>One intention</span><strong>Still waiting to become finished work</strong></div>
-            </div>
-
-            <section class="cs-section cs-subsection">
-              <p class="cs-label">Opportunity</p>
-              <h2>Voice to capture, a controlled runtime as the moat</h2>
-              <p class="cs-lede">Productivity is a huge category, and people now expect to get things done by talking to software. But that adoption has produced better conversation, not better follow-through.</p>
-            </section>
-            <div class="cs-grid">
-              <div class="cs-grid-item"><h4>One loop</h4><p>Connect the surfaces people already use into a single capture-clarify-act loop.</p></div>
-              <div class="cs-grid-item"><h4>Voice-first</h4><p>Voice as the entry point, so capture feels closer to thinking out loud than filing into an app.</p></div>
-              <div class="cs-grid-item"><h4>Scoped execution</h4><p>Actions run through a gateway the user owns, and can be reviewed or revoked.</p></div>
-            </div>
-          </div>
-
-          <div class="cs-chapter" id="final-artifacts">
-            <section class="cs-section">
-              <p class="cs-label">Solution</p>
-              <h2>The finished Rem experience, before the process behind it</h2>
-              <p>This section is intentionally scaffolded for the final product story. Replace the placeholder media and copy once the core flows and narrative are selected.</p>
-            </section>
-            <!-- Reference scaffold only: add, remove, or reorder core-flow rows to fit the evidence and narrative. -->
-            <div class="cs-flow cs-flow-placeholder">
-              <div class="cs-flow-step">
-                <div class="cs-flow-media">
-                  <div class="cs-artifact-placeholder cs-artifact-placeholder-device">
-                    <div class="cs-device cs-device-placeholder" aria-label="Empty phone frame for a future core-flow recording">
-                      <div class="cs-device-media">
-                        <div class="cs-device-media-screen"><span>Core flow media</span></div>
-                        <img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="cs-flow-text"><p class="cs-flow-num">01</p><h3>Core flow placeholder</h3><p>Add the outcome-oriented description of the first finished product flow.</p></div>
-              </div>
-              <div class="cs-flow-step">
-                <div class="cs-flow-media">
-                  <div class="cs-artifact-placeholder cs-artifact-placeholder-device">
-                    <div class="cs-device cs-device-placeholder" aria-label="Empty phone frame for a future core-flow recording">
-                      <div class="cs-device-media">
-                        <div class="cs-device-media-screen"><span>Core flow media</span></div>
-                        <img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="cs-flow-text"><p class="cs-flow-num">02</p><h3>Core flow placeholder</h3><p>Add the outcome-oriented description of the second finished product flow.</p></div>
-              </div>
-              <div class="cs-flow-step cs-flow-step-wide cs-flow-step-onboarding">
-                <div class="cs-flow-media">
-                  <div class="cs-artifact-placeholder cs-artifact-placeholder-wide">
-                    <div class="cs-device cs-device-placeholder" aria-label="Empty phone frame for a future onboarding recording">
-                      <div class="cs-device-media">
-                        <div class="cs-device-media-screen"><span>Onboarding media</span></div>
-                        <img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="cs-flow-text"><p class="cs-flow-num">03</p><h3>Onboarding</h3><p>Add the final onboarding artifact and the short explanation of what it helps a new user understand.</p></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cs-chapter" id="design-moments">
-            <section class="cs-section">
-              <p class="cs-label">Research</p>
-              <h2>Understanding who should lead a voice interaction</h2>
-              <p>We studied voice and AI products to see how much initiative an assistant should take, what context it should package, and where the user should remain in control.</p>
-            </section>
-
-            <div class="cs-board" data-shared-media-controls>
-              <p class="cs-board-label">References</p>
-              <div class="cs-grid-2">
-                <div class="cs-reference-item">
-                  <div class="cs-device">
-                    <div class="cs-device-media">
-                      <div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline preload="auto" poster="/projects/rem-evidence/huxe-daily-brief-poster.jpg" src="/projects/rem-evidence/huxe-daily-brief-web.mp4"></video></div>
-                      <img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" />
-                    </div>
-                  </div>
-                  <p class="cs-caption"><b>HUXE.</b> An assistant-led daily brief packages context and leads the conversation.</p>
-                </div>
-                <div class="cs-reference-item">
-                  <div class="cs-device">
-                    <div class="cs-device-media">
-                      <div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline preload="auto" poster="/projects/rem-evidence/todoist-ramble-poster.jpg" src="/projects/rem-evidence/todoist-ramble-web.mp4"></video></div>
-                      <img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" />
-                    </div>
-                  </div>
-                  <p class="cs-caption"><b>Todoist Ramble.</b> Loose user input becomes structured task context.</p>
-                </div>
-              </div>
-            </div>
-
-            <section class="cs-section cs-subsection">
-              <p class="cs-label">Exploring the interaction model</p>
-              <h2>Finding the balance between assistant-led and user-led</h2>
-              <p>HUXE packages context and leads the conversation; Todoist Ramble starts from loose user input. Rem needed a model that could move work forward without taking control away.</p>
-            </section>
-
-            <div class="cs-board">
-              <p class="cs-board-label">Early exploration</p>
-              <div class="cs-grid-2">
-                <figure class="cs-figure">
-                  <img class="only-light" src="/projects/rem-evidence/notion-timeblock-github-light.png" alt="Notion Time Block script" loading="lazy" />
-                  <img class="only-dark" src="/projects/rem-evidence/notion-timeblock-github-dark.png" alt="Notion Time Block script" loading="lazy" />
-                  <figcaption class="cs-caption"><b>Notion Time Block.</b> An early script turning Notion tasks and calendar availability into a suggested plan.</figcaption>
-                </figure>
-                <figure class="cs-figure">
-                  <img class="only-light" src="/projects/rem-evidence/figjam-ideation-light.png" alt="FigJam ideation board" loading="lazy" />
-                  <img class="only-dark" src="/projects/rem-evidence/figjam-ideation-dark.png" alt="FigJam ideation board" loading="lazy" />
-                  <figcaption class="cs-caption"><b>FigJam ideation.</b> Shaping the capture, planning, and follow-through loop with collaborators.</figcaption>
-                </figure>
-              </div>
-            </div>
-
-            <div class="cs-decision-grid">
-              <article class="cs-decision-card">
-                <div class="cs-carousel" data-carousel>
-                  <div class="cs-carousel-stage">
-                    <div class="cs-carousel-slide is-active" data-carousel-slide>
-                      <div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><img class="cs-device-media-content only-light" src="/projects/rem-evidence/rem-chat-initial-light.png" alt="Rem chat, iteration 1" loading="lazy" /><img class="cs-device-media-content only-dark" src="/projects/rem-evidence/rem-chat-initial-dark.png" alt="Rem chat, iteration 1" loading="lazy" /></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div>
-                    </div>
-                    <div class="cs-carousel-slide" data-carousel-slide>
-                      <div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><img class="cs-device-media-content only-light" src="/projects/rem-evidence/rem-chat-previous-light.png" alt="Rem chat, iteration 2" loading="lazy" /><img class="cs-device-media-content only-dark" src="/projects/rem-evidence/rem-chat-previous-dark.png" alt="Rem chat, iteration 2" loading="lazy" /></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div>
-                    </div>
-                  </div>
-                  <div class="cs-carousel-controls">
-                    <button type="button" data-carousel-prev aria-label="Previous exploration">←</button>
-                    <span data-carousel-status aria-live="polite">1 of 2</span>
-                    <button type="button" data-carousel-next aria-label="Next exploration">→</button>
-                  </div>
-                </div>
-                <div class="cs-decision-copy"><h3>Exploring the interaction model</h3><p>Two early directions tested how much of listening, composing, and conversation should be visible.</p></div>
-              </article>
-              <article class="cs-decision-card">
-                <div class="cs-carousel" data-carousel>
-                  <div class="cs-carousel-stage">
-                    <div class="cs-carousel-slide is-active" data-carousel-slide>
-                      <div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline preload="auto" poster="/projects/rem-evidence/rem-chat-conversational-light-poster.jpg" src="/projects/rem-evidence/rem-chat-conversational-light-web.mp4"></video></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div>
-                    </div>
-                  </div>
-                  <div class="cs-carousel-controls">
-                    <button type="button" data-carousel-prev aria-label="Previous final direction">←</button>
-                    <span data-carousel-status aria-live="polite">1 of 1</span>
-                    <button type="button" data-carousel-next aria-label="Next final direction">→</button>
-                  </div>
-                </div>
-                <div class="cs-decision-copy"><h3>Returning to a familiar chat model</h3><p>The final direction keeps the thread visible and treats voice as an ongoing call inside the conversation.</p></div>
-              </article>
-            </div>
-
-            <section class="cs-section cs-subsection">
-              <p class="cs-label">Designing the execution layer</p>
-              <h2>Giving Rem a safe, understandable way to act</h2>
-              <p>Rem needed more than a chat surface. It needed a gateway that could run approved actions, show its status clearly, and stay under the user’s control.</p>
-            </section>
-            <!-- Future media direction: this heterogeneous timeline is a strong candidate for a freeform evidence composition. -->
-            <div class="cs-board">
-              <p class="cs-board-label">Agentic control timeline · Feb–May 2026</p>
-              <div class="cs-grid-3">
-                <figure class="cs-figure">
-                  <img class="only-light" src="/projects/rem-evidence/openclaw-docs-light.png" alt="OpenClaw docs" loading="lazy" />
-                  <img class="only-dark" src="/projects/rem-evidence/openclaw-docs-dark.png" alt="OpenClaw docs" loading="lazy" />
-                  <figcaption class="cs-caption"><b>Feb · OpenClaw.</b> Framed the gateway and control model.</figcaption>
-                </figure>
-                <figure class="cs-figure">
-                  <video autoplay muted loop playsinline preload="metadata" src="/projects/rem-evidence/claude-dispatch-light.mp4"></video>
-                  <figcaption class="cs-caption"><b>Mar · Claude Dispatch.</b> Approved remote actions going mainstream.</figcaption>
-                </figure>
-                <figure class="cs-figure">
-                  <video autoplay muted loop playsinline preload="metadata" src="/projects/rem-evidence/codex-control-light.mp4"></video>
-                  <figcaption class="cs-caption"><b>May · Codex.</b> Mobile control made concrete, scoped and visible.</figcaption>
-                </figure>
-              </div>
-            </div>
-          </div>
-
-          <div class="cs-chapter" id="impact">
-            <section class="cs-section">
-              <p class="cs-label">Impact</p>
-              <h2>Shipped across platforms, now building toward an open-core model</h2>
-              <p>The first release validated the planning-assistant surface and exposed the retention work still ahead. Rem has since expanded beyond the original iOS experiment while the product and business model continue to evolve.</p>
-            </section>
-            <div class="cs-grid cs-impact-grid">
-              <div class="cs-grid-item"><h4>Early traction</h4><p>More than 100 people joined the waitlist, and Rem was accepted into Beta University’s pre-accelerator.</p></div>
-              <div class="cs-grid-item"><h4>iOS and Android</h4><p>Rem now reaches users across both major mobile platforms.</p></div>
-              <div class="cs-grid-item"><h4>Open source, open core</h4><p>The open-source product supports an open-core model around a more reliable, user-controlled runtime.</p></div>
-            </div>
-            <details class="cs-supporting-evidence">
-              <summary>Supporting evidence: retention signal</summary>
-              <div class="cs-grid-2 cs-app-store-grid">
-                <figure class="cs-figure">
-                  <img src="/projects/rem-evidence/rem-app-store-light.png" alt="Rem App Store presentation in light mode" loading="lazy" />
-                  <figcaption class="cs-caption">App Store presentation · light</figcaption>
-                </figure>
-                <figure class="cs-figure">
-                  <img src="/projects/rem-evidence/rem-app-store-dark.png" alt="Rem App Store presentation in dark mode" loading="lazy" />
-                  <figcaption class="cs-caption">App Store presentation · dark</figcaption>
-                </figure>
-              </div>
-              <figure class="cs-figure">
-                <img src="/projects/rem-evidence/posthog-data-tracking.png" alt="PostHog usage dashboard" loading="lazy" />
-                <figcaption class="cs-caption"><b>PostHog dashboard.</b> Usage tracking made the retention problem visible and set the goal for the relaunch.</figcaption>
-              </figure>
-            </details>
-          </div>
-
-          <div class="cs-chapter" id="reflection">
-            <section class="cs-section">
-              <p class="cs-label">Reflection</p>
-              <h2>What I learned</h2>
-            </section>
-            <div class="cs-grid reflect cols-2">
-              <div class="cs-grid-item"><h4>Reflection theme one</h4><p>Placeholder for the first project lesson. Replace this with the approved reflection copy from the writing document.</p></div>
-              <div class="cs-grid-item"><h4>Reflection theme two</h4><p>Placeholder for the second project lesson. Keep this concise, specific, and grounded in a decision from the work.</p></div>
-            </div>
-          </div>
-
-          <div class="cs-end"></div>
-        </main>
-
-        <footer class="site-footer2">
-          <div class="page footer-inner">
-            <span class="footer-left">
-              Designed + Coded with
-              <svg class="octicon footer-heart" viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M7.655 14.916v-.001h-.002l-.006-.003-.018-.01a22.066 22.066 0 0 1-3.744-2.584C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.044 5.231-3.886 6.818a22.094 22.094 0 0 1-3.433 2.414 7.152 7.152 0 0 1-.31.17l-.018.01-.008.004a.75.75 0 0 1-.69 0Z"></path></svg>
-              by Samuel
-            </span>
-            <span class="footer-links">
-              <a href="https://www.linkedin.com/in/samuel-alake/" target="_blank" rel="noreferrer"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M14.5455 0H1.45455C0.650909 0 0 0.650909 0 1.45455V14.5455C0 15.3491 0.650909 16 1.45455 16H14.5455C15.3491 16 16 15.3491 16 14.5455V1.45455C16 0.650909 15.3491 0 14.5455 0ZM5.05746 13.0909H2.912V6.18764H5.05746V13.0909ZM3.96291 5.20073C3.27127 5.20073 2.712 4.64 2.712 3.94982C2.712 3.25964 3.272 2.69964 3.96291 2.69964C4.65236 2.69964 5.21309 3.26036 5.21309 3.94982C5.21309 4.64 4.65236 5.20073 3.96291 5.20073ZM13.0938 13.0909H10.9498V9.73382C10.9498 8.93309 10.9353 7.90327 9.83491 7.90327C8.71855 7.90327 8.54691 8.77527 8.54691 9.67564V13.0909H6.40291V6.18764H8.46109V7.13091H8.49018C8.77673 6.58836 9.47636 6.016 10.52 6.016C12.6924 6.016 13.0938 7.44582 13.0938 9.30473V13.0909V13.0909Z"></path></svg>LinkedIn</a>
-              <a href="https://github.com/samuelalake" target="_blank" rel="noreferrer"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>GitHub</a>
-            </span>
-          </div>
-        </footer>
-
-      </div>
-    </div>
-    <script src="/homepage.js?v=20260821-rem-layout-6" defer></script>
+      <section class="np-section">
+        <p class="np-label">Reflection</p>
+        <h2>I learned to get clear before I build</h2>
+        <div class="np-grid two"><article class="np-card"><h3>Understand the problem before choosing a direction</h3><p>Rem sits in a product space with few settled patterns. I explored too many directions at once, then learned to form a clearer picture of the problem before committing to a solution. The product became simpler as my understanding improved.</p></article><article class="np-card"><h3>Invite people in, then make ownership explicit</h3><p>Building in the open helped me bring friends into the project. I owned product and they focused on the mechanics, but that boundary blurred and momentum faded. Next time I would involve more design builders and agree on ownership earlier.</p></article></div>
+      </section>
+    </main>
+    <footer class="np-footer">Samuel Alake · Product design and engineering</footer>
   </body>
 </html>

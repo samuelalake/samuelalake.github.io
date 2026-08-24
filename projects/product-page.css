@@ -43,8 +43,6 @@ body { margin: 0; background: var(--np-bg); color: var(--np-ink); font-family: M
 .np-card { min-width: 0; padding-top: 20px; border-top: 1px solid var(--np-line); }
 .np-card h3 { margin: 0 0 10px; font-size: 20px; line-height: 1.25; }
 .np-card p { margin: 0; color: var(--np-muted); line-height: 1.65; }
-.np-review-card { display: block; color: var(--np-ink); text-decoration: none; }
-.np-review-card:hover h3 { color: var(--np-blue); }
 .np-flow { display: grid; grid-template-columns: minmax(280px, .85fr) 1fr; gap: 48px; align-items: end; margin-top: 54px; }
 .np-flow-media { display: grid; min-height: 0; aspect-ratio: 4 / 5; place-items: center; border: 1px solid var(--np-line); background: var(--np-soft); color: var(--np-muted); font: 650 11px/1.4 ui-monospace, monospace; letter-spacing: .06em; text-align: center; text-transform: uppercase; }
 .np-flow-media.np-media-reserved { border-color: transparent; background: transparent; color: transparent; }
