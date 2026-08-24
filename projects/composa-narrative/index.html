@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Composa narrative case-study review by Samuel Alake." />
+    <title>Composa narrative · Samuel Alake</title>
+    <link rel="stylesheet" href="/assets/index-DcLK9jS5.css" />
+    <link rel="stylesheet" href="/projects/narrative-page.css?v=20260824-2" />
+  </head>
+  <body>
+    <header class="np-header"><div class="np-header-inner"><a class="np-brand" href="/projects/narratives/">Narrative review</a><nav aria-label="Sections"><a href="/">Work</a><a href="/about">About</a></nav></div></header>
+    <main class="np-main">
+      <header class="np-hero">
+        <p class="np-label">Composa · Web · 2026</p>
+        <h1>Building a video editor around the way designers already work</h1>
+        <p class="np-lede">Composa is built on a simple belief: the skills designers use in Figma or slides should carry over to video editing.</p>
+        <div class="np-reserved" aria-label="Reserved space for future Composa cover composition"></div>
+      </header>
+
+      <dl class="np-meta">
+        <div><dt>Role</dt><dd>Founder<br />Product design and engineering</dd></div>
+        <div><dt>Timeline</dt><dd>2026<br />Active V1</dd></div>
+        <div><dt>Platform</dt><dd>Web</dd></div>
+        <div><dt>Skills</dt><dd>Product design<br />Design engineering<br />Systems design</dd></div>
+      </dl>
+
+      <section class="np-section">
+        <p class="np-label">The problem</p>
+        <h2>Moving a design into video usually means starting over</h2>
+        <p class="np-copy">Two things break when designers move into video. Their Figma or slide-making skills no longer map to the editor, and the design itself becomes a flat asset without its original layers or controls.</p>
+        <div class="np-stack" aria-label="The design-to-video handoff problem">
+          <div class="np-stack-layer"><strong>Design tool</strong><span>Familiar canvas controls and editable layers.</span></div>
+          <div class="np-stack-layer"><strong>The handoff</strong><span>Export collapses the structure into a flat asset.</span></div>
+          <div class="np-stack-layer"><strong>Video editor</strong><span>Learn a different editing model and rebuild the work.</span></div>
+        </div>
+      </section>
+
+      <section class="np-section">
+        <p class="np-label">The product</p>
+        <h2>If you can use Figma or make slides, you can make video</h2>
+        <p class="np-copy">Composa keeps the canvas and property controls designers already know, then adds the timelines and media tools needed for video.</p>
+        <article class="np-flow"><div class="np-flow-media np-media-reserved" aria-label="Reserved space for canvas controls media"></div><div class="np-flow-copy"><p class="np-count">01 · Compose</p><h3>Design on a canvas you know</h3><p>Arrange layers with the same canvas controls, layout models, and property panel designers expect from a design tool.</p></div></article>
+        <article class="np-flow"><div class="np-flow-media np-media-reserved" aria-label="Reserved space for timeline media"></div><div class="np-flow-copy"><p class="np-count">02 · Add media</p><h3>Put video and audio on one timeline</h3><p>Place compositions, video, and audio on separate tracks under one playhead.</p></div></article>
+        <article class="np-flow"><div class="np-flow-media np-media-reserved" aria-label="Reserved space for motion controls media"></div><div class="np-flow-copy"><p class="np-count">03 · Animate</p><h3>Animate like it’s Keynote</h3><p>Start with Build in, Action, and Build out, then use the motion gizmo, keyframe diamonds, easing, and property controls to refine the result.</p></div></article>
+        <article class="np-flow"><div class="np-flow-media np-media-reserved" aria-label="Reserved space for assistant-editor media"></div><div class="np-flow-copy"><p class="np-count">04 · Direct</p><h3>Use AI as an assistant editor</h3><p>Describe a change and Composa applies it to the canvas or timeline. The result stays editable.</p></div></article>
+      </section>
+
+      <section class="np-section">
+        <p class="np-label">Key decisions for V1</p>
+        <h2>What makes V1 lovable?</h2>
+        <p class="np-copy">The first version was centered on one flow: paste a design from Figma, add video and audio, animate it, and export one video.</p>
+        <div class="np-horizontal-reserved" aria-label="Reserved space for the Composa core-loop composition"></div>
+        <div class="np-grid two">
+          <article class="np-card"><h3>Keep the design mental model</h3><p>The canvas, layers, property controls, and motion presets should feel familiar before someone learns anything new.</p></article>
+          <article class="np-card"><h3>Prove one complete loop</h3><p>Figma-to-video parity is the direction. V1 earns it by making the design, media, motion, and export loop coherent end to end.</p></article>
+        </div>
+      </section>
+
+      <section class="np-section">
+        <p class="np-label">Competitive research</p>
+        <h2>Identify opportunities beyond the basics</h2>
+        <p class="np-copy">I studied design, slide, video, audio, and AI tools to understand the wider market. The research surfaced emerging behaviors and jobs Composa could support after proving its first editing loop.</p>
+        <div class="np-horizontal-reserved" aria-label="Reserved space for competitive research composition"></div>
+      </section>
+
+      <section class="np-section">
+        <p class="np-label">Designing media for V1</p>
+        <h2>A video editor needs more than a timeline</h2>
+        <p class="np-copy">The canvas and timeline established the editing model, but a credible video editor also needs media and audio effects. I used Sequence as a reference and translated its controls into Composa’s design system.</p>
+        <div class="np-grid two">
+          <article class="np-card"><h3>Media effects</h3><p>Translate the useful controls from the reference into a system that belongs beside Composa’s canvas properties.</p></article>
+          <article class="np-card"><h3>Audio effects</h3><p>Give audio the same legible, direct-manipulation model as the rest of the editor.</p></article>
+        </div>
+        <div class="np-horizontal-reserved" aria-label="Reserved space for media and audio effects comparison"></div>
+      </section>
+
+      <section class="np-section">
+        <p class="np-label">Where it stands</p>
+        <h2>Shipped and available in public beta</h2>
+        <p class="np-copy">Composa is live at <a href="https://composa.app">composa.app</a> and available to use now. I am tracking how designers use the public beta as I decide whether to keep growing it as a side project or turn it into an open-core, founder-led business.</p>
+      </section>
+
+      <section class="np-section">
+        <p class="np-label">Reflection</p>
+        <h2>What I learned</h2>
+        <p class="np-copy">Building Composa changed how I think about choosing a market and how much product one person can now direct. I want to make those lessons useful beyond the editor through an open-core model and by writing about the process.</p>
+        <div class="np-grid two">
+          <article class="np-card"><h3>Build to validate</h3><p>I saw a gap between design and video, then built a public product people could try. The strongest signal comes from putting the idea in front of the market.</p></article>
+          <article class="np-card"><h3>AI changes the size of team needed to build</h3><p>With agents, clear specs, design-to-code workflows, and review gates, I recreated Figma-level interface fidelity without its codebase. AI did more than write code; it expanded the range of work one person could direct.</p></article>
+        </div>
+      </section>
+    </main>
+    <footer class="np-footer">Narrative review page · final media intentionally deferred</footer>
+  </body>
+</html>

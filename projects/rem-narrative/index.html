@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Rem narrative case-study review by Samuel Alake." />
+    <title>Rem narrative · Samuel Alake</title>
+    <link rel="stylesheet" href="/assets/index-DcLK9jS5.css" />
+    <link rel="stylesheet" href="/projects/narrative-page.css?v=20260824-2" />
+    <script>
+      try { document.documentElement.setAttribute("data-color-mode", localStorage.getItem("theme") || "light"); } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <header class="np-header">
+      <div class="np-header-inner">
+        <a class="np-brand" href="/projects/narratives/">Narrative review</a>
+        <nav aria-label="Sections"><a href="/">Work</a><a href="/about">About</a></nav>
+      </div>
+    </header>
+
+    <main class="np-main">
+      <header class="np-hero">
+        <p class="np-label">Rem · iOS · 2026</p>
+        <h1>Turning everyday intent into work an assistant can actually do</h1>
+        <p class="np-lede">Rem captures what you mean to do, turns it into a task, and runs approved actions through a gateway you control.</p>
+        <div class="np-reserved" aria-label="Reserved space for future cover media"></div>
+      </header>
+
+      <dl class="np-meta">
+        <div><dt>Role</dt><dd>Product design<br />and engineering</dd></div>
+        <div><dt>Timeline</dt><dd>2026–present</dd></div>
+        <div><dt>Platform</dt><dd>iOS</dd></div>
+        <div><dt>Focus</dt><dd>Product design<br />Design engineering</dd></div>
+      </dl>
+
+      <section class="np-section">
+        <p class="np-label">Project context</p>
+        <h2>Work gets scattered across too many apps</h2>
+        <p class="np-copy">Tasks, messages, notes, and calendar commitments live in different places. Keeping up means switching between them, rebuilding the plan in your head, and still doing the work yourself. Rem brings those priorities into one assistant that can help decide what matters and move approved tasks forward.</p>
+      </section>
+
+      <section class="np-section">
+        <p class="np-label">Solution</p>
+        <h2>One loop: capture, orient, work, brief, repeat</h2>
+        <p class="np-copy">Rem brings capture, planning, and action into one assistant. A task persists after the conversation moves on, giving the person and the assistant one place to clarify the work, approve the next step, and follow the result.</p>
+
+        <article class="np-flow"><div class="np-flow-media">Capture portrait media</div><div class="np-flow-copy"><p class="np-count">01 · Capture</p><h3>Get intent in before it disappears</h3><p>Someone can talk or type in their own words. Rem clarifies what they mean and turns it into a task, an event, or an action for a connected tool.</p></div></article>
+        <article class="np-flow"><div class="np-flow-media">Agenda portrait media</div><div class="np-flow-copy"><p class="np-count">02 · Orient</p><h3>See tasks and time in one agenda</h3><p>Calendar commitments provide the timed context. Tasks hold the work. The agenda brings both together in a plan that can change with the day.</p></div></article>
+        <article class="np-flow"><div class="np-flow-media">Approved-action portrait media</div><div class="np-flow-copy"><p class="np-count">03 · Work</p><h3>Approve the next step before it runs</h3><p>Rem proposes an action, waits for confirmation, runs it through a gateway or connector, and reports the result back in the task’s log.</p></div></article>
+        <article class="np-flow"><div class="np-flow-media">Daily Brief portrait media</div><div class="np-flow-copy"><p class="np-count">04 · Brief</p><h3>Roll useful updates into one brief</h3><p>A daily brief gathers the work worth noticing into one update. When nothing needs attention, Rem can stay quiet.</p></div></article>
+        <article class="np-wide"><div class="np-flow-media">Onboarding media</div><div class="np-flow-copy"><p class="np-count">05 · Onboarding</p><h3>Set expectations before Rem starts acting</h3><p>Onboarding introduces the assistant, the approval model, and connected tools before someone asks Rem to do work.</p></div></article>
+      </section>
+
+      <section class="np-section">
+        <p class="np-label">Design explorations</p>
+        <h2>How people communicate with an assistant</h2>
+        <p class="np-copy">I looked at Gemini, HUXE, Todoist, Claude, and Codex to understand who leads the conversation, how much context the assistant packages, and when voice replaces typing.</p>
+        <div class="np-reference-board">
+          <p class="np-board-tag">References</p>
+          <div class="np-reference-grid">
+            <article class="np-reference"><video autoplay muted loop playsinline poster="/projects/rem-evidence/huxe-daily-brief-poster.jpg" src="/projects/rem-evidence/huxe-daily-brief-web.mp4"></video><p><strong>HUXE.</strong> An assistant-led daily brief packages context and leads the conversation.</p></article>
+            <article class="np-reference"><video autoplay muted loop playsinline poster="/projects/rem-evidence/todoist-ramble-poster.jpg" src="/projects/rem-evidence/todoist-ramble-web.mp4"></video><p><strong>Todoist Ramble.</strong> Loose user input becomes structured task context.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="np-section">
+        <p class="np-label">Exploring the interaction model</p>
+        <h2>Finding the balance between assistant-led and user-led</h2>
+        <p class="np-copy">Early concepts either showed every mode at once or reduced the experience to a voice call. The final direction keeps the chat thread visible and treats voice as another way to participate in it.</p>
+        <div class="np-grid two">
+          <article class="np-card"><h3>Before</h3><p>Two directions tested a dense all-in-one surface and a minimal voice-only call.</p></article>
+          <article class="np-card"><h3>After</h3><p>Chat, Daily Brief listening, and Live Activity share one interaction model.</p></article>
+        </div>
+      </section>
+
+      <section class="np-section">
+        <p class="np-label">Product positioning</p>
+        <h2>Deciding where Rem should sit in a changing market</h2>
+        <p class="np-copy">We started with two assumptions: people would want more privacy than a conventional cloud assistant offers, but less setup than a fully local agent requires. I mapped the market to see how that tradeoff should shape where Rem runs, how it is controlled, and which device stays in charge.</p>
+        <div class="np-positioning">
+          <section class="np-position-row">
+            <h3>Where does the agent run?</h3>
+            <div class="np-axis-labels"><strong>Cloud</strong><strong>Local</strong></div>
+            <div class="np-axis"><span class="np-axis-line"></span><span class="np-axis-tick"></span><span class="np-rem-dot middle"><i></i><b>Rem</b></span></div>
+            <div class="np-axis-lists"><div class="np-app-list"><span class="np-app"><i></i>Claude</span><span class="np-app"><i></i>OpenAI</span></div><div class="np-app-list"><span class="np-app"><i></i>Clovy</span><span class="np-app"><i></i>Hermes</span><span class="np-app"><i></i>OpenClaw</span></div></div>
+            <p class="np-axis-note">Rem’s assumption: cloud-backup convenience with local-style ownership. Back it up, move it, or delete it.</p>
+          </section>
+          <section class="np-position-row">
+            <h3>How do you control it?</h3>
+            <div class="np-axis-labels"><strong>Keyboard</strong><strong>Voice</strong></div>
+            <div class="np-axis"><span class="np-axis-line"></span><span class="np-axis-tick"></span><span class="np-rem-dot voice"><i></i><b>Rem</b></span></div>
+            <div class="np-axis-lists"><div class="np-app-list"><span class="np-app"><i></i>Claude</span><span class="np-app"><i></i>OpenAI</span></div><div class="np-app-list"><span class="np-app"><i></i>Clicky</span></div></div>
+          </section>
+          <section class="np-position-row">
+            <h3>Where do you control it from?</h3>
+            <div class="np-axis-labels three"><strong>Desktop app</strong><strong>Mobile assistant</strong><strong>Phone as remote</strong></div>
+            <div class="np-axis"><span class="np-axis-line"></span><span class="np-axis-tick"></span><span class="np-rem-dot remote"><i></i><b>Rem</b></span></div>
+            <div class="np-axis-lists three"><div class="np-app-list"><span class="np-app"><i></i>Claude</span><span class="np-app"><i></i>OpenAI</span></div><div class="np-app-list"><span class="np-app"><i></i>AGI · confirm</span></div><div class="np-app-list"></div></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="np-section">
+        <p class="np-label">Future explorations</p>
+        <h2>Exploring a Mac home and wearable capture</h2>
+        <p class="np-copy">These concepts extend the product direction beyond the current iPhone release. They remain gated until the supporting mockups are ready.</p>
+        <div class="np-grid two"><article class="np-card"><h3>Give approved work a visible home on the Mac</h3><p>A desktop surface could make running work, status, and recovery easier to follow.</p></article><article class="np-card"><h3>Capture intent without reaching for the phone</h3><p>Wearables could make quick capture and lightweight updates available in motion.</p></article></div>
+      </section>
+
+      <section class="np-section">
+        <p class="np-label">Where it stands</p>
+        <h2>Shipped on iPhone, then opened at the core</h2>
+        <p class="np-copy">Rem is live on the App Store for iPhone and has been released as an Apache-2.0 open-source project. The product is still being simplified and made more reliable as the open-core model takes shape.</p>
+      </section>
+
+      <section class="np-section">
+        <p class="np-label">Reflection</p>
+        <h2>I learned to get clear before I build</h2>
+        <div class="np-grid two"><article class="np-card"><h3>Understand the problem before choosing a direction</h3><p>Rem sits in a product space with few settled patterns. I explored too many directions at once, then learned to form a clearer picture of the problem before committing to a solution. The product became simpler as my understanding improved.</p></article><article class="np-card"><h3>Invite people in, then make ownership explicit</h3><p>Building in the open helped me bring friends into the project. I owned product and they focused on the mechanics, but that boundary blurred and momentum faded. Next time I would involve more design builders and agree on ownership earlier.</p></article></div>
+      </section>
+    </main>
+    <footer class="np-footer">Narrative review page · final media intentionally deferred</footer>
+  </body>
+</html>
