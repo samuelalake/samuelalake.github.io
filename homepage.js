@@ -154,9 +154,19 @@
   function playSeq(img) {
     if (img._seqPlaying) return;
     var dir = img.getAttribute("data-seq");
-    var count = parseInt(img.getAttribute("data-count"), 10) || 1;
+    var countPrimary = parseInt(img.getAttribute("data-count"), 10) || 1;
+    var dirNext = img.getAttribute("data-seq-next");
+    var countNext = parseInt(img.getAttribute("data-count-next"), 10) || 0;
+    var count = countPrimary + (dirNext ? countNext : 0);
     var last = count - 1;
-    if (reduce) { img.src = dir + "/" + pad3(last) + ".svg"; return; }
+    var version = img.getAttribute("data-seq-version");
+    function srcForFrame(index) {
+      var src = dirNext && index >= countPrimary
+        ? dirNext + "/" + pad3(index - countPrimary) + ".svg"
+        : dir + "/" + pad3(index) + ".svg";
+      return version ? src + "?v=" + encodeURIComponent(version) : src;
+    }
+    if (reduce) { img.src = srcForFrame(last); return; }
     var duration = parseInt(img.getAttribute("data-duration"), 10) || 3200;
     var pause = 500;
     var loop = img.hasAttribute("data-loop");
@@ -170,7 +180,7 @@
       var cycleTime = loop ? elapsed % cycle : Math.min(elapsed, duration);
       var t = Math.min(1, cycleTime / duration);
       var f = Math.floor(t * last);
-      if (f !== cur2) { cur2 = f; img.src = dir + "/" + pad3(f) + ".svg"; }
+      if (f !== cur2) { cur2 = f; img.src = srcForFrame(f); }
       if (loop || t < 1) img._seqRaf = requestAnimationFrame(frame);
       else img._seqPlaying = false;
     }
