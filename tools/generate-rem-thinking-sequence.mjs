@@ -1,4 +1,4 @@
-import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -14,10 +14,11 @@ const outputDir = join(root, "projects/rem-thinking-transition");
 const originalDir = join(root, "projects/rem-logo-transition-inverted");
 const background = "#F6E35A";
 const blue = "#0C50FF";
-const loadingFrames = 120;
-const transitionFrames = 24;
+const loadingFrames = 36;
+const transitionFrames = 8;
 const totalFrames = loadingFrames + transitionFrames;
 
+await rm(outputDir, { recursive: true, force: true });
 await mkdir(outputDir, { recursive: true });
 
 const ease = (value) => 1 - Math.pow(1 - value, 3);
@@ -31,7 +32,7 @@ for (let frame = 0; frame < totalFrames; frame += 1) {
   const moveProgress = isTransition
     ? ease(Math.max(0, (transitionProgress - 0.2) / 0.8))
     : 0;
-  const cycleProgress = (frame % 40) / 39;
+  const cycleProgress = (frame % 12) / 11;
   const drawn = isTransition ? 100 : Math.min(100, cycleProgress * 118);
   const loaderX = 548 + (690 - 548) * moveProgress;
   const loaderY = 458 + (260 - 458) * moveProgress;

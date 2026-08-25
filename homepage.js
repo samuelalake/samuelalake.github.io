@@ -157,12 +157,14 @@
     var countPrimary = parseInt(img.getAttribute("data-count"), 10) || 1;
     var dirNext = img.getAttribute("data-seq-next");
     var countNext = parseInt(img.getAttribute("data-count-next"), 10) || 0;
+    var stepNext = parseInt(img.getAttribute("data-seq-step-next"), 10) || 1;
     var count = countPrimary + (dirNext ? countNext : 0);
     var last = count - 1;
     var version = img.getAttribute("data-seq-version");
     function srcForFrame(index) {
+      var nextIndex = Math.min((index - countPrimary) * stepNext, (countNext - 1) * stepNext);
       var src = dirNext && index >= countPrimary
-        ? dirNext + "/" + pad3(index - countPrimary) + ".svg"
+        ? dirNext + "/" + pad3(nextIndex) + ".svg"
         : dir + "/" + pad3(index) + ".svg";
       return version ? src + "?v=" + encodeURIComponent(version) : src;
     }
