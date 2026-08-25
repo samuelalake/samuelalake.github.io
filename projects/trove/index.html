@@ -17,13 +17,15 @@
         <p class="np-label">Trove · iOS · 2026</p>
         <h1>A social cookbook built from recipes you find everywhere</h1>
         <p class="np-lede">Trove pulls recipes from Instagram, TikTok, YouTube, and the open web into one place to cook from. You can save an editable copy, plan it into your week, and turn several recipes into one grocery list.</p>
-        <div class="np-reserved" aria-label="Reserved space for future Trove cover composition"></div>
+        <div class="np-trove-cover" aria-label="Animated Trove cookbook cover">
+          <video autoplay muted loop playsinline preload="metadata" data-no-media-controls poster="/projects/trove-evidence/trove-book-cover-poster.jpg" src="/projects/trove-evidence/trove-book-cover.mp4"></video>
+        </div>
       </header>
 
       <dl class="np-meta">
         <div><dt>Role</dt><dd>Founder<br />Design and engineering</dd></div>
         <div><dt>Timeline</dt><dd>2026<br />App Store review</dd></div>
-        <div><dt>Platform</dt><dd>iOS</dd></div>
+        <div><dt>Team</dt><dd>Solo</dd></div>
         <div><dt>Skills</dt><dd>Product design<br />iOS engineering<br />Systems design</dd></div>
       </dl>
 
@@ -31,47 +33,51 @@
         <p class="np-label">The problem</p>
         <h2>Recipes live everywhere, and nowhere you can cook from</h2>
         <p class="np-copy">A recipe found in a social post or blog can disappear, change, or remain awkward to use in the kitchen. Saving the link does not make the recipe easier to plan, shop, or cook. Trove becomes your treasure trove: one place to keep recipes and return when you are ready to complete the journey.</p>
-        <div class="np-stack" aria-label="The path from a recipe source to a private copy">
-          <div class="np-stack-layer"><strong>Find</strong><span>Discover a recipe through people, social media, or the open web.</span></div>
-          <div class="np-stack-layer"><strong>Visit the source</strong><span>Review the original and keep the creator connected to the recipe.</span></div>
-          <div class="np-stack-layer"><strong>Add to Trove</strong><span>Create the editable copy you plan, shop, and cook from.</span></div>
-        </div>
       </section>
 
       <section class="np-section">
         <p class="np-label">The product</p>
         <h2>From something you find to something you can cook</h2>
-        <p class="np-copy">Trove turns scattered recipes into a repeatable flywheel: discover something worth cooking, add it to your Trove, plan it into the week, cook it, and shop for what comes next. The recipe stays in your Trove when the journey begins again.</p>
+        <p class="np-copy">Trove turns scattered recipes into a repeatable flywheel: discover something worth cooking, add it to your Trove, plan it into the week, cook it, and shop for what comes next.</p>
         <article class="np-flow"><div class="np-flow-media np-media-reserved" aria-label="Reserved space for Discover media"></div><div class="np-flow-copy"><p class="np-count">01 · Discover</p><h3>Find recipes through people and the open web</h3><p>Discover brings together recipes from other cooks and the open web, with search for both recipes and people. When someone finds one they want to cook, they can open it and add it to Trove.</p></div></article>
-        <article class="np-flow"><div class="np-flow-media np-media-reserved" aria-label="Reserved space for recipe import media"></div><div class="np-flow-copy"><p class="np-count">02 · Import</p><h3>Add a private copy to your Trove</h3><p>Adding a recipe starts with a visit to the original source. Trove then creates an editable copy with the steps someone can plan, change, and cook from.</p></div></article>
+        <article class="np-flow"><div class="np-flow-media np-media-reserved np-carousel-reserved" aria-label="Reserved carousel for Safari share import and in-app link import"><span>Two import paths</span></div><div class="np-flow-copy"><p class="np-count">02 · Import</p><h3>Bring recipes in from wherever you find them</h3><p>From Safari, someone can share a recipe directly to Trove without leaving the browsing flow. Inside the app, they can also tap Add and paste a link. Both paths create a private, editable copy.</p></div></article>
         <article class="np-flow"><div class="np-flow-media np-media-reserved" aria-label="Reserved space for planning and cooking media"></div><div class="np-flow-copy"><p class="np-count">03 · Plan and cook</p><h3>Plan the week, then cook one step at a time</h3><p>Recipes from your Trove can be placed into a weekly plan. Guided steps and timers turn the saved recipe into something easier to follow in the kitchen.</p></div></article>
-        <article class="np-flow"><div class="np-flow-media np-media-reserved" aria-label="Reserved space for grocery media"></div><div class="np-flow-copy"><p class="np-count">04 · Shop</p><h3>Turn several recipes into one shopping list</h3><p>Trove gives you one list to maintain across the week, with a pantry view for what you already have. A retailer handoff helps move the rest toward an actual purchase.</p></div></article>
+        <article class="np-flow"><div class="np-flow-media np-media-reserved" aria-label="Reserved space for grocery media showing an item move from To buy to Stocked"></div><div class="np-flow-copy"><p class="np-count">04 · Shop</p><h3>Turn several recipes into one shopping list</h3><p>Trove gives you one list to maintain across the week. Someone can move an item from To buy to Stocked as their pantry changes, then hand the remaining list to a retailer.</p></div></article>
         <div class="np-horizontal-reserved" aria-label="Reserved space for the Trove onboarding composition"></div>
       </section>
 
       <section class="np-section">
         <p class="np-label">Key decisions</p>
-        <h2>Build for the constraints</h2>
-        <p class="np-copy">Recipe sites depend on traffic and attribution, and creators need to remain connected to the work people save. Grocery shopping creates a different constraint: partners and capabilities change with traction and geography. I designed Trove around both limits rather than treating them as edge cases.</p>
-        <div class="np-grid two">
-          <article class="np-card"><h3>Keep attribution and originality intact</h3><p>A recipe can travel far from the person or site that created it. Trove keeps the creator and source visible, then sends people to the original site before import so the source receives the visit and the cook can review the original.</p></article>
-          <article class="np-card"><h3>Use commerce technology that works now</h3><p>Partnerships such as Chicory and Instacart require traction, and options change by country. Trove uses direct cart technology where Kroger is available and affiliate handoffs elsewhere.</p></article>
-        </div>
-        <div class="np-horizontal-reserved" aria-label="Reserved space for source and commerce constraint media"></div>
+        <h2>Build for two kinds of constraints</h2>
+        <p class="np-copy">The first constraint comes from recipe publishers and bloggers. Their sites depend on traffic, while users still need a clear path back to the original page or video when it helps them cook. The second comes from grocery commerce: retailer capabilities vary by partner, traction, and location.</p>
+        <article class="np-solution-block np-decision-block">
+          <h3>Keep attribution and originality intact</h3>
+          <p>Trove keeps the publisher and original source visible wherever a recipe appears, so users can find the page or video again when they need it.</p>
+          <p>When someone saves a recipe that is already in the community, Trove sends them to the publisher before creating the private copy. The source receives the visit, and the user imports the directions from the original.</p>
+          <div class="np-decision-carousel" aria-label="Reserved two-step carousel: attribution in the interface, then saving from the community through the publisher">
+            <div class="np-decision-media"><span>Attribution and save-from-community media</span><i aria-hidden="true"></i></div>
+            <div class="np-progress" aria-hidden="true"><span></span><span></span></div>
+          </div>
+        </article>
+        <article class="np-solution-block np-decision-block">
+          <h3>Use commerce technology that works now</h3>
+          <p>Retail integrations depend on traction and geography. Trove uses Kroger where direct cart support is available; otherwise Amazon stays available as an affiliate handoff.</p>
+          <div class="np-horizontal-reserved" aria-label="Reserved media for Kroger direct cart support and Amazon affiliate handoff"></div>
+        </article>
       </section>
 
       <section class="np-section">
         <p class="np-label">Building for social connection</p>
-        <h2>Start with the actions that help recipes move</h2>
-        <p class="np-copy">For V1, saving, profiles, and following create enough connection for recipes to move through people. Community notes and suggestions are a fast follow once the boundary between shared input and a private copy is clearer.</p>
-        <div class="np-grid two">
-          <article class="np-card"><h3>V1 · Saving, profiles, and following</h3><p>Saving organizes recipes and gives discovery a signal. Profiles, following, and visible social context connect recipes back to the people and sources behind them.</p></article>
-          <article class="np-card"><h3>Fast follow · Community suggestions</h3><p>Notes and suggestions explore how people can contribute without blurring the boundary around someone else’s private copy.</p></article>
-        </div>
+        <h2>How might we make finding recipes feel social?</h2>
+        <p class="np-copy">Recipes usually reach people through other people. V1 makes that visible with profiles, a People directory, following, and saves that connect each recipe to who shared it. Community suggestions remain a future direction once the line between shared input and a private copy is clear.</p>
+        <div class="np-horizontal-reserved np-social-reserved" aria-label="Reserved recording: own profile, Discover, People See all, MealDB profile, Follow"></div>
         <article class="np-solution-block">
           <h3>Build for different tastes</h3>
           <p>Early feedback showed that people struggled to identify cuisines they wanted. I grouped recipes into sections, then let people star categories as preferences that shape what appears in their feed.</p>
-          <div class="np-horizontal-reserved" aria-label="Reserved space for cuisine discovery comparison"></div>
+          <div class="np-grid two np-media-comparison" aria-label="Before and after cuisine discovery media">
+            <figure><div class="np-comparison-media" aria-label="Reserved media from the older list-style Discover branch"></div><figcaption>Before · Cuisines were presented as a list.</figcaption></figure>
+            <figure><div class="np-comparison-media" aria-label="Reserved recording opening Mediterranean See all and saving a category"></div><figcaption>After · Browse a cuisine landing page and save it as a preference.</figcaption></figure>
+          </div>
         </article>
       </section>
 
@@ -92,7 +98,8 @@
       </section>
     </main>
     <footer class="np-footer">Samuel Alake · Product design and engineering</footer>
-    <script src="/projects/product-page-shell.js?v=20260824-case-study-shell"></script>
+    <script src="/portfolio-footer.js?v=20260824-shared-footer" defer></script>
+    <script src="/projects/product-page-shell.js?v=20260824-shared-footer"></script>
     <script src="/homepage.js?v=20260824-case-study-shell" defer></script>
   </body>
 </html>

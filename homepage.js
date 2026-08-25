@@ -177,7 +177,7 @@
   }
 
   // --- muted recordings: meaningful posters at rest, playback only while visible ---
-  var autoplayVideos = [].slice.call(document.querySelectorAll("video[autoplay]"));
+  var autoplayVideos = [].slice.call(document.querySelectorAll("video[autoplay]:not([data-no-media-controls])"));
   autoplayVideos.forEach(function (video) { video.muted = true; });
 
   // Compact play, restart, and sound controls appear over recordings on hover/focus.

@@ -43,5 +43,5 @@
   main.insertAdjacentHTML("afterbegin", '<nav class="cs-nav" aria-label="On this page"><a class="cs-nav-back" href="/"><svg class="octicon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 1.06L5.06 7h8.19a.75.75 0 0 1 0 1.5H5.06l2.72 2.72a.75.75 0 0 1 0 1.06Z"></path></svg>Back</a><p class="cs-nav-title">In this case study</p><ul class="cs-nav-list">' + links + "</ul></nav>");
 
   var footer = document.querySelector(".np-footer");
-  if (footer) footer.outerHTML = '<footer class="site-footer2"><div class="page footer-inner"><span class="footer-left">Designed + Coded with <span aria-hidden="true">♥</span> by Samuel</span><span class="footer-links"><a href="https://www.linkedin.com/in/samuel-alake/" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/samuelalake" target="_blank" rel="noreferrer">GitHub</a></span></div></footer>';
+  if (footer) footer.outerHTML = '<portfolio-footer></portfolio-footer>';
 })();
