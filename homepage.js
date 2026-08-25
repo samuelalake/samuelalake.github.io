@@ -281,6 +281,49 @@
     attachMediaControls([video], host);
   });
 
+  // Optional, non-destructive touch cues for iOS recordings. Cue values are
+  // time in seconds followed by x/y percentages within the captured screen.
+  [].slice.call(document.querySelectorAll("video[data-touch-cues]")).forEach(function (video) {
+    var screen = video.closest(".cs-device-media-screen") || video.parentElement;
+    var cues = video.dataset.touchCues.split(";").map(function (value) {
+      var parts = value.split(",").map(Number);
+      return { time: parts[0], x: parts[1], y: parts[2] };
+    }).filter(function (cue) {
+      return Number.isFinite(cue.time) && Number.isFinite(cue.x) && Number.isFinite(cue.y);
+    });
+    if (!screen || !cues.length) return;
+    var cursor = document.createElement("span");
+    cursor.className = "np-touch-cursor";
+    cursor.setAttribute("aria-hidden", "true");
+    screen.appendChild(cursor);
+    var touchRaf = 0;
+    function renderTouchCue() {
+      var now = video.currentTime;
+      var active = cues.find(function (cue) {
+        return now >= cue.time - .48 && now <= cue.time + .34;
+      });
+      cursor.classList.toggle("is-visible", !!active);
+      if (active) {
+        cursor.style.left = active.x + "%";
+        cursor.style.top = active.y + "%";
+        cursor.classList.toggle("is-pressing", Math.abs(now - active.time) <= .14);
+      } else {
+        cursor.classList.remove("is-pressing");
+      }
+      if (!video.paused && !video.ended) touchRaf = requestAnimationFrame(renderTouchCue);
+    }
+    video.addEventListener("play", function () {
+      cancelAnimationFrame(touchRaf);
+      touchRaf = requestAnimationFrame(renderTouchCue);
+    });
+    video.addEventListener("pause", function () {
+      cancelAnimationFrame(touchRaf);
+      renderTouchCue();
+    });
+    video.addEventListener("seeked", renderTouchCue);
+    renderTouchCue();
+  });
+
   if (!reduce && "IntersectionObserver" in window) {
     var videoIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {

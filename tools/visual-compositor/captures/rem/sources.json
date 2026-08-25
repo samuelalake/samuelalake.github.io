@@ -1,0 +1,34 @@
+{
+  "project": "rem",
+  "artifact": "REM-05-onboarding",
+  "status": "draft",
+  "truthLabel": "fixture",
+  "adjacentClaim": "A new user understands what Rem does, how it acts, and where they stay in control.",
+  "sources": [
+    {
+      "file": "assets/value-summary.jpg",
+      "origin": "/Volumes/SatechiSSD/Developer/Apps/Swift/RemClaw/docs/screenshots/issue-309/wave2-onboarding-value-summary.jpg",
+      "role": "value-summary"
+    },
+    {
+      "file": "assets/start-in-chat.png",
+      "origin": "/Volumes/SatechiSSD/Developer/Apps/Swift/RemClaw/docs/screenshots/wave2-status-ui/post-setup-nux-iphone-frame-final-light.png",
+      "role": "first-action"
+    },
+    {
+      "file": "assets/control-visible.png",
+      "origin": "/Volumes/SatechiSSD/Developer/Apps/Swift/RemClaw/docs/screenshots/issue-309/wave2-final-post-setup-nux/ios-launch.png",
+      "role": "control-model"
+    }
+  ],
+  "presentation": {
+    "aspectRatio": "16:9",
+    "motionCandidate": "6-8 second stepped progression after static approval",
+    "reducedMotionFallback": "onboarding-board.html"
+  },
+  "notes": [
+    "These are owned fixture screenshots, not a claim that one user session traversed all three states.",
+    "Replace with a fresh pinned-build capture if the current onboarding fixture changes the approved story.",
+    "No cursor is baked into the source artifact."
+  ]
+}

@@ -3,3 +3,11 @@
 .DS_Store
 .vercel
 .env*
+
+# Licensed source artwork used only while rendering portfolio media. Keep the
+# editable vectors local; commit the exported composition and provenance note.
+tools/visual-compositor/captures/trove/cover/assets/licensed/
+
+# Capture masters live in the external PortfolioMedia archive. Keep only the
+# lightweight web derivatives, posters, manifests, and compositor source here.
+tools/visual-compositor/captures/**/assets/*-master.mov

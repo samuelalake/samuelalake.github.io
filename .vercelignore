@@ -1,6 +1,7 @@
 # Dev-only files (never part of the live site)
 CASE-STUDY-SPEC.md
 .claude
+tools/visual-compositor
 
 # Heavy source recordings replaced by optimized .mp4 on the pages.
 # Kept locally as source; excluded from deploy to keep the bundle small.

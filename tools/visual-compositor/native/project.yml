@@ -1,0 +1,23 @@
+name: VisualCompositorNative
+options:
+  bundleIdPrefix: com.samuelalake
+  deploymentTarget:
+    macOS: "15.0"
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+targets:
+  VisualCompositorNative:
+    type: application
+    platform: macOS
+    sources:
+      - path: VisualCompositorNative
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.samuelalake.visual-compositor-native
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Visual Compositor Native
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.graphics-design
+        ENABLE_HARDENED_RUNTIME: YES
+        CODE_SIGNING_ALLOWED: NO
+        MACOSX_DEPLOYMENT_TARGET: "15.0"

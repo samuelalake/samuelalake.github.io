@@ -1,0 +1,419 @@
+{
+  "project": "trove",
+  "artifact": "TROVE-02C-save-from-discover",
+  "legacyArtifact": "TROVE-02-import",
+  "status": "captured-evidence",
+  "reviewStatus": "accepted-as-save-from-discover-not-import",
+  "truthLabel": "fixture",
+  "adjacentClaim": "A recipe discovered in Trove can be visited at its original source and saved as a private, editable copy.",
+  "product": {
+    "repository": "/Volumes/SatechiSSD/Developer/Apps/Swift/Munch",
+    "sourceWorktree": ".claude/worktrees/devicecomb3",
+    "branchAtInspection": "integration-aug7-v19",
+    "commit": "2e689f2433544e836eaf0d51fa161856e7469dd2",
+    "bundleIdentifier": "ade-studios.Munch-RKCK"
+  },
+  "capture": {
+    "date": "2026-08-24",
+    "simulator": "iPhone 17 Pro Max",
+    "simulatorId": "E579FDE3-815F-4A10-BDD5-5A41D284CC06",
+    "runtime": "iOS 26.2",
+    "appearance": "light",
+    "statusBarTime": "9:41",
+    "launchArguments": [
+      "MUNCH_TEST_USER",
+      "MUNCH_SKIP_ONBOARDING"
+    ],
+    "environment": [
+      "MUNCH_SEED_ATTRIBUTION_DEMO=1",
+      "MUNCH_SEED_DEMO=1"
+    ],
+    "recipe": "Tangy carrot, cabbage & onion salad",
+    "source": "BBC Good Food",
+    "audio": false,
+    "cursorBakedIn": false,
+    "deviceFrameBakedIn": false
+  },
+  "files": [
+    {
+      "file": "assets/trove-02-import-master.mov",
+      "role": "clean-source-master",
+      "dimensions": "1320x2868",
+      "durationSeconds": 39.98,
+      "codec": "H.264",
+      "pixelFormat": "yuv420p",
+      "notes": "Legacy filename. Continuous real product session showing Save from Discover, not Safari/share import or Add-by-link. Simulator output is variable-frame-rate and ends during the final save transition; retain for source evidence and future editorial recuts."
+    },
+    {
+      "file": "assets/trove-02-import.mp4",
+      "role": "web-derivative",
+      "dimensions": "880x1912",
+      "durationSeconds": 16.57,
+      "frameRate": 30,
+      "codec": "H.264",
+      "pixelFormat": "yuv420p",
+      "fastStart": true,
+      "notes": "Legacy filename. Concise Save-from-Discover cut of the same session. The final saved-state dwell is the poster screenshot captured immediately after save completed."
+    },
+    {
+      "file": "assets/trove-02-import-poster.jpg",
+      "role": "poster-and-reduced-motion-fallback",
+      "dimensions": "368x800",
+      "state": "Saved private recipe with Add to Meal Plan available"
+    }
+  ],
+  "sequence": [
+    "Discover",
+    "Attributed recipe detail",
+    "Original source in Trove browser",
+    "Review Recipe",
+    "Saved private copy"
+  ],
+  "integrityNotes": [
+    "The recipe source page and save/review path were exercised in the pinned product build.",
+    "This clip must not be labeled as the Safari share-extension flow or the in-app Add-by-link flow.",
+    "The mock signed-in user and deterministic demo flags prepare capture state; they do not replace the product UI.",
+    "No purchase, external account action, or invented future capability is shown.",
+    "Cursor, tap cue, zoom, device shell, and cover motion remain compositor layers."
+  ],
+  "relatedArtifacts": [
+    {
+      "artifact": "TROVE-cover-book",
+      "status": "ready",
+      "truthLabel": "owned-animation",
+      "adjacentClaim": "Trove turns scattered recipe inspiration into something a cook can keep, plan, shop, and make.",
+      "files": [
+        {
+          "file": "cover/trove-book-cover.mp4",
+          "role": "portfolio-cover-and-onboarding-visual",
+          "dimensions": "1520x1188",
+          "durationSeconds": 5.43,
+          "frameRate": 30,
+          "codec": "H.264",
+          "pixelFormat": "yuv420p"
+        },
+        {
+          "file": "cover/trove-book-cover-poster.jpg",
+          "role": "poster-and-reduced-motion-fallback"
+        },
+        {
+          "file": "cover/full-frame-sheet.png",
+          "role": "full-timeline-qa"
+        },
+        {
+          "file": "cover/closing-frame-sheet.png",
+          "role": "closing-choreography-qa"
+        }
+      ],
+      "integrityNotes": [
+        "The final DINNER INSPIRATION title uses Trove coral.",
+        "The internal leaves now return in reverse order before the front cover closes and recenters.",
+        "The animation is 2D SwiftUI/HTML owned media, not a recording of shipped product UI."
+      ]
+    },
+    {
+      "artifact": "TROVE-02A-share-import",
+      "status": "blocked-on-supported-url",
+      "truthLabel": "pending",
+      "adjacentClaim": "A recipe encountered in Safari or Instagram can be sent to Trove through the share extension without breaking the browsing flow.",
+      "requiredInput": "A specific supported Instagram recipe URL supplied by the project owner.",
+      "sequence": [
+        "Instagram recipe in Safari",
+        "Share sheet",
+        "Save to Trove extension",
+        "Imported recipe in Trove"
+      ]
+    },
+    {
+      "artifact": "TROVE-02B-link-import",
+      "status": "pending-capture",
+      "truthLabel": "pending",
+      "adjacentClaim": "A cook can paste a recipe URL from Trove's Add menu and turn it into a private recipe.",
+      "sequence": [
+        "Add button",
+        "Import from link",
+        "Supported recipe URL",
+        "Review Recipe",
+        "Saved private copy"
+      ]
+    },
+    {
+      "artifact": "TROVE-01-discover",
+      "status": "captured-static",
+      "truthLabel": "fixture",
+      "adjacentClaim": "People can discover recipes from other cooks and attributed web sources.",
+      "capture": {
+        "date": "2026-08-24",
+        "simulator": "iPhone 17 Pro Max",
+        "simulatorId": "E579FDE3-815F-4A10-BDD5-5A41D284CC06",
+        "runtime": "iOS 26.2",
+        "appearance": "light",
+        "statusBarTime": "9:41",
+        "audio": false,
+        "cursorBakedIn": false,
+        "deviceFrameBakedIn": false
+      },
+      "files": [
+        {
+          "file": "assets/trove-01-discover-poster.jpg",
+          "role": "primary-static",
+          "dimensions": "1320x2868",
+          "state": "Discover with people, attributed For You recipes, and cuisine sections"
+        }
+      ],
+      "integrityNotes": [
+        "The static is extracted from the verified Import master, whose opening already supplies the only useful Discover motion.",
+        "A separate Discover animation was intentionally omitted because it would repeat the Import clip without adding explanatory value."
+      ]
+    },
+    {
+      "artifact": "TROVE-03-plan",
+      "status": "recapture-required",
+      "reviewStatus": "interaction-approved-attribution-rejected",
+      "truthLabel": "fixture",
+      "adjacentClaim": "A saved recipe can be scheduled into a specific meal and then found in the meal plan.",
+      "capture": {
+        "date": "2026-08-24",
+        "simulator": "iPhone 17 Pro Max",
+        "simulatorId": "E579FDE3-815F-4A10-BDD5-5A41D284CC06",
+        "runtime": "iOS 26.2",
+        "appearance": "light",
+        "statusBarTime": "9:41",
+        "recipe": "Tangy carrot, cabbage & onion salad",
+        "meal": "Dinner",
+        "audio": false,
+        "cursorBakedIn": false,
+        "deviceFrameBakedIn": false
+      },
+      "files": [
+        {
+          "file": "assets/trove-03-plan-master.mov",
+          "role": "clean-source-master",
+          "dimensions": "1320x2868",
+          "durationSeconds": 59.14,
+          "codec": "H.264",
+          "pixelFormat": "yuv420p",
+          "notes": "Continuous variable-frame-rate simulator capture retained for evidence and future recuts."
+        },
+        {
+          "file": "assets/trove-03-plan.mp4",
+          "role": "web-derivative",
+          "dimensions": "880x1912",
+          "durationSeconds": 18.63,
+          "frameRate": 30,
+          "codec": "H.264",
+          "pixelFormat": "yuv420p",
+          "fastStart": true
+        },
+        {
+          "file": "assets/trove-03-plan-poster.jpg",
+          "role": "poster-and-reduced-motion-fallback",
+          "dimensions": "368x800",
+          "state": "Meal Plan showing the scheduled recipe and Cook Now action"
+        }
+      ],
+      "sequence": [
+        "Saved recipe",
+        "Add to Meal Plan",
+        "Choose Dinner",
+        "Scheduled recipe detail",
+        "Meal Plan"
+      ],
+      "recaptureRequirements": [
+        "Replace the synthetic TC capture identity with the official Trove profile identity used first in Discover.",
+        "Resolve the official avatar through the same handle/profile path as Discover; do not require a real login."
+      ]
+    },
+    {
+      "artifact": "TROVE-04-shop",
+      "status": "recapture-required",
+      "reviewStatus": "needs-clean-stocked-state-and-two-retailer-fixture",
+      "truthLabel": "fixture",
+      "adjacentClaim": "Ingredients from a planned recipe become an attributed grocery list that can distinguish what is stocked before a retailer handoff.",
+      "capture": {
+        "date": "2026-08-24",
+        "simulator": "iPhone 17 Pro Max",
+        "simulatorId": "E579FDE3-815F-4A10-BDD5-5A41D284CC06",
+        "runtime": "iOS 26.2",
+        "appearance": "light",
+        "statusBarTime": "9:41",
+        "recipe": "Tangy carrot, cabbage & onion salad",
+        "retailerBoundary": "Kroger and Amazon Fresh chooser",
+        "locationPermission": "denied for capture",
+        "audio": false,
+        "cursorBakedIn": false,
+        "deviceFrameBakedIn": false
+      },
+      "files": [
+        {
+          "file": "assets/trove-04-shop-master.mov",
+          "role": "clean-source-master",
+          "dimensions": "1320x2868",
+          "durationSeconds": 70.11,
+          "codec": "H.264",
+          "pixelFormat": "yuv420p",
+          "notes": "Continuous variable-frame-rate simulator capture retained for evidence and future recuts."
+        },
+        {
+          "file": "assets/trove-04-shop.mp4",
+          "role": "web-derivative",
+          "dimensions": "880x1912",
+          "durationSeconds": 13.5,
+          "frameRate": 30,
+          "codec": "H.264",
+          "pixelFormat": "yuv420p",
+          "fastStart": true
+        },
+        {
+          "file": "assets/trove-04-shop-poster.jpg",
+          "role": "poster-and-reduced-motion-fallback",
+          "dimensions": "368x800",
+          "state": "Superseded capture: Get Ingredients sheet showing Amazon Fresh only; no external store opened"
+        }
+      ],
+      "sequence": [
+        "Attributed grocery list",
+        "Mark one item Stocked",
+        "Shopping count updates",
+        "Retailer chooser"
+      ],
+      "integrityNotes": [
+        "The recording stops at the reversible retailer-selection boundary.",
+        "No external store, account sign-in, cart mutation, or purchase is shown.",
+        "Recapture must open the item menu, change the item to Stocked, show the updated list, and end on a Debug fixture containing Kroger and Amazon Fresh.",
+        "The Kroger row is capture-only and must not imply live availability at the simulator's location."
+      ]
+    },
+    {
+      "artifact": "TROVE-03-cook",
+      "status": "captured",
+      "reviewStatus": "accepted-baseline",
+      "truthLabel": "fixture",
+      "adjacentClaim": "A planned recipe can be followed one step at a time, with an in-app timer that remains visible when cooking is minimized.",
+      "capture": {
+        "date": "2026-08-24",
+        "simulator": "iPhone 17 Pro Max",
+        "simulatorId": "E579FDE3-815F-4A10-BDD5-5A41D284CC06",
+        "runtime": "iOS 26.2",
+        "appearance": "light",
+        "statusBarTime": "9:41",
+        "recipe": "Spanish chicken pie",
+        "meal": "Dinner",
+        "guidedStepCount": 3,
+        "suggestedTimer": "15:00",
+        "notificationPermission": "denied for capture; timer remained functional in app",
+        "audio": false,
+        "cursorBakedIn": false,
+        "deviceFrameBakedIn": false
+      },
+      "files": [
+        {
+          "file": "assets/trove-03-cook-master.mov",
+          "role": "clean-source-master",
+          "dimensions": "1320x2868",
+          "durationSeconds": 64.04,
+          "codec": "H.264",
+          "notes": "Continuous variable-frame-rate simulator capture retained for evidence and future editorial recuts. Decode timestamps are normalized in the web derivative."
+        },
+        {
+          "file": "assets/trove-03-cook.mp4",
+          "role": "web-derivative",
+          "dimensions": "880x1912",
+          "durationSeconds": 16,
+          "frameRate": 30,
+          "codec": "H.264",
+          "pixelFormat": "yuvj420p",
+          "fastStart": true
+        },
+        {
+          "file": "assets/trove-03-cook-poster.jpg",
+          "role": "poster-and-reduced-motion-fallback",
+          "dimensions": "1320x2868",
+          "state": "Meal Plan with the active cooking session minimized into a persistent bottom bar"
+        }
+      ],
+      "sequence": [
+        "Planned recipe",
+        "Guided cooking step one",
+        "Start suggested timer",
+        "Guided cooking step two",
+        "Minimized persistent cooking state"
+      ],
+      "integrityNotes": [
+        "The recording uses a recipe imported through the real product path in the pinned build.",
+        "The recording does not imply that the meal was completed or rated.",
+        "Cursor, tap cue, zoom, device shell, and cover motion remain compositor layers."
+      ]
+    },
+    {
+      "artifact": "TROVE-05-onboarding",
+      "status": "recapture-required",
+      "reviewStatus": "must-start-at-sign-in-and-use-owned-first-page-animation",
+      "truthLabel": "fixture",
+      "adjacentClaim": "The onboarding explains Trove's discover, import, plan, and grocery loop before collecting lightweight preferences and notification intent.",
+      "capture": {
+        "date": "2026-08-24",
+        "simulator": "iPhone 17 Pro Max",
+        "simulatorId": "E579FDE3-815F-4A10-BDD5-5A41D284CC06",
+        "runtime": "iOS 26.2",
+        "appearance": "light",
+        "statusBarTime": "9:41",
+        "launchArguments": [
+          "MUNCH_TEST_USER"
+        ],
+        "environment": [
+          "MUNCH_SHOW_ONBOARDING=1",
+          "MUNCH_CAPTURE_USER_NAME=Samuel",
+          "MUNCH_CAPTURE_BOOK_ANIMATION=1"
+        ],
+        "selectedPreference": "Italian",
+        "notificationAction": "screen shown; permission not requested in this capture",
+        "audio": false,
+        "cursorBakedIn": false,
+        "deviceFrameBakedIn": false
+      },
+      "files": [
+        {
+          "file": "assets/trove-05-onboarding-draft-master.mov",
+          "role": "clean-source-master",
+          "dimensions": "1320x2868",
+          "durationSeconds": 56.93,
+          "codec": "H.264",
+          "pixelFormat": "yuv420p",
+          "notes": "Continuous simulator capture retained for evidence and future recuts. High nominal frame-rate metadata is normalized in the web derivative."
+        },
+        {
+          "file": "assets/trove-05-onboarding-draft.mp4",
+          "role": "draft-web-derivative",
+          "dimensions": "880x1912",
+          "durationSeconds": 16,
+          "frameRate": 30,
+          "codec": "H.264",
+          "pixelFormat": "yuv420p",
+          "fastStart": true
+        },
+        {
+          "file": "assets/trove-05-onboarding-draft-poster.jpg",
+          "role": "draft-poster",
+          "dimensions": "1320x2868",
+          "state": "How Trove works overview"
+        }
+      ],
+      "sequence": [
+        "Sign-in screen",
+        "Continue as Samuel capture bypass",
+        "How Trove works overview",
+        "Preference setup",
+        "Select one cuisine",
+        "Notification rationale"
+      ],
+      "integrityNotes": [
+        "The existing draft is source evidence only and is not approved as final portfolio media.",
+        "Recapture starts at sign-in, uses a Debug-only identity bypass with no auth session, and proceeds through the new-user walkthrough.",
+        "The repaired owned book animation is the intended first explainer visual.",
+        "No notification permission prompt or external system mutation is shown.",
+        "Cursor, tap cue, zoom, device shell, and cover motion remain compositor layers."
+      ]
+    }
+  ]
+}

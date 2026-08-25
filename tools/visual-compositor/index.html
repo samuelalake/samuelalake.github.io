@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Visual compositor lab</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Visual compositor lab</p>
+          <h1 id="scene-title">Loading scene…</h1>
+          <p id="scene-claim" class="scene-claim"></p>
+        </div>
+        <div class="variant-picker" aria-label="Composition aspect ratio">
+          <button type="button" data-variant="landscape">16:9</button>
+          <button type="button" data-variant="square">1:1</button>
+          <button type="button" data-variant="portrait">4:5</button>
+        </div>
+      </header>
+
+      <section class="workspace" aria-label="Composition preview">
+        <div class="stage-wrap">
+          <div id="stage" class="stage" data-variant="landscape">
+            <div id="camera-layer" class="camera-layer">
+              <div id="device" class="device">
+                <div id="device-screen" class="device-screen">
+                  <video id="product-video" muted playsinline preload="metadata"></video>
+                  <div id="overlay-layer" class="overlay-layer" aria-hidden="true"></div>
+                </div>
+                <img id="device-frame" class="device-frame" alt="" />
+              </div>
+            </div>
+            <p class="stage-label">Presentation is editable; product pixels remain unchanged.</p>
+          </div>
+        </div>
+
+        <aside class="inspector">
+          <div class="inspector-section transport">
+            <button id="play-toggle" class="primary-control" type="button">Play</button>
+            <button id="restart" type="button">Restart</button>
+          </div>
+
+          <div class="inspector-section">
+            <label for="timeline">Timeline</label>
+            <input id="timeline" type="range" min="0" max="1" step="0.001" value="0" />
+            <div class="time-readout">
+              <span id="current-time">0:00.00</span>
+              <span id="duration">0:00.00</span>
+            </div>
+          </div>
+
+          <div class="inspector-section">
+            <p class="inspector-label">Active tracks</p>
+            <ul id="track-list" class="track-list"></ul>
+          </div>
+
+          <div class="inspector-section source-state">
+            <span id="source-status" class="status-dot"></span>
+            <p id="source-copy">Checking the browser derivative…</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script type="module" src="./compositor.js"></script>
+  </body>
+</html>

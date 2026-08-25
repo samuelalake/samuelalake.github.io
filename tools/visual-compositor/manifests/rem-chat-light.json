@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "id": "rem-chat-light",
+  "title": "Rem conversational response",
+  "claim": "Rem keeps a voice conversation legible inside a familiar chat thread.",
+  "media": {
+    "master": "/projects/rem-evidence/rem-chat-conversational-light.mov",
+    "web": "/tools/visual-compositor/generated/rem-chat-light.mp4",
+    "poster": "/tools/visual-compositor/generated/rem-chat-light-poster.jpg",
+    "sourceWidth": 1206,
+    "sourceHeight": 2622,
+    "sourceFrameRate": 60,
+    "webFrameRate": 30,
+    "in": 0.35,
+    "out": 11.8
+  },
+  "device": {
+    "kind": "iphone-flat",
+    "frame": "/projects/wayfind-evidence/iphone-14-pro-no-notch.svg",
+    "screenInset": {
+      "x": 0.0524,
+      "y": 0.0224,
+      "width": 0.8952,
+      "height": 0.9552
+    }
+  },
+  "composition": {
+    "colorMode": "light",
+    "background": "#eef2f8",
+    "foreground": "#18202b",
+    "accent": "#ff6b57",
+    "cursor": {
+      "mode": "auto",
+      "light": "#3f4652",
+      "dark": "#d8dde5",
+      "project": null
+    },
+    "defaultVariant": "landscape"
+  },
+  "variants": {
+    "landscape": {
+      "label": "16:9",
+      "width": 1600,
+      "height": 900,
+      "deviceHeight": 0.82
+    },
+    "square": {
+      "label": "1:1",
+      "width": 1200,
+      "height": 1200,
+      "deviceHeight": 0.78
+    },
+    "portrait": {
+      "label": "4:5",
+      "width": 1080,
+      "height": 1350,
+      "deviceHeight": 0.76
+    }
+  },
+  "tracks": {
+    "camera": [
+      { "time": 0.35, "scale": 0.97, "x": 0, "y": 0.01 },
+      { "time": 0.72, "scale": 1, "x": 0, "y": 0 },
+      { "time": 5.82, "scale": 1, "x": 0, "y": 0 },
+      { "time": 6.18, "scale": 1.08, "x": 0, "y": 0.012 },
+      { "time": 9.4, "scale": 1.07, "x": 0, "y": 0.01 },
+      { "time": 9.78, "scale": 1, "x": 0, "y": 0 },
+      { "time": 11.8, "scale": 1, "x": 0, "y": 0 }
+    ],
+    "overlays": [
+      {
+        "id": "response-focus",
+        "kind": "focus",
+        "start": 6.15,
+        "duration": 0.72,
+        "x": 0.34,
+        "y": 0.34,
+        "size": 0.16,
+        "label": "Assistant response appears"
+      }
+    ]
+  }
+}
