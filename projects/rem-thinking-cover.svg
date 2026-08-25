@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Rem thinking animation</title>
+  <desc id="desc">The Rem mark draws like a loader beside the word Thinking, then resolves into the centered smiling logo.</desc>
+  <style>
+    :root { color-scheme: light dark; }
+    .background { fill: #eef0f3; }
+    .mark { transform-box: fill-box; transform-origin: center; animation: settle 5.2s cubic-bezier(.2,.8,.2,1) infinite; }
+    .outline { fill: transparent; stroke: #0c50ff; stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; path-length: 1; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 5.2s cubic-bezier(.45,0,.2,1) infinite; }
+    .fill { fill: #0c50ff; opacity: 0; animation: fill-in 5.2s ease infinite; }
+    .face { fill: none; stroke: white; stroke-width: 12; stroke-linecap: round; opacity: 0; animation: face-in 5.2s ease infinite; }
+    .thinking { fill: #20252c; font: 600 56px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: -.02em; animation: label 5.2s ease infinite; }
+    .dot { animation: dot 1s ease-in-out infinite; }
+    @keyframes draw {
+      0%, 8% { stroke-dashoffset: 1; opacity: 1; }
+      38%, 50% { stroke-dashoffset: 0; opacity: 1; }
+      58%, 100% { stroke-dashoffset: 0; opacity: 0; }
+    }
+    @keyframes fill-in { 0%, 46% { opacity: 0; } 58%, 92% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes face-in { 0%, 55% { opacity: 0; } 64%, 92% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes settle {
+      0%, 45% { transform: translate(-115px, 0) scale(.78); }
+      62%, 92% { transform: translate(0, 0) scale(1.18); }
+      100% { transform: translate(0, 0) scale(1.18); }
+    }
+    @keyframes label { 0%, 8% { opacity: 0; transform: translateX(-10px); } 16%, 46% { opacity: 1; transform: translateX(0); } 56%, 100% { opacity: 0; transform: translateX(12px); } }
+    @keyframes dot { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .mark { animation: none; transform: scale(1.18); }
+      .outline, .thinking { display: none; }
+      .fill, .face { animation: none; opacity: 1; }
+    }
+  </style>
+  <rect class="background" width="1920" height="1080" />
+  <g transform="translate(820 350)">
+    <g class="mark">
+      <path class="outline" pathLength="1" d="M140 16 C169 16 174 52 194 60 C215 69 245 48 264 67 C283 86 261 116 270 137 C278 157 314 162 314 191 C314 220 278 225 270 245 C261 266 283 296 264 315 C245 334 215 313 194 322 C174 330 169 366 140 366 C111 366 106 330 86 322 C65 313 35 334 16 315 C-3 296 19 266 10 245 C2 225 -34 220 -34 191 C-34 162 2 157 10 137 C19 116 -3 86 16 67 C35 48 65 69 86 60 C106 52 111 16 140 16 Z" />
+      <path class="fill" d="M140 16 C169 16 174 52 194 60 C215 69 245 48 264 67 C283 86 261 116 270 137 C278 157 314 162 314 191 C314 220 278 225 270 245 C261 266 283 296 264 315 C245 334 215 313 194 322 C174 330 169 366 140 366 C111 366 106 330 86 322 C65 313 35 334 16 315 C-3 296 19 266 10 245 C2 225 -34 220 -34 191 C-34 162 2 157 10 137 C19 116 -3 86 16 67 C35 48 65 69 86 60 C106 52 111 16 140 16 Z" />
+      <path class="face" d="M93 158 V190 M187 158 V190 M83 241 C111 272 166 275 198 240" />
+    </g>
+  </g>
+  <g class="thinking">
+    <text x="1045" y="575">Thinking</text>
+    <circle class="dot" cx="1270" cy="566" r="7" fill="#0c50ff" />
+  </g>
+</svg>

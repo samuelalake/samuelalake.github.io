@@ -82,6 +82,7 @@ html::-webkit-scrollbar { width: 0; height: 0; }
 .card, .card:link, .card:visited, .card:hover, .card:active, .card:focus, .card-title, .card-meta { text-decoration: none; }
 .card-media { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; overflow: hidden; background: var(--portfolio-bg-muted); border: 1px solid var(--portfolio-border-muted); }
 .card-media.seq { object-fit: contain; }
+.card-media-rem { object-fit: contain; background: #eef0f3; }
 .card-media-placeholder { display: grid; place-items: center; text-align: center; padding: 20px; color: var(--portfolio-fg-muted); font-size: 14px; background: radial-gradient(120% 120% at 30% 20%, color-mix(in srgb, var(--portfolio-fg-accent) 14%, transparent), transparent 60%), var(--portfolio-bg-muted); }
 .card-media-trove { background: color-mix(in srgb, #ea6a2e 16%, var(--portfolio-bg)); }
 .card-media-trove video { display: block; width: 100%; height: 100%; object-fit: contain; }

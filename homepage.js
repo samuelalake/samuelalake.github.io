@@ -149,27 +149,44 @@
     }
   }
 
-  // --- SVG frame-sequence player: plays once when the card enters view, freezes on the last frame ---
+  // --- SVG frame-sequence player: loops while visible and stops work off-screen ---
   function pad3(n) { return ("00" + n).slice(-3); }
   function playSeq(img) {
+    if (img._seqPlaying) return;
     var dir = img.getAttribute("data-seq");
     var count = parseInt(img.getAttribute("data-count"), 10) || 1;
     var last = count - 1;
     if (reduce) { img.src = dir + "/" + pad3(last) + ".svg"; return; }
-    var duration = 3200, start = null, cur2 = -1;
+    var duration = parseInt(img.getAttribute("data-duration"), 10) || 3200;
+    var pause = 500;
+    var loop = img.hasAttribute("data-loop");
+    var start = null, cur2 = -1;
+    img._seqPlaying = true;
     function frame(ts) {
+      if (!img._seqPlaying) return;
       if (start === null) start = ts;
-      var t = Math.min(1, (ts - start) / duration);
+      var elapsed = ts - start;
+      var cycle = duration + pause;
+      var cycleTime = loop ? elapsed % cycle : Math.min(elapsed, duration);
+      var t = Math.min(1, cycleTime / duration);
       var f = Math.floor(t * last);
       if (f !== cur2) { cur2 = f; img.src = dir + "/" + pad3(f) + ".svg"; }
-      if (t < 1) requestAnimationFrame(frame);
+      if (loop || t < 1) img._seqRaf = requestAnimationFrame(frame);
+      else img._seqPlaying = false;
     }
-    requestAnimationFrame(frame);
+    img._seqRaf = requestAnimationFrame(frame);
+  }
+  function stopSeq(img) {
+    img._seqPlaying = false;
+    if (img._seqRaf) cancelAnimationFrame(img._seqRaf);
   }
   var seqEls = [].slice.call(document.querySelectorAll("img.seq"));
   if ("IntersectionObserver" in window) {
     var seqIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) { seqIO.unobserve(e.target); playSeq(e.target); } });
+      entries.forEach(function (e) {
+        if (e.isIntersecting) playSeq(e.target);
+        else stopSeq(e.target);
+      });
     }, { threshold: 0.35 });
     seqEls.forEach(function (i) { seqIO.observe(i); });
   } else {
