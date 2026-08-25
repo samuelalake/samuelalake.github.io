@@ -10,10 +10,11 @@ const outlineMatch = sourceLogo.match(/<path fill-rule="evenodd" clip-rule="even
 if (!outlineMatch) throw new Error("Could not find the Rem outline path in projects/rem.svg");
 
 const outline = outlineMatch[1];
+const loaderPath = `${outline.split("Z")[0]}Z`;
 const outputDir = join(root, "projects/rem-thinking-transition");
 const originalDir = join(root, "projects/rem-logo-transition-inverted");
-const background = "#F6E35A";
-const blue = "#0C50FF";
+const background = "#0C50FF";
+const foreground = "white";
 const loadingFrames = 36;
 const transitionFrames = 8;
 const totalFrames = loadingFrames + transitionFrames;
@@ -42,9 +43,9 @@ for (let frame = 0; frame < totalFrames; frame += 1) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
   <rect width="1920" height="1080" fill="${background}"/>
   <g transform="translate(${loaderX.toFixed(3)} ${loaderY.toFixed(3)}) scale(${loaderScale.toFixed(4)})">
-    <path d="${outline}" fill="none" stroke="${blue}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" pathLength="100" stroke-dasharray="${drawn.toFixed(3)} 100"/>
+    <path d="${loaderPath}" fill="none" stroke="${foreground}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" pathLength="100" stroke-dasharray="${drawn.toFixed(3)} 100"/>
   </g>
-  <text x="738" y="586" fill="${blue}" opacity="${textOpacity.toFixed(4)}" font-family="Arial, Helvetica, sans-serif" font-size="116" font-weight="700" letter-spacing="-3">Thinking</text>
+  <text x="738" y="586" fill="${foreground}" opacity="${textOpacity.toFixed(4)}" font-family="Arial, Helvetica, sans-serif" font-size="116" font-weight="700" letter-spacing="-3">Thinking</text>
 </svg>`;
 
   await writeFile(join(outputDir, `${pad3(frame)}.svg`), svg);
@@ -56,10 +57,16 @@ let recolored = 0;
 for (const name of originalFrames) {
   const path = join(originalDir, name);
   const source = await readFile(path, "utf8");
-  const next = source.replace(
-    /<path fill="(?:white|#F6E35A)" transform="translate\(960 540\.5\)" d="M-960 -540\.5/,
-    `<path fill="${background}" transform="translate(960 540.5)" d="M-960 -540.5`,
-  );
+  const backgroundToken = "__REM_COVER_BACKGROUND__";
+  const next = source
+    .replace(
+      /<path fill="(?:white|#F6E35A|#0C50FF)" transform="translate\(960 540\.5\)" d="M-960 -540\.5/,
+      `<path fill="${backgroundToken}" transform="translate(960 540.5)" d="M-960 -540.5`,
+    )
+    .replaceAll('fill="#0C50FF"', 'fill="white"')
+    .replaceAll('fill="#F6E35A"', 'fill="white"')
+    .replace(/<path(?=\s+transform=)(?![^>]*\b(?:fill|stroke)=)/g, '<path fill="white"')
+    .replace(`fill="${backgroundToken}"`, `fill="${background}"`);
   if (next !== source) await writeFile(path, next);
   if (next.includes(`<path fill="${background}" transform="translate(960 540.5)" d="M-960 -540.5`)) recolored += 1;
 }
