@@ -97,7 +97,6 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
 .np-inline-app { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; color: var(--np-ink); }
 .np-inline-app img,
 .np-inline-app-icon { display: inline-grid; width: 17px; height: 17px; flex: 0 0 17px; place-items: center; border-radius: 4px; object-fit: cover; vertical-align: -.18em; }
-.np-gemini-icon { color: #6750e8; background: color-mix(in srgb, #6750e8 10%, transparent); font-size: 13px; }
 .np-interaction-carousel { margin-top: 44px; border: 1px solid var(--np-line); background: var(--np-soft); }
 .np-interaction-carousel .cs-carousel-stage { aspect-ratio: 16 / 10; }
 .np-interaction-slide { height: 100%; padding: 18px 18px 10px; }
