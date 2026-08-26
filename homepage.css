@@ -174,10 +174,12 @@ portfolio-footer { display: block; }
 
 @media (max-width: 720px) {
   .repo-page-header { padding: 0 12px !important; }
-  .repo-page-header .prc-PageHeader-TitleArea-2n2J0 { min-width: 0; }
+  .repo-page-header .prc-PageHeader-TitleArea-2n2J0 { min-width: 0; align-items: center; }
+  .repo-page-header .prc-PageHeader-LeadingVisual-njece { display: flex; align-items: center; }
+  .repo-title-path { display: inline-flex; align-items: center; line-height: 1; }
   .repo-title-path > span,
   .repo-name { display: none; }
-  .repo-owner { font-size: 14px; }
+  .repo-owner { font-size: 16px; line-height: 1; }
   .repo-page-header .prc-PageHeader-Actions-wawWm { gap: 6px; }
   .header-nav { gap: 12px; margin-right: 4px; }
   .header-nav a { font-size: 13px; }

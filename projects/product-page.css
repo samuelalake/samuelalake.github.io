@@ -88,7 +88,7 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
   100% { opacity: 0; transform: scale(1.45); }
 }
 .np-reference-board { margin-top: 44px; padding: 18px; border: 1px solid var(--np-line); background: var(--np-soft); }
-.np-board-tag { display: inline-flex; margin: 0 0 20px; padding: 4px 7px; border: 1px solid var(--np-line); border-radius: 4px; background: var(--np-paper); font-size: 12px; }
+.np-board-tag { display: inline-flex; width: fit-content; max-width: 100%; margin: 0 0 20px; padding: 4px 7px; align-self: flex-start; border: 1px solid var(--np-line); border-radius: 4px; background: var(--np-paper); font-size: 12px; }
 .np-reference-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 .np-reference { min-width: 0; }
 .np-reference > .cs-device { width: 100%; aspect-ratio: 4 / 5; padding: 24px; }
@@ -97,6 +97,8 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
 .np-inline-app { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; color: var(--np-ink); }
 .np-inline-app img,
 .np-inline-app-icon { display: inline-grid; width: 17px; height: 17px; flex: 0 0 17px; place-items: center; border-radius: 4px; object-fit: cover; vertical-align: -.18em; }
+.np-clicky-app { gap: 0; vertical-align: -.2em; }
+.np-clicky-app img { width: 56px; height: 20px; flex-basis: 56px; border-radius: 0; object-fit: contain; }
 .np-interaction-carousel { margin-top: 44px; border: 1px solid var(--np-line); background: var(--np-soft); }
 .np-interaction-carousel .cs-carousel-stage { aspect-ratio: 16 / 10; }
 .np-interaction-slide { height: 100%; padding: 18px 18px 10px; }
@@ -136,7 +138,7 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
 .np-axis::after { right: 0; }
 .np-axis-tick { left: 50%; }
 .np-rem-dot { position: absolute; top: 14px; display: grid; justify-items: center; transform: translateX(-50%); }
-.np-rem-dot.middle { left: 50%; }.np-rem-dot.voice { left: 78%; }.np-rem-dot.remote { left: 90%; }
+.np-rem-dot.middle { left: 50%; }.np-rem-dot.desktop { left: 32%; }.np-rem-dot.voice { left: 78%; }.np-rem-dot.remote { left: 90%; }
 .np-rem-dot i { display: block; border-radius: 50%; }
 .np-rem-dot i { width: 10px; height: 10px; background: var(--np-blue); box-shadow: 0 0 0 2px var(--np-soft); }
 .np-rem-dot b { margin-top: 6px; color: var(--np-blue); font-size: 11px; }
@@ -151,6 +153,7 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
 .np-app img,
 .np-app-icon-fallback { display: grid; width: 18px; height: 18px; flex: 0 0 18px; place-items: center; border-radius: 5px; object-fit: cover; background: var(--np-paper); color: var(--np-muted); font: 600 11px/1 var(--font-sans); }
 .np-axis-note { margin: 18px 0 0; color: var(--np-muted); font-size: 14px; line-height: 1.55; }
+.np-axis-note strong { color: var(--np-ink); }
 .np-positioning-future { margin-top: 64px; padding-top: 38px; border-top: 1px solid var(--np-line); }
 .np-positioning-future > h3 { margin: 0; font-family: var(--font-display); font-size: 28px; line-height: 1.15; }
 .np-positioning-future > p:not(.np-label) { max-width: var(--np-read); margin: 16px 0 0; color: var(--np-muted); font-size: 16px; line-height: 1.65; }
@@ -205,6 +208,9 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
   .np-interaction-grid figcaption { font-size: 10px; }
 }
 @media (max-width: 560px) {
+  .np-interaction-carousel .cs-carousel-stage { aspect-ratio: 3 / 5; }
+  .np-interaction-grid-before { grid-template-columns: 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); }
+  .np-interaction-grid-before .cs-device { width: min(100%, 290px); justify-self: center; }
   .np-interaction-grid-after { display: flex; overflow-x: auto; gap: 12px; scroll-padding-inline: 2px; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-inline: contain; }
   .np-interaction-grid-after::-webkit-scrollbar { display: none; }
   .np-interaction-grid-after figure { flex: 0 0 82%; scroll-snap-align: start; }
