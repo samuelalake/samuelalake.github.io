@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/assets/index-DcLK9jS5.css" />
     <link rel="stylesheet" href="/homepage.css?v=20260824-case-study-shell" />
     <link rel="stylesheet" href="/case-study.css?v=20260824-case-study-shell" />
-    <link rel="stylesheet" href="/projects/product-page.css?v=20260825-rem-interaction-v2" />
+    <link rel="stylesheet" href="/projects/product-page.css?v=20260826-rem-positioning-v1" />
     <script>
       try { document.documentElement.setAttribute("data-color-mode", localStorage.getItem("theme") || "light"); } catch (e) {}
     </script>
@@ -83,7 +83,7 @@
             </div>
             <div class="cs-carousel-slide np-interaction-slide" data-carousel-slide>
               <p class="np-board-tag">After · one interaction model</p>
-              <div class="np-interaction-grid np-interaction-grid-after">
+              <div class="np-interaction-grid np-interaction-grid-after" role="region" aria-label="Final interaction views; swipe horizontally on small screens">
                 <figure><div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline poster="/projects/rem-evidence/rem-chat-conversational-light-poster.jpg" src="/projects/rem-evidence/rem-chat-conversational-light-web.mp4"></video></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div><figcaption>Chat + voice</figcaption></figure>
                 <figure><div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline poster="/projects/rem-evidence/rem-brief-poster.png" src="/projects/rem-evidence/rem-brief-web.mp4"></video></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div><figcaption>Daily Brief listening</figcaption></figure>
                 <figure><div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><div class="np-live-activity-mock" role="img" aria-label="Future Rem Live Activity direction"><span class="np-live-island"></span><div><strong>Rem is listening</strong><small>Follow the conversation while you work</small></div><span class="np-live-wave" aria-hidden="true"></span></div></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div><figcaption>Live Activity direction</figcaption></figure>
@@ -94,23 +94,29 @@
         </div>
       </section>
 
-      <section class="np-section">
+      <section class="np-section" id="product-positioning">
         <p class="np-label">Product positioning</p>
-        <h2>Deciding where Rem should sit in a changing market</h2>
-        <p class="np-copy">We started with two assumptions: people would want more privacy than a conventional cloud assistant offers, but less setup than a fully local agent requires. I mapped the market to see how that tradeoff should shape where Rem runs and which device stays in charge.</p>
+        <h2>A vision for private AI that stays under your control</h2>
+        <p class="np-copy np-assumption-intro">I started with two assumptions:</p>
+        <ul class="np-assumptions">
+          <li>People would want more privacy and ownership than a conventional cloud assistant offers.</li>
+          <li>They would want less setup and maintenance than a fully local agent requires.</li>
+        </ul>
+        <p class="np-copy np-positioning-bridge">That shaped two questions: where personal data should live, and which device should stay in charge.</p>
         <div class="np-positioning">
           <section class="np-position-row">
-            <h3>Where does the agent run?</h3>
-            <div class="np-axis-labels"><strong>Cloud</strong><strong>Local</strong></div>
-            <div class="np-axis"><span class="np-axis-line"></span><span class="np-axis-tick"></span><span class="np-axis-competitor start"><i></i><i></i></span><span class="np-axis-competitor end"><i></i><i></i><i></i></span><span class="np-rem-dot middle"><i></i><b>Rem</b></span></div>
+            <h3>Where should your data live?</h3>
+            <div class="np-axis-labels"><strong>Cloud-only</strong><strong>User-owned</strong></div>
+            <div class="np-axis"><span class="np-axis-line"></span><span class="np-axis-tick"></span><span class="np-axis-competitor start"><i></i></span><span class="np-axis-competitor end"><i></i></span><span class="np-rem-dot middle"><i></i><b>Rem</b></span></div>
             <div class="np-axis-lists"><div class="np-app-list"><span class="np-app"><img src="/tools/claude.svg" alt="" />Claude</span><span class="np-app"><img src="/tools/codex.svg" alt="" />OpenAI</span></div><div class="np-app-list"><span class="np-app"><img src="https://github.com/open-software-network.png" alt="" />Clovy</span><span class="np-app"><img src="https://github.com/NousResearch.png" alt="" />Hermes</span><span class="np-app"><img src="https://github.com/openclaw.png" alt="" />OpenClaw</span></div></div>
-            <p class="np-axis-note">Rem gives people the convenience of cloud backup while keeping their data portable and under their control.</p>
+            <p class="np-axis-note">The vision is closer to private messaging than a conventional cloud assistant: encrypt conversations, keep the durable history on a gateway or machine the person owns, and use cloud services only when a task needs them.</p>
           </section>
           <section class="np-position-row">
-            <h3>Where do you control it from?</h3>
-            <div class="np-axis-labels three"><strong>Desktop app</strong><strong>Mobile assistant</strong><strong>Phone as remote</strong></div>
-            <div class="np-axis"><span class="np-axis-line"></span><span class="np-axis-tick"></span><span class="np-axis-competitor start"><i></i><i></i></span><span class="np-axis-competitor center"><i></i></span><span class="np-rem-dot remote"><i></i><b>Rem</b></span></div>
+            <h3>Which device should stay in charge?</h3>
+            <div class="np-axis-labels three"><strong>Desktop runtime</strong><strong>Mobile assistant</strong><strong>Phone as remote</strong></div>
+            <div class="np-axis"><span class="np-axis-line"></span><span class="np-axis-tick"></span><span class="np-axis-competitor start"><i></i></span><span class="np-axis-competitor center"><i></i></span><span class="np-rem-dot remote"><i></i><b>Rem</b></span></div>
             <div class="np-axis-lists three"><div class="np-app-list"><span class="np-app"><img src="/tools/claude.svg" alt="" />Claude</span><span class="np-app"><img src="/tools/codex.svg" alt="" />OpenAI</span></div><div class="np-app-list"><span class="np-app"><img src="/projects/rem-evidence/competitor-icons/agi-inc.png" alt="" />AGI, Inc.</span></div><div class="np-app-list"></div></div>
+            <p class="np-axis-note">The direction keeps the phone as the familiar control surface while a gateway handles longer-running work elsewhere.</p>
           </section>
         </div>
         <div class="np-positioning-future">
