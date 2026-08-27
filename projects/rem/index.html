@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/assets/index-DcLK9jS5.css" />
     <link rel="stylesheet" href="/homepage.css?v=20260824-case-study-shell" />
     <link rel="stylesheet" href="/case-study.css?v=20260827-viewbox-v1" />
-    <link rel="stylesheet" href="/projects/product-page.css?v=20260827-viewbox-v1" />
+    <link rel="stylesheet" href="/projects/product-page.css?v=20260827-rem-voice-v1" />
     <script>
       try { document.documentElement.setAttribute("data-color-mode", localStorage.getItem("theme") || "light"); } catch (e) {}
     </script>
@@ -58,36 +58,43 @@
         <p class="np-label">Design explorations</p>
         <h2>Exploring the interaction model and modality for a mobile voice AI assistant</h2>
         <p class="np-copy">Voice became a priority because it reduced two kinds of friction: the time it takes to type a request and the time it takes to read a response. Speaking and listening also made the assistant feel more like a natural conversation than another interface to operate.</p>
-        <p class="np-copy">Across <span class="np-inline-app"><img src="/projects/rem-evidence/competitor-icons/gemini.svg" alt="" />Gemini</span>, <span class="np-inline-app"><img src="/projects/rem-evidence/huxe-logo.avif" alt="" />HUXE</span>, <span class="np-inline-app"><img src="/projects/rem-evidence/todoist-icon.webp" alt="" />Todoist</span>, <span class="np-inline-app"><img src="/tools/claude.svg" alt="" />Claude</span>, and <span class="np-inline-app"><img src="/tools/codex.svg" alt="" />Codex</span>, I found two broad patterns: podcast-like experiences where AI packages information for listening, and user-driven conversations where voice is a faster way to think out loud. I wanted Rem to sit between them—able to deliver a useful brief and continue into a conversation when the person wanted to respond.</p>
+        <p class="np-copy">Across <span class="np-inline-app"><img src="/projects/rem-evidence/competitor-icons/gemini.svg" alt="" />Gemini</span>, <span class="np-inline-app"><img src="/projects/rem-evidence/huxe-logo.avif" alt="" />HUXE</span>, <span class="np-inline-app"><img src="/projects/rem-evidence/arc-voice-view.jpg" alt="" />Arc</span>, <span class="np-inline-app"><img src="/projects/rem-evidence/todoist-icon.webp" alt="" />Todoist</span>, <span class="np-inline-app"><img src="/tools/claude.svg" alt="" />Claude</span>, and <span class="np-inline-app"><img src="/tools/codex.svg" alt="" />Codex</span>, I found two broad patterns: podcast-like experiences where AI packages information for listening, and user-driven conversations where voice is a faster way to think out loud. I wanted Rem to sit between them—able to deliver a useful brief and continue into a conversation when the person wanted to respond.</p>
         <div class="np-reference-board">
           <p class="np-board-tag">References</p>
           <div class="np-reference-grid">
             <article class="np-reference">
               <div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline poster="/projects/rem-evidence/huxe-daily-brief-poster.jpg" src="/projects/rem-evidence/huxe-daily-brief-web.mp4"></video></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div>
-              <p><strong>HUXE.</strong> An assistant-led daily brief packages context and leads the conversation.</p>
+              <p><strong class="np-reference-title"><img src="/projects/rem-evidence/huxe-logo.avif" alt="" />HUXE</strong> An assistant-led daily brief packages context and leads the conversation.</p>
             </article>
             <article class="np-reference">
               <div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline poster="/projects/rem-evidence/todoist-ramble-poster.jpg" src="/projects/rem-evidence/todoist-ramble-web.mp4"></video></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div>
-              <p><strong>Todoist Ramble.</strong> Loose user input becomes structured task context.</p>
+              <p><strong class="np-reference-title"><img src="/projects/rem-evidence/todoist-icon.webp" alt="" />Todoist Ramble</strong> Loose user input becomes structured task context.</p>
+            </article>
+            <article class="np-reference">
+              <div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><img class="cs-device-media-content" loading="lazy" decoding="async" src="/projects/rem-evidence/arc-voice-view.jpg" alt="Arc Voice presented as a focused phone-call interface" /></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div>
+              <p><strong class="np-reference-title"><img src="/projects/rem-evidence/arc-voice-view.jpg" alt="" />Arc Voice</strong> A familiar call metaphor makes a voice-first assistant immediately legible.</p>
             </article>
           </div>
+        </div>
+
+        <div class="np-interaction-intro">
+          <h3>Start familiar, then ladder in novelty</h3>
+          <p class="np-copy">I was initially drawn to making voice feel distinct, which led to several modes and new surfaces at once. I reset around a familiar chat thread, then introduced new interaction patterns incrementally only when they unlocked something useful. That gave people a clear place to begin while leaving room for voice and listening to grow with the product.</p>
         </div>
 
         <div class="cs-carousel np-interaction-carousel" data-carousel aria-label="Before and after interaction-model directions">
           <div class="cs-carousel-stage">
             <div class="cs-carousel-slide is-active np-interaction-slide" data-carousel-slide>
-              <p class="np-board-tag">Before · two directions</p>
+              <p class="np-board-tag">Before · novelty first</p>
               <div class="np-interaction-grid np-interaction-grid-before">
                 <figure><div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><picture><source media="(prefers-color-scheme: dark)" srcset="/projects/rem-evidence/rem-chat-initial-dark.png" /><img class="cs-device-media-content" src="/projects/rem-evidence/rem-chat-initial-light.png" alt="An early Rem direction showing many conversation modes at once" /></picture></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div><figcaption>All modes at once</figcaption></figure>
                 <figure><div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><picture><source media="(prefers-color-scheme: dark)" srcset="/projects/rem-evidence/rem-chat-previous-dark.png" /><img class="cs-device-media-content" src="/projects/rem-evidence/rem-chat-previous-light.png" alt="An early Rem direction reduced to a voice-led call" /></picture></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div><figcaption>Voice-only call</figcaption></figure>
               </div>
             </div>
             <div class="cs-carousel-slide np-interaction-slide" data-carousel-slide>
-              <p class="np-board-tag">After · one interaction model</p>
-              <div class="np-interaction-grid np-interaction-grid-after" role="region" aria-label="Final interaction views; swipe horizontally on small screens">
-                <figure><div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline poster="/projects/rem-evidence/rem-chat-conversational-light-poster.jpg" src="/projects/rem-evidence/rem-chat-conversational-light-web.mp4"></video></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div><figcaption>Chat + voice</figcaption></figure>
-                <figure><div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline poster="/projects/rem-evidence/rem-brief-poster.png" src="/projects/rem-evidence/rem-brief-web.mp4"></video></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div><figcaption>Daily Brief listening</figcaption></figure>
-                <figure><div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><div class="np-live-activity-mock" role="img" aria-label="Future Rem Live Activity direction"><span class="np-live-island"></span><div><strong>Rem is listening</strong><small>Follow the conversation while you work</small></div><span class="np-live-wave" aria-hidden="true"></span></div></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div><figcaption>Live Activity direction</figcaption></figure>
+              <p class="np-board-tag">After · familiarity first</p>
+              <div class="np-interaction-grid np-interaction-grid-single">
+                <figure><div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline poster="/projects/rem-evidence/rem-chat-conversational-light-poster.jpg" src="/projects/rem-evidence/rem-chat-conversational-light-web.mp4"></video></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div><figcaption>A familiar chat thread carries both typing and voice</figcaption></figure>
               </div>
             </div>
           </div>

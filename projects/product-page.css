@@ -130,23 +130,30 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
 }
 .np-reference-board { margin-top: 44px; padding: 18px; border: 1px solid var(--np-line); background: var(--np-soft); }
 .np-board-tag { display: inline-flex; width: fit-content; max-width: 100%; margin: 0 0 20px; padding: 4px 7px; align-self: flex-start; border: 1px solid var(--np-line); border-radius: 4px; background: var(--np-paper); font-size: 12px; }
-.np-reference-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.np-reference-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .np-reference { min-width: 0; }
 .np-reference > .cs-device { width: 100%; aspect-ratio: 4 / 5; padding: 24px; }
 .np-reference .cs-device-media-content { aspect-ratio: auto; object-fit: cover; }
 .np-reference p { margin: 12px 0 0; color: var(--np-muted); font-size: 14px; line-height: 1.5; }
+.np-reference-title { display: inline-flex; align-items: center; gap: 5px; color: var(--np-ink); }
+.np-reference-title::after { content: "."; }
+.np-reference-title img { width: 17px; height: 17px; flex: 0 0 17px; border-radius: 4px; object-fit: cover; }
 .np-inline-app { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; color: var(--np-ink); }
 .np-inline-app img,
 .np-inline-app-icon { display: inline-grid; width: 17px; height: 17px; flex: 0 0 17px; place-items: center; border-radius: 4px; object-fit: cover; vertical-align: -.18em; }
 .np-clicky-app { gap: 0; vertical-align: -.2em; }
 .np-clicky-app img { width: 56px; height: 20px; flex-basis: 56px; border-radius: 0; object-fit: contain; }
+.np-interaction-intro { max-width: var(--np-read); margin-top: 44px; }
+.np-interaction-intro h3 { margin: 0 0 10px; font-size: 25px; line-height: 1.15; }
+.np-interaction-intro .np-copy { margin-top: 0; }
 .np-interaction-carousel { margin-top: 44px; border: 1px solid var(--np-line); background: var(--np-soft); }
 .np-interaction-carousel .cs-carousel-stage { aspect-ratio: 16 / 10; }
 .np-interaction-slide { height: 100%; padding: 18px 18px 10px; }
 .np-interaction-slide.is-active { display: flex; flex-direction: column; }
 .np-interaction-grid { display: grid; min-height: 0; flex: 1; align-items: stretch; gap: 18px; }
 .np-interaction-grid-before { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.np-interaction-grid-after { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.np-interaction-grid-single { grid-template-columns: 1fr; }
+.np-interaction-grid-single figure { width: min(100%, 360px); justify-self: center; }
 .np-interaction-grid figure { display: grid; min-width: 0; min-height: 0; margin: 0; grid-template-rows: minmax(0, 1fr) auto; gap: 9px; }
 .np-interaction-grid .cs-device { width: 100%; height: 100%; min-height: 0; padding: 14px; background: transparent; }
 .np-interaction-grid .cs-device-media-content { object-fit: cover; }
@@ -263,9 +270,4 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
   .np-interaction-carousel .cs-carousel-stage { aspect-ratio: 3 / 5; }
   .np-interaction-grid-before { grid-template-columns: 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); }
   .np-interaction-grid-before .cs-device { width: min(100%, 290px); justify-self: center; }
-  .np-interaction-grid-after { display: flex; overflow-x: auto; gap: 12px; scroll-padding-inline: 2px; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-inline: contain; }
-  .np-interaction-grid-after::-webkit-scrollbar { display: none; }
-  .np-interaction-grid-after figure { flex: 0 0 82%; scroll-snap-align: start; }
-  .np-interaction-grid-after .cs-device { padding: 10px; }
-  .np-interaction-grid-after figcaption { font-size: 11px; }
 }
