@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/assets/index-DcLK9jS5.css" />
     <link rel="stylesheet" href="/homepage.css?v=20260824-case-study-shell" />
     <link rel="stylesheet" href="/case-study.css?v=20260827-viewbox-v1" />
-    <link rel="stylesheet" href="/projects/product-page.css?v=20260827-rem-voice-v3" />
+    <link rel="stylesheet" href="/projects/product-page.css?v=20260827-rem-story-v4" />
     <script>
       try { document.documentElement.setAttribute("data-color-mode", localStorage.getItem("theme") || "light"); } catch (e) {}
     </script>
@@ -78,6 +78,7 @@
         </div>
 
         <div class="np-interaction-intro">
+          <h3>Let familiar patterns carry the novelty</h3>
           <p class="np-copy">I was initially drawn to making voice feel distinct, which led to several modes and states at once. I reset around a familiar pattern—the chat thread—then introduced new patterns only when a feature needed them. Establishing this baseline of simplicity gave the interface a clearer architecture: start from conventions people already understand, then expand an existing pattern toward novelty when new functionality calls for it.</p>
         </div>
 
@@ -128,21 +129,36 @@
         <div class="np-positioning-future">
           <p class="np-label">Future product direction</p>
           <h3>Moving beyond mobile</h3>
-          <p>I explored two ways Rem could move beyond the iPhone: a Mac home for ongoing work and wearable capture.</p>
-          <div class="np-grid two"><article class="np-card"><h3>Bring the mobile model to the Mac</h3><p>A Mac experience could combine what Rem achieves on mobile with <span class="np-inline-app np-clicky-app"><img src="/projects/rem-evidence/competitor-icons/heyclicky.avif" alt="heyclicky" /></span>’s cursor-style interaction, making active work, status, and recovery easier to follow.</p></article><article class="np-card"><h3>Capture intent without reaching for the phone</h3><p>Wearables could make quick capture and lightweight updates available in motion.</p></article></div>
+          <p>The mobile app established Rem as a remote for work running elsewhere. Moving beyond the iPhone raises two different product decisions: what becomes possible when that remote connects to a local Mac, and whether ambient capture requires Rem hardware or an integration with devices people already own.</p>
+          <div class="np-grid two">
+            <article class="np-card np-direction-card">
+              <p class="np-decision-label">Decision 01 · Desktop</p>
+              <h3>Make the Mac the place work happens</h3>
+              <p>A local Mac could become the runtime the phone connects to and controls. Rather than copy the mobile interface, the desktop experience could let voice continue while people multitask, draw over other apps, and inspect Rem’s work as it happens.</p>
+            </article>
+            <article class="np-card np-direction-card">
+              <p class="np-decision-label">Decision 02 · Wearables</p>
+              <h3>Integrate before building hardware</h3>
+              <p>Ambient capture creates a build-or-integrate decision. My current direction is to let the mobile app discover compatible wearables and use them as a live video input, proving the interaction before considering purpose-built Rem hardware.</p>
+            </article>
+          </div>
         </div>
       </section>
 
       <section class="np-section">
         <p class="np-label">Where it stands</p>
-        <h2>Shipped on iPhone, then opened at the core</h2>
-        <p class="np-copy">Rem is live on the App Store for iPhone, and I released it as Apache-2.0 open source. Shipping forced the simplification the concept had been avoiding: the product got smaller and clearer as real use showed what didn’t earn its place. Opening it moved the work from adding features to making the core reliable, and the edge from the code to the product experience.</p>
+        <h2>Shipped the iPhone app, then opened the foundation</h2>
+        <p class="np-copy">Rem is available on the App Store for iPhone. Reaching that point meant narrowing the product around a dependable loop for capture, planning, and follow-through, and removing ideas that did not strengthen it.</p>
+        <p class="np-copy">Once that foundation was defined, I released Rem under the Apache 2.0 license. Open sourcing gives other builders a working system they can examine and extend while I continue shaping the product experience.</p>
       </section>
 
       <section class="np-section">
         <p class="np-label">Reflection</p>
-        <h2>I learned to get clear before I build</h2>
-        <div class="np-grid two"><article class="np-card"><h3>Understand the problem before choosing a direction</h3><p>Rem sits in a product space with few settled patterns. I explored too many directions at once, then learned to form a clearer picture of the problem before committing to a solution. The product became simpler as my understanding improved.</p></article><article class="np-card"><h3>Invite people in, then make ownership explicit</h3><p>Building in the open helped me bring friends into the project. I owned product and they focused on the mechanics, but that boundary blurred and momentum faded. Next time I would involve more design builders and agree on ownership earlier.</p></article></div>
+        <h2>Building Rem expanded how I practice design</h2>
+        <div class="np-grid two">
+          <article class="np-card"><h3>Design and engineering became one practice</h3><p>Rem was my introduction to building with AI as a developer. Working directly in the code let me test an interaction, understand the system constraints behind it, and refine both together. It moved me toward the design-engineering practice I use today.</p></article>
+          <article class="np-card"><h3>Build in the open to expand the idea</h3><p>The project began with me persuading friends to help turn an ambitious idea into a product. Once the core was defined, I open-sourced it so the thinking could travel beyond that circle. I am learning to lead through a clear point of view and a foundation other people can challenge, extend, and build with.</p></article>
+        </div>
       </section>
     </main>
     <footer class="np-footer">Samuel Alake · Product design and engineering</footer>
