@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/assets/index-DcLK9jS5.css" />
     <link rel="stylesheet" href="/homepage.css?v=20260824-case-study-shell" />
     <link rel="stylesheet" href="/case-study.css?v=20260827-viewbox-v1" />
-    <link rel="stylesheet" href="/projects/product-page.css?v=20260827-rem-voice-v2" />
+    <link rel="stylesheet" href="/projects/product-page.css?v=20260827-rem-voice-v3" />
     <script>
       try { document.documentElement.setAttribute("data-color-mode", localStorage.getItem("theme") || "light"); } catch (e) {}
     </script>
@@ -57,7 +57,7 @@
       <section class="np-section">
         <p class="np-label">Interaction direction</p>
         <h2>Exploring the interaction model for a mobile voice AI assistant</h2>
-        <p class="np-copy">Voice was prioritized as an interaction mode to reduce two kinds of friction: the time it takes to type a request and the time it takes to read a response. Speaking and listening made the assistant feel more like a natural conversation.</p>
+        <p class="np-copy">Voice was prioritized as Rem's primary mode of interaction to reduce two kinds of friction: the time it takes to type a request and the time it takes to read a response. Speaking and listening made interaction with the assistant feel more like a natural conversation.</p>
         <p class="np-copy">I audited voice experiences across <span class="np-inline-app"><img src="/projects/rem-evidence/competitor-icons/gemini.svg" alt="" />Gemini</span>, <span class="np-inline-app"><img src="/projects/rem-evidence/huxe-logo.avif" alt="" />HUXE</span>, <span class="np-inline-app"><img src="/projects/rem-evidence/arc-favicon.png" alt="" />Arc</span>, <span class="np-inline-app"><img src="/projects/rem-evidence/todoist-icon.webp" alt="" />Todoist</span>, <span class="np-inline-app"><img src="/tools/claude.svg" alt="" />Claude</span>, and <span class="np-inline-app"><img src="/tools/codex.svg" alt="" />Codex</span> and found novel patterns for listening, speaking, and moving between the two. They helped me see voice as more than a replacement for typing: it could package information for listening, support a back-and-forth conversation, or shift between those roles as the person’s needs changed.</p>
         <div class="np-reference-board">
           <p class="np-board-tag">References</p>
@@ -78,23 +78,25 @@
         </div>
 
         <div class="np-interaction-intro">
-          <h3>Start familiar, then ladder in novelty</h3>
-          <p class="np-copy">I was initially drawn to making voice feel distinct, which led to several modes and states at once. I reset around a familiar chat thread, then introduced new patterns only when a feature needed them. Establishing that baseline gave the interface a clearer architecture: start from conventions people already understand, then expand an existing pattern when new functionality calls for it.</p>
+          <p class="np-copy">I was initially drawn to making voice feel distinct, which led to several modes and states at once. I reset around a familiar pattern—the chat thread—then introduced new patterns only when a feature needed them. Establishing this baseline of simplicity gave the interface a clearer architecture: start from conventions people already understand, then expand an existing pattern toward novelty when new functionality calls for it.</p>
         </div>
 
         <figure class="np-voice-session-board">
           <p class="np-board-tag">Early direction · Voice Session concept</p>
-          <div class="np-voice-session-layout">
-            <div class="np-voice-session-media" data-shared-media-controls aria-label="Voice Session concept recording">
-              <div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline preload="metadata" poster="/projects/rem-evidence/before-states/rem-before-voicesession.png" src="/projects/rem-evidence/before-states/rem-before-voicesession.mp4"></video></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div>
-            </div>
-            <ol class="np-voice-session-notes">
-              <li><strong>One shared session</strong><span>Transcript and Live use the same header, keeping the conversation connected as the mode changes.</span></li>
-              <li><strong>Transcript keeps context</strong><span>Messages, the created event, and the composer remain visible while the person works through the request.</span></li>
-              <li><strong>Live changes the emphasis</strong><span>The face, response, waveform, and lightweight controls shift attention toward listening and speaking.</span></li>
-            </ol>
+          <div class="np-voice-session-grid">
+            <article class="np-voice-session-card">
+              <div class="np-voice-session-media" data-shared-media-controls aria-label="Voice Session transcript recording">
+                <div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline preload="metadata" poster="/projects/rem-evidence/before-states/rem-before-voicesession-transcript.png" src="/projects/rem-evidence/before-states/rem-before-voicesession-transcript.mp4"></video><span class="np-voice-callout np-voice-callout-transcript" aria-hidden="true"></span></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div>
+              </div>
+              <p><strong>Transcript keeps the work visible</strong><span>The thread, created event, and composer keep the request and its outcome in view.</span></p>
+            </article>
+            <article class="np-voice-session-card">
+              <div class="np-voice-session-media" data-shared-media-controls aria-label="Voice Session live recording">
+                <div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline preload="metadata" poster="/projects/rem-evidence/before-states/rem-before-voicesession-live.png" src="/projects/rem-evidence/before-states/rem-before-voicesession-live.mp4" data-touch-cues="0.45,65,7"></video><span class="np-voice-callout np-voice-callout-live" aria-hidden="true"></span></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div>
+              </div>
+              <p><strong>Live changes the emphasis</strong><span>The same session shifts toward listening and speaking as the face, response, waveform, and controls take focus.</span></p>
+            </article>
           </div>
-          <figcaption>The concept brought transcript and live voice into one session. It was more coherent than separate modes, but still asked people to learn several new states at once.</figcaption>
         </figure>
       </section>
 
@@ -125,7 +127,7 @@
         </div>
         <div class="np-positioning-future">
           <p class="np-label">Future product direction</p>
-          <h3>Exploring a Mac home and wearable capture</h3>
+          <h3>Moving beyond mobile</h3>
           <p>I explored two ways Rem could move beyond the iPhone: a Mac home for ongoing work and wearable capture.</p>
           <div class="np-grid two"><article class="np-card"><h3>Bring the mobile model to the Mac</h3><p>A Mac experience could combine what Rem achieves on mobile with <span class="np-inline-app np-clicky-app"><img src="/projects/rem-evidence/competitor-icons/heyclicky.avif" alt="heyclicky" /></span>’s cursor-style interaction, making active work, status, and recovery easier to follow.</p></article><article class="np-card"><h3>Capture intent without reaching for the phone</h3><p>Wearables could make quick capture and lightweight updates available in motion.</p></article></div>
         </div>
