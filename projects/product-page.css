@@ -67,10 +67,19 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
 .np-evidence-carousel a { display: block; width: 100%; height: 100%; color: inherit; }
 .np-evidence-carousel figcaption,
 .np-portrait-evidence figcaption { position: absolute; right: 8px; bottom: 8px; left: 8px; width: fit-content; max-width: calc(100% - 16px); padding: 5px 7px; border: 1px solid color-mix(in srgb, var(--np-line) 80%, transparent); border-radius: 5px; background: color-mix(in srgb, var(--np-paper) 92%, transparent); color: var(--np-ink); font: 650 10px/1.3 ui-monospace, SFMono-Regular, monospace; letter-spacing: .02em; text-align: left; text-transform: none; }
+.np-reachability-media figcaption,
+.np-device-evidence figcaption,
+.np-birthday-evidence figcaption { top: 8px; bottom: auto; }
+.np-reachability-media figure > .cs-device { padding: 36px 24px 18px; }
+.np-reachability-media .np-inset-artifact { padding: 36px 20px 18px; }
 .np-evidence-carousel .cs-carousel-progress { width: 100%; margin: 0; }
 .np-evidence-carousel .cs-carousel-controls { width: 100%; background: var(--np-paper); }
 .np-portrait-evidence { position: relative; overflow: hidden; margin: 0; background: #eef0f3; }
 .np-portrait-evidence img { display: block; width: 100%; height: 100%; padding: 10%; object-fit: contain; }
+.np-device-evidence > .cs-device { width: 100%; height: 100%; aspect-ratio: auto; padding: 36px 46px 18px; background: transparent; }
+.np-device-evidence .cs-device-media-content { padding: 0; object-fit: cover; }
+.np-birthday-evidence > img { position: absolute; inset: 0; width: 100%; max-width: none; height: 100%; margin: 0; padding: 34px 52px 16px; object-fit: contain; }
+.np-live-audio-media figure > a { padding-right: 20px; padding-left: 20px; }
 .np-feed-media { overflow: hidden; border-color: var(--np-line); background: #eef0f3; }
 .np-feed-media img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .np-flow-copy .np-count { margin: 0 0 8px; color: var(--np-muted); font: 650 12px/1.3 ui-monospace, monospace; }
@@ -142,7 +151,7 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
 .np-interaction-grid .cs-device-media-content { object-fit: cover; }
 .np-interaction-grid figcaption { color: var(--np-muted); font-size: 12px; line-height: 1.35; text-align: center; }
 .np-interaction-carousel .cs-carousel-controls { border-top: 1px solid var(--np-line); background: var(--np-paper); }
-.np-interaction-carousel .cs-carousel-progress { margin: 0 14px; }
+.np-interaction-carousel .cs-carousel-progress { margin: 0; padding-right: 14px; padding-left: 14px; border-right: 0; border-left: 0; }
 .np-assumption-intro { margin-bottom: 0; }
 .np-assumptions { display: grid; max-width: var(--np-read); margin: 14px 0 0; padding-left: 24px; gap: 10px; color: var(--np-muted); font-size: 16px; line-height: 1.6; }
 .np-positioning-bridge { margin-top: 16px; }
