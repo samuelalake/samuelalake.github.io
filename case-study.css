@@ -389,6 +389,32 @@
 .cs-supporting-evidence .cs-figure img { display: block; width: 100%; border: 1px solid var(--portfolio-border-muted); }
 .cs-app-store-grid { padding-top: 12px; }
 
+/* Meaningful case-study images can expand without changing linked evidence. */
+.cs-viewbox-trigger { cursor: zoom-in; }
+.cs-viewbox-trigger:focus-visible { outline: 2px solid var(--portfolio-fg-accent); outline-offset: 3px; }
+.cs-viewbox {
+  width: min(94vw, 1440px);
+  max-width: none;
+  height: min(92vh, 1000px);
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--portfolio-border);
+  border-radius: 12px;
+  background: var(--portfolio-bg);
+  color: var(--portfolio-fg);
+  box-shadow: 0 28px 80px rgba(17, 24, 39, .24);
+}
+.cs-viewbox[open] { display: block; }
+.cs-viewbox::backdrop { background: rgba(17, 24, 39, .72); backdrop-filter: blur(8px); }
+.cs-viewbox-inner { display: grid; width: 100%; height: 100%; padding: 48px 24px 18px; grid-template-rows: minmax(0, 1fr) auto; gap: 12px; }
+.cs-viewbox-image { display: block; width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+.cs-viewbox-caption { margin: 0; color: var(--portfolio-fg-muted); font-size: 13px; line-height: 1.45; text-align: center; }
+.cs-viewbox-close { position: absolute; z-index: 2; top: 12px; right: 12px; min-height: 32px; padding: 5px 10px; border: 1px solid var(--portfolio-border-muted); border-radius: 999px; background: var(--portfolio-bg); color: var(--portfolio-fg); font: 600 12px/1 var(--cs-mono); cursor: pointer; }
+.cs-viewbox-close:hover { background: var(--portfolio-bg-muted); }
+.cs-viewbox-close:focus-visible { outline: 2px solid var(--portfolio-fg-accent); outline-offset: 2px; }
+
 /* Theme-aware pairs. */
 .cs .only-dark { display: none; }
 [data-color-mode="dark"] .cs .only-light { display: none; }
@@ -418,6 +444,8 @@
   .cs-problem-fragments { grid-template-columns: repeat(2, 1fr); }
   .cs-problem-outcome { align-items: flex-start; flex-direction: column; gap: 6px; }
   .cs-problem-outcome strong { text-align: left; }
+  .cs-viewbox { width: calc(100vw - 20px); height: calc(100vh - 20px); border-radius: 10px; }
+  .cs-viewbox-inner { padding: 46px 12px 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

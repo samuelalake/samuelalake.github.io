@@ -78,8 +78,9 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
 .np-portrait-evidence img { display: block; width: 100%; height: 100%; padding: 10%; object-fit: contain; }
 .np-device-evidence > .cs-device { width: 100%; height: 100%; aspect-ratio: auto; padding: 36px 46px 18px; background: transparent; }
 .np-device-evidence .cs-device-media-content { padding: 0; object-fit: cover; }
+.np-device-evidence .cs-device-media-frame { z-index: 3; filter: drop-shadow(0 7px 12px rgba(17, 24, 39, .12)); }
 .np-birthday-evidence > img { position: absolute; inset: 0; width: 100%; max-width: none; height: 100%; margin: 0; padding: 34px 52px 16px; object-fit: contain; }
-.np-live-audio-media figure > a { padding-right: 20px; padding-left: 20px; }
+.np-live-audio-media figure > video { padding-right: 20px; padding-left: 20px; }
 .np-feed-media { overflow: hidden; border-color: var(--np-line); background: #eef0f3; }
 .np-feed-media img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .np-flow-copy .np-count { margin: 0 0 8px; color: var(--np-muted); font: 650 12px/1.3 ui-monospace, monospace; }

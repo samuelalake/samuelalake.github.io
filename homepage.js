@@ -400,6 +400,55 @@
     updateSpy();
   }
 
+  // --- case-study image viewbox ---
+  var viewboxTriggers = [].slice.call(document.querySelectorAll('main.cs img[alt]:not([alt=""])')).filter(function (img) {
+    return !img.classList.contains("seq") &&
+      !img.classList.contains("cs-device-media-frame") &&
+      !img.closest("a");
+  });
+  var viewbox = null, viewboxImage = null, viewboxCaption = null, activeViewboxTrigger = null;
+  function ensureViewbox() {
+    if (viewbox) return;
+    viewbox = document.createElement("dialog");
+    viewbox.className = "cs-viewbox";
+    viewbox.setAttribute("aria-labelledby", "cs-viewbox-caption");
+    viewbox.innerHTML =
+      '<button class="cs-viewbox-close" type="button" aria-label="Close expanded image">Close</button>' +
+      '<div class="cs-viewbox-inner"><img class="cs-viewbox-image" alt="" />' +
+      '<p class="cs-viewbox-caption" id="cs-viewbox-caption"></p></div>';
+    document.body.appendChild(viewbox);
+    viewboxImage = viewbox.querySelector(".cs-viewbox-image");
+    viewboxCaption = viewbox.querySelector(".cs-viewbox-caption");
+    viewbox.querySelector(".cs-viewbox-close").addEventListener("click", function () { viewbox.close(); });
+    viewbox.addEventListener("click", function (event) {
+      if (event.target === viewbox) viewbox.close();
+    });
+    viewbox.addEventListener("close", function () {
+      if (activeViewboxTrigger) activeViewboxTrigger.focus();
+    });
+  }
+  function openViewbox(img) {
+    ensureViewbox();
+    activeViewboxTrigger = img;
+    viewboxImage.src = img.currentSrc || img.src;
+    viewboxImage.alt = img.alt;
+    viewboxCaption.textContent = img.alt;
+    if (typeof viewbox.showModal === "function") viewbox.showModal();
+    else viewbox.setAttribute("open", "");
+  }
+  viewboxTriggers.forEach(function (img) {
+    img.classList.add("cs-viewbox-trigger");
+    img.setAttribute("tabindex", "0");
+    img.setAttribute("role", "button");
+    img.setAttribute("aria-label", "Expand image: " + img.alt);
+    img.addEventListener("click", function () { openViewbox(img); });
+    img.addEventListener("keydown", function (event) {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      openViewbox(img);
+    });
+  });
+
   // --- compact case-study carousels ---
   [].slice.call(document.querySelectorAll("[data-carousel]")).forEach(function (carousel) {
     var slides = [].slice.call(carousel.querySelectorAll("[data-carousel-slide]"));
