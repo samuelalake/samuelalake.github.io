@@ -48,11 +48,11 @@
 
       <section class="np-section">
         <p class="np-label">Product decisions</p>
-        <h2>What Trove keeps, and what it hands off</h2>
-        <p class="np-copy">Trove keeps a private copy for planning and cooking. It sends people back to the publisher for the original recipe and out to a retailer when they are ready to shop. Those handoffs came from two practical limits: copyright and the retailer integrations available at launch.</p>
+        <h2>Give each person a private copy they can cook from</h2>
+        <p class="np-copy">Bookmarking saves a link to someone else's recipe, but it does not give the person a version they can edit, plan, or cook from if the source changes. Trove keeps the public recipe connected to its publisher, then creates a private copy for each person when they import it.</p>
         <article class="np-solution-block np-decision-block">
           <h3>Keep the recipe connected to its source</h3>
-          <p>Public recipe cards show the cover, ingredients, who saved it, and the original publisher, but not the directions because Trove cannot republish them. When someone wants to cook, Trove opens the source and imports a private, editable copy. The publisher gets the visit, and the person gets steps they can plan and edit.</p>
+          <p>Public recipe cards show the cover, ingredients, who saved it, and the original publisher, but not the directions because Trove cannot republish them. When someone wants to cook, Trove opens the source and imports the directions into their own copy. The publisher gets the visit, while the person's edits, plans, and cooking history stay private to them.</p>
           <figure class="np-decision-evidence">
             <div class="np-decision-media np-recording-media" aria-label="Recipe detail showing who saved the recipe and its original publisher">
               <div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><img class="cs-device-media-content" loading="lazy" decoding="async" src="/projects/trove-evidence/trove-attribution-still.jpg?v=20260827-trove-media-v2" alt="Recipe detail showing Saved by MealDB and From Recipes-for-life" /></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div>
@@ -60,24 +60,19 @@
             <figcaption>The recipe keeps the person who saved it and the original publisher visible as separate sources.</figcaption>
           </figure>
         </article>
-        <article class="np-solution-block np-decision-block">
-          <h3>Use the retailer path that works today</h3>
-          <p>Kroger supports adding items directly to a cart. Amazon's cart API requires sales volume Trove does not have yet, so I kept Amazon as an affiliate handoff instead of blocking launch on a deeper integration.</p>
-          <div class="np-horizontal-reserved" aria-label="Reserved media for Kroger direct cart support and Amazon affiliate handoff"></div>
-        </article>
       </section>
 
       <section class="np-section">
         <p class="np-label">Building for social connection</p>
-        <h2>How might we make finding recipes feel social?</h2>
-        <p class="np-copy">Recipes usually reach people through other people. V1 makes that visible with profiles, a People directory, following, and saves that connect each recipe to who shared it. Community suggestions remain a future direction once the line between shared input and a private copy is clear.</p>
+        <h2>How might we make saving and sharing recipes feel social?</h2>
+        <p class="np-copy">When each person owns a private copy, social behavior has to happen around it rather than inside it. Attribution, profiles, People search, following, and saves show where a recipe came from without exposing someone's personal edits. As the community grows, suggestions or remixing could let people contribute back without turning the private copy into a shared document.</p>
         <div class="np-horizontal-reserved np-horizontal-recording np-social-reserved" data-shared-media-controls aria-label="Trove profiles and following recording"><div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline preload="metadata" data-touch-cues="3.15,17,94;9.05,20,26" poster="/projects/trove-evidence/trove-profiles-following-poster.jpg?v=20260825-trove-cursors-v1" src="/projects/trove-evidence/trove-profiles-following-web.mp4?v=20260825-trove-cursors-v1"></video></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div></div>
         <article class="np-solution-block">
-          <h3>Build for different tastes</h3>
-          <p>Early feedback showed that people struggled to identify cuisines they wanted. I grouped recipes into sections, then let people star categories as preferences that shape what appears in their feed.</p>
+          <h3>Organize recipes for scanning and preference-setting</h3>
+          <p>The flat feed already ranked recipes using saved preferences, but it made cuisines difficult to scan. I reorganized Discover into cuisine sections, each with a dedicated page. A star in the page header lets people explicitly tell Trove which cuisines they want to see more often.</p>
           <div class="np-grid two np-media-comparison" aria-label="Before and after cuisine discovery media">
-            <figure><div class="np-comparison-media" data-shared-media-controls aria-label="Earlier Trove discovery feed"><div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline preload="metadata" poster="/projects/trove-evidence/trove-cuisine-before-poster.jpg?v=20260827-trove-media-v2" src="/projects/trove-evidence/trove-cuisine-before-web.mp4?v=20260827-trove-media-v2"></video></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div></div><figcaption>Before · A flat feed made cuisine difficult to browse.</figcaption></figure>
-            <figure><div class="np-comparison-media" data-shared-media-controls aria-label="Redesigned Trove cuisine browsing"><div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline preload="metadata" poster="/projects/trove-evidence/trove-cuisine-after-poster.jpg?v=20260827-trove-media-v2" src="/projects/trove-evidence/trove-cuisine-after-web.mp4?v=20260827-trove-media-v2"></video></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div></div><figcaption>After · Cuisine sections lead to a dedicated page that can be saved as a preference.</figcaption></figure>
+            <figure><div class="np-comparison-media" data-shared-media-controls aria-label="Earlier Trove discovery feed"><div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline preload="metadata" poster="/projects/trove-evidence/trove-cuisine-before-poster.jpg?v=20260827-trove-media-v2" src="/projects/trove-evidence/trove-cuisine-before-web.mp4?v=20260827-trove-media-v2"></video></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div></div><figcaption>Before · A ranked flat feed surfaced individual recipes, but made cuisines difficult to scan.</figcaption></figure>
+            <figure><div class="np-comparison-media" data-shared-media-controls aria-label="Redesigned Trove cuisine browsing"><div class="cs-device"><div class="cs-device-media"><div class="cs-device-media-screen"><video class="cs-device-media-content" autoplay muted loop playsinline preload="metadata" poster="/projects/trove-evidence/trove-cuisine-after-poster.jpg?v=20260827-trove-media-v2" src="/projects/trove-evidence/trove-cuisine-after-web.mp4?v=20260827-trove-media-v2"></video></div><img class="cs-device-media-frame" src="/projects/wayfind-evidence/iphone-14-pro-no-notch.svg" alt="" aria-hidden="true" /></div></div></div><figcaption>After · Cuisine sections open into dedicated pages. A star in the header lets people manage that cuisine as a preference.</figcaption></figure>
           </div>
         </article>
       </section>
