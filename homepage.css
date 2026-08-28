@@ -35,6 +35,26 @@ html::-webkit-scrollbar { width: 0; height: 0; }
 #theme-toggle .octicon-sun { display: none; }
 [data-color-mode="dark"] #theme-toggle .octicon-moon { display: none; }
 [data-color-mode="dark"] #theme-toggle .octicon-sun { display: inline-block; }
+.repo-page-header #cursor-toggle,
+.repo-page-header #theme-toggle {
+  border-color: var(--portfolio-border);
+  background: var(--portfolio-bg);
+  color: var(--portfolio-fg);
+  box-shadow: none;
+}
+.repo-page-header #cursor-toggle:hover,
+.repo-page-header #theme-toggle:hover { background: var(--portfolio-bg-muted); }
+[data-color-mode="dark"] .repo-page-header #cursor-toggle,
+[data-color-mode="dark"] .repo-page-header #theme-toggle {
+  border-color: color-mix(in srgb, var(--portfolio-border) 72%, var(--portfolio-fg-muted));
+  background: color-mix(in srgb, var(--portfolio-bg-muted) 82%, var(--portfolio-bg));
+  color: var(--portfolio-fg);
+}
+[data-color-mode="dark"] .repo-page-header #cursor-toggle:hover,
+[data-color-mode="dark"] .repo-page-header #theme-toggle:hover {
+  border-color: var(--portfolio-fg-muted);
+  background: color-mix(in srgb, var(--portfolio-bg-muted) 70%, var(--portfolio-fg-muted));
+}
 
 /* cursor color picker */
 :root { --cursor-color: #111820; }
