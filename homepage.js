@@ -324,6 +324,37 @@
     renderTouchCue();
   });
 
+  // Time-synchronized callouts connect a recording's controls to its caption.
+  [].slice.call(document.querySelectorAll("[data-timed-annotations]")).forEach(function (host) {
+    var video = host.querySelector("video");
+    var cues = [].slice.call(host.querySelectorAll("[data-annotation-cue]"));
+    var captions = [].slice.call(host.querySelectorAll("[data-annotation-caption]"));
+    var annotationRaf = 0;
+    if (!video || !cues.length) return;
+    function isCurrent(item, time) {
+      var start = Number(item.dataset.start);
+      var end = Number(item.dataset.end);
+      return Number.isFinite(start) && Number.isFinite(end) && time >= start && time < end;
+    }
+    function renderTimedAnnotations() {
+      var now = video.currentTime || 0;
+      cues.forEach(function (cue) { cue.classList.toggle("is-active", isCurrent(cue, now)); });
+      captions.forEach(function (caption) { caption.classList.toggle("is-active", isCurrent(caption, now)); });
+      if (!video.paused && !video.ended) annotationRaf = requestAnimationFrame(renderTimedAnnotations);
+    }
+    video.addEventListener("play", function () {
+      cancelAnimationFrame(annotationRaf);
+      annotationRaf = requestAnimationFrame(renderTimedAnnotations);
+    });
+    video.addEventListener("pause", function () {
+      cancelAnimationFrame(annotationRaf);
+      renderTimedAnnotations();
+    });
+    video.addEventListener("seeked", renderTimedAnnotations);
+    video.addEventListener("loadedmetadata", renderTimedAnnotations);
+    renderTimedAnnotations();
+  });
+
   if (!reduce && "IntersectionObserver" in window) {
     var videoIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
