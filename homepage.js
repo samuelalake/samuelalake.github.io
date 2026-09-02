@@ -108,7 +108,7 @@
       '<path fill-rule="evenodd" clip-rule="evenodd" d="M4.67558 3.03185C4.49199 2.963 4.2851 3.00782 4.14646 3.14646C4.00782 3.2851 3.963 3.49199 4.03185 3.67558L8.15685 14.6756C8.2337 14.8805 8.43492 15.0117 8.65345 14.9992C8.87197 14.9868 9.057 14.8336 9.11009 14.6213L10.4123 9.41232L15.6213 8.11009C15.8336 8.057 15.9868 7.87197 15.9992 7.65345C16.0117 7.43492 15.8805 7.2337 15.6756 7.15685L4.67558 3.03185Z" fill="var(--cursor-color)"/></svg>';
 
     if (savedName) { label.textContent = savedName; label.dataset.named = "1"; }
-    else { label.textContent = "you"; setTimeout(function () { if (!label.dataset.named) label.classList.add("faded"); }, 1600); }
+    else { label.textContent = ""; label.classList.add("faded"); }
 
     var cbtn = document.getElementById("cursor-toggle");
     if (cbtn) {
@@ -142,7 +142,7 @@
       nameInput.addEventListener("input", function () {
         var v = nameInput.value.trim();
         if (v) { label.textContent = v; label.dataset.named = "1"; label.classList.remove("faded"); }
-        else { label.textContent = "you"; delete label.dataset.named; label.classList.add("faded"); }
+        else { label.textContent = ""; delete label.dataset.named; label.classList.add("faded"); }
         try { localStorage.setItem("cursorName", v); } catch (e3) {}
       });
       document.addEventListener("click", function () { pop.classList.remove("open"); });
