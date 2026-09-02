@@ -73,6 +73,7 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
 .np-reachability-media figure > .cs-device { padding: 36px 24px 18px; }
 .np-reachability-media .np-inset-artifact { padding: 36px 20px 18px; }
 .np-evidence-carousel .cs-carousel-progress { width: 100%; margin: 0; }
+.np-evidence-carousel[data-carousel-sync-video] .cs-carousel-progress-step.is-current::after { animation: none; transform: scaleX(var(--carousel-video-progress, 0)); }
 .np-evidence-carousel .cs-carousel-controls { width: 100%; background: var(--np-paper); }
 .np-brief-carousel .cs-carousel-stage { background: var(--np-soft); }
 .np-brief-carousel figcaption { top: 8px; bottom: auto; }
@@ -269,6 +270,7 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
 .np-comparison-media { position: relative; display: grid; aspect-ratio: 4 / 5; overflow: hidden; place-items: center; border: 1px solid var(--np-line); background: var(--np-soft); }
 .np-comparison-media > .np-board-tag { position: absolute; z-index: 3; top: 18px; left: 18px; margin: 0; }
 .np-comparison-media > .cs-device { width: 100%; height: 100%; aspect-ratio: auto; padding: 18px; background: transparent; }
+.np-social-profile-comparison .np-comparison-media > .cs-device { padding-top: 52px; }
 .np-media-comparison figcaption { margin-top: 12px; color: var(--np-muted); font-size: 13px; line-height: 1.5; }
 .np-annotated-comparison { display: grid; grid-template-rows: auto minmax(58px, auto); overflow: hidden; border: 1px solid var(--np-line); background: var(--np-soft); }
 .np-annotated-comparison .np-comparison-media { border: 0; }

@@ -488,6 +488,7 @@
     var status = carousel.querySelector("[data-carousel-status]");
     var index = Math.max(0, slides.findIndex(function (slide) { return slide.classList.contains("is-active"); }));
     var duration = 6000, timer = null, inView = false, pointerInside = false;
+    var syncVideo = carousel.hasAttribute("data-carousel-sync-video");
     var progress = null, progressSteps = [];
     if (slides.length) {
       progress = document.createElement("div");
@@ -502,10 +503,38 @@
       carousel.insertBefore(progress, carousel.querySelector(".cs-carousel-controls"));
       progressSteps = [].slice.call(progress.querySelectorAll("[data-carousel-step]"));
     }
+    function activeVideo() {
+      return slides[index] ? slides[index].querySelector("video") : null;
+    }
+    function canAutoAdvance() {
+      return !reduce && slides.length > 1 && inView && !pointerInside && !carousel.matches(":focus-within") && !document.hidden;
+    }
+    function updateSyncedProgress() {
+      if (!syncVideo || !progressSteps.length) return;
+      var video = activeVideo();
+      var ratio = video && Number.isFinite(video.duration) && video.duration > 0
+        ? Math.min(1, Math.max(0, video.currentTime / video.duration))
+        : 0;
+      progressSteps.forEach(function (step, stepIndex) {
+        step.style.setProperty("--carousel-video-progress", stepIndex === index ? ratio : 0);
+      });
+    }
     function scheduleAuto() {
       clearTimeout(timer);
       carousel.classList.remove("is-running");
-      if (reduce || slides.length <= 1 || !inView || pointerInside || carousel.matches(":focus-within") || document.hidden) return;
+      if (syncVideo) {
+        updateSyncedProgress();
+        if (!canAutoAdvance()) return;
+        var video = activeVideo();
+        if (!video) return;
+        if (video.ended || (Number.isFinite(video.duration) && video.duration > 0 && video.currentTime >= video.duration - .05)) {
+          showSlide(index + 1);
+          return;
+        }
+        if (video.paused && video.dataset.userPaused !== "true") video.play().catch(function () {});
+        return;
+      }
+      if (!canAutoAdvance()) return;
       void carousel.offsetWidth;
       carousel.classList.add("is-running");
       timer = setTimeout(function () { showSlide(index + 1); }, duration);
@@ -524,6 +553,17 @@
         step.classList.toggle("is-current", stepIndex === index);
         step.setAttribute("aria-current", stepIndex === index ? "step" : "false");
       });
+      if (syncVideo) {
+        slides.forEach(function (slide, slideIndex) {
+          var video = slide.querySelector("video");
+          if (!video) return;
+          video.loop = false;
+          video.currentTime = 0;
+          if (slideIndex !== index) video.pause();
+          else if (inView && !reduce && video.dataset.userPaused !== "true") video.play().catch(function () {});
+        });
+        updateSyncedProgress();
+      }
       scheduleAuto();
     }
     if (previous) previous.addEventListener("click", function () { showSlide(index - 1); });
@@ -541,6 +581,23 @@
     carousel.addEventListener("focusin", scheduleAuto);
     carousel.addEventListener("focusout", function () { setTimeout(scheduleAuto, 0); });
     document.addEventListener("visibilitychange", scheduleAuto);
+    if (syncVideo) {
+      slides.forEach(function (slide, slideIndex) {
+        var video = slide.querySelector("video");
+        if (!video) return;
+        video.loop = false;
+        ["loadedmetadata", "durationchange", "timeupdate", "seeked", "play", "pause"].forEach(function (eventName) {
+          video.addEventListener(eventName, function () {
+            if (slideIndex === index) updateSyncedProgress();
+          });
+        });
+        video.addEventListener("ended", function () {
+          if (slideIndex !== index) return;
+          updateSyncedProgress();
+          if (canAutoAdvance()) showSlide(index + 1);
+        });
+      });
+    }
     if (slides.length > 1 && "IntersectionObserver" in window) {
       new IntersectionObserver(function (entries) {
         inView = entries[0].isIntersecting;
