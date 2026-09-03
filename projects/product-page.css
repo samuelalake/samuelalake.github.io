@@ -136,6 +136,7 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
 /* Figma 600px square: 1006 x 628.75 recording at (-576, 70).
    Keep the right inspector and surrounding whitespace proportional at every size. */
 .np-audio-crop video, .np-audio-crop > .np-effects-image { position: absolute; display: block; top: 11.666667%; left: -96%; width: 167.666667%; max-width: none; height: 104.791667%; object-fit: fill; }
+.np-audio-crop > .np-effects-board-image { display: block; width: 100%; height: auto; clip-path: inset(11.666667% 28.333333% 0 0); }
 .np-onboarding-media { overflow: hidden; }
 .np-onboarding-media > .cs-device { width: auto; height: 100%; aspect-ratio: 1 / 1; padding: 18px; background: transparent; }
 .np-recording-media { overflow: hidden; }
