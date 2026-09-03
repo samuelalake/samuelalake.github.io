@@ -108,6 +108,12 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
 .np-wide .np-flow-copy { padding-top: 22px; }
 .np-composa-recording { overflow: hidden; }
 .np-composa-recording video { display: block; width: 100%; min-width: 0; max-width: 100%; height: 100%; object-fit: contain; }
+.np-audio-comparison figure { min-width: 0; margin: 0; }
+.np-audio-comparison figcaption { margin-bottom: 12px; color: var(--np-muted); font-size: 14px; line-height: 1.5; }
+.np-audio-crop { position: relative; aspect-ratio: 1; overflow: hidden; background: #fff; }
+/* Figma 600px square: 1006 x 628.75 recording at (-576, 70).
+   Keep the right inspector and surrounding whitespace proportional at every size. */
+.np-audio-crop video { position: absolute; display: block; top: 11.666667%; left: -96%; width: 167.666667%; max-width: none; height: 104.791667%; object-fit: fill; }
 .np-onboarding-media { overflow: hidden; }
 .np-onboarding-media > .cs-device { width: auto; height: 100%; aspect-ratio: 1 / 1; padding: 18px; background: transparent; }
 .np-recording-media { overflow: hidden; }
