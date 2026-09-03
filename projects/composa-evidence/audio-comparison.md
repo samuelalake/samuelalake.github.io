@@ -16,7 +16,12 @@ H.264/yuv420p, AAC, fast-start MP4. Posters are frames at 2 seconds.
 Both references use a white 600×600 frame and a 1006×628.75 recording layer
 at x=-576, y=70. `.np-audio-crop` preserves these proportions in CSS, rather
 than baking a crop into the media. The right inspector remains the focal point.
-White is intentional in both themes to match the reference; labels use site tokens.
+Following review, the outer stages use the site's soft-grey theme token and
+standard board-tag labels. The source recording pixels and Figma crop remain unchanged.
+
+Media effects uses the exact screenshot asset exported from Figma node `7:6`
+in the same file, with the same crop. Composa's counterpart is explicitly pending.
+The inline product favicon is the original asset from `https://composa.app/favicon.svg`.
 
 The comparison uses the existing two-column grid and its mobile stack breakpoint.
 Each clip has independent shared playback controls and starts muted.

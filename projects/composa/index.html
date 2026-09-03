@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/assets/index-DcLK9jS5.css" />
     <link rel="stylesheet" href="/homepage.css?v=20260824-case-study-shell" />
     <link rel="stylesheet" href="/case-study.css?v=20260827-viewbox-v1" />
-    <link rel="stylesheet" href="/projects/product-page.css?v=20260903-composa-audio-v1" />
+    <link rel="stylesheet" href="/projects/product-page.css?v=20260903-composa-effects-v2" />
   </head>
   <body>
     <header class="np-header"><div class="np-header-inner"><a class="np-brand" href="/">samuelalake / product designer + engineer</a><nav aria-label="Sections"><a href="/">Work</a><a href="/about">About</a></nav></div></header>
@@ -66,22 +66,37 @@
         <p class="np-label">Designing media for V1</p>
         <h2>A video editor needs more than a timeline</h2>
         <p class="np-copy">The canvas and timeline established the editing model, but a credible video editor also needs media and audio effects. I used Sequence as a reference and translated its controls into Composa’s design system.</p>
-        <div class="np-grid two">
-          <article class="np-card"><h3>Media effects</h3><p>Translate the useful controls from the reference into a system that belongs beside Composa’s canvas properties.</p></article>
-        </div>
+        <article class="np-solution-block" id="media-adjustments">
+          <h3>Media effects</h3>
+          <p>Translate the useful controls from the reference into a system that belongs beside Composa’s canvas properties.</p>
+          <div class="np-grid two np-audio-comparison" aria-label="Composa and Sequence media effects">
+            <figure>
+              <div class="np-audio-crop np-effects-pending" aria-label="Composa media effects capture pending">
+                <span class="np-board-tag">Composa</span>
+                <p>Capture pending<br><span>Awaiting the latest Composa build</span></p>
+              </div>
+            </figure>
+            <figure>
+              <div class="np-audio-crop" aria-label="Sequence reference color adjustment controls">
+                <span class="np-board-tag">Sequence · Reference</span>
+                <img class="np-effects-image" src="/projects/composa-evidence/sequence-media-effects.png" alt="Sequence’s right inspector showing blend, color adjustments, curves, color wheels, and chroma key." loading="lazy" />
+              </div>
+            </figure>
+          </div>
+        </article>
         <article class="np-solution-block" id="audio-adjustments">
           <h3>Audio effects</h3>
           <p>Give audio the same legible, direct-manipulation model as the rest of the editor.</p>
           <div class="np-grid two np-audio-comparison" aria-label="Composa and Sequence audio adjustments">
             <figure>
-              <figcaption>Composa</figcaption>
               <div class="np-audio-crop" data-shared-media-controls aria-label="Composa audio adjustment controls">
+                <span class="np-board-tag">Composa</span>
                 <video autoplay muted loop playsinline preload="metadata" poster="/projects/composa-evidence/composa-audio-poster.jpg" src="/projects/composa-evidence/composa-audio-web.mp4"></video>
               </div>
             </figure>
             <figure>
-              <figcaption>Sequence · Reference</figcaption>
               <div class="np-audio-crop" data-shared-media-controls aria-label="Sequence reference audio adjustment controls">
+                <span class="np-board-tag">Sequence · Reference</span>
                 <video autoplay muted loop playsinline preload="metadata" poster="/projects/composa-evidence/sequence-audio-poster.jpg" src="/projects/composa-evidence/sequence-audio-web.mp4"></video>
               </div>
             </figure>
@@ -92,16 +107,16 @@
       <section class="np-section">
         <p class="np-label">Where it stands</p>
         <h2>Shipped and available in public beta</h2>
-        <p class="np-copy">Composa is live at <a href="https://composa.app">composa.app</a> and available to use now. I am tracking how designers use the public beta as I decide whether to keep growing it as a side project or turn it into an open-core, founder-led business.</p>
+        <p class="np-copy"><a class="np-product-link" href="https://composa.app"><img src="/projects/composa-evidence/composa-favicon.svg" width="18" height="18" alt="" />Composa</a> is live and available to use now. I am tracking how designers use the public beta as I decide whether to keep growing it as a side project or turn it into an open-core, founder-led business.</p>
       </section>
 
       <section class="np-section">
         <p class="np-label">Reflection</p>
         <h2>What I learned</h2>
-        <p class="np-copy">Building Composa changed how I think about choosing a market and how much product one person can now direct. I want to make those lessons useful beyond the editor through an open-core model and by writing about the process.</p>
+        <p class="np-copy">Building Composa taught me how to work with AI at two levels: inside my own design and engineering workflow, and across a repeatable process for turning product decisions into verified software. The second required designing how agents receive work, check their results, and bring decisions back to me.</p>
         <div class="np-grid two">
-          <article class="np-card"><h3>Build to validate</h3><p>I saw a gap between design and video, then built a public product people could try. The strongest signal comes from putting the idea in front of the market.</p></article>
-          <article class="np-card"><h3>AI changes the size of team needed to build</h3><p>With agents, clear specs, design-to-code workflows, and review gates, I recreated Figma-level interface fidelity without its codebase. AI did more than write code; it expanded the range of work one person could direct.</p></article>
+          <article class="np-card"><h3>Make AI part of the design loop</h3><p>I used AI to move between interface references, specifications, and working code. Reviewing the result in the product helped me refine the next instruction. Clear design intent and concrete feedback mattered as much as the prompt.</p></article>
+          <article class="np-card"><h3>Design the system that builds the product</h3><p>Beyond individual AI-assisted tasks, I built a repeatable workflow around scoped agent work, shared specifications, verification, and a human review-and-merge gate. My role expanded to defining what agents could decide, what evidence counted as done, and where I needed to step in. That process let me direct a wider range of work while keeping responsibility for the result.</p></article>
         </div>
       </section>
     </main>
