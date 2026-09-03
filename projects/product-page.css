@@ -48,6 +48,26 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
 .np-theme-list li > div { display: grid; grid-template-columns: 170px 1fr; gap: 18px; }
 .np-theme-list strong, .np-theme-number { color: var(--np-ink); font-weight: 650; }
 .np-theme-note { margin: 18px 0 0; color: var(--np-muted); font-size: 15px; line-height: 1.6; }
+.np-opportunity-map { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 24px; margin: 36px 0 0; }
+.np-opportunity-root { position: relative; align-self: center; display: grid; justify-items: center; gap: 10px; padding: 24px 16px; border: 1px solid var(--np-line); background: var(--np-soft); text-align: center; }
+.np-opportunity-root::after { position: absolute; top: 50%; left: 100%; width: 24px; border-top: 1px solid var(--np-line); content: ""; }
+.np-opportunity-root > img { background: white; border-radius: 4px; }
+.np-opportunity-root > span { color: var(--np-muted); font-size: 14px; line-height: 1.5; }
+.np-opportunity-branches { display: grid; gap: 16px; margin: 0; padding: 0 0 0 24px; list-style: none; border-left: 1px solid var(--np-line); }
+.np-opportunity-branches > li { position: relative; padding: 16px; border: 1px solid var(--np-line); background: var(--np-soft); }
+.np-opportunity-branches > li::before { position: absolute; top: 50%; right: 100%; width: 24px; border-top: 1px solid var(--np-line); content: ""; }
+.np-opportunity-status { color: var(--np-muted); font: 11px/1.4 ui-monospace, monospace; }
+.np-opportunity-branches h3 { margin: 6px 0 10px; font-size: 19px; line-height: 1.2; }
+.np-opportunity-branches p { margin: 10px 0 0; color: var(--np-muted); font-size: 14px; line-height: 1.5; }
+.np-reference-products { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; color: var(--np-muted); font-size: 13px; }
+.np-reference-products a { display: inline-flex; align-items: center; gap: 7px; color: inherit; text-underline-offset: 3px; }
+.np-reference-products img { width: 20px; height: 20px; object-fit: contain; background: white; border-radius: 3px; }
+.np-opportunity-map > figcaption { grid-column: 1 / -1; color: var(--np-muted); font-size: 13px; line-height: 1.5; }
+@media (max-width: 640px) {
+  .np-opportunity-map { grid-template-columns: minmax(0, 1fr); }
+  .np-opportunity-root::after { top: 100%; left: 16px; width: 0; height: 24px; border-top: 0; border-left: 1px solid var(--np-line); }
+  .np-opportunity-branches { margin-left: 16px; }
+}
 .np-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 42px; }
 .np-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .np-card { min-width: 0; }
