@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/assets/index-DcLK9jS5.css" />
     <link rel="stylesheet" href="/homepage.css?v=20260824-case-study-shell" />
     <link rel="stylesheet" href="/case-study.css?v=20260827-viewbox-v1" />
-    <link rel="stylesheet" href="/projects/product-page.css?v=20260903-composa-positioning-v1" />
+    <link rel="stylesheet" href="/projects/product-page.css?v=20260903-composa-spectrum-v2" />
   </head>
   <body>
     <header class="np-header"><div class="np-header-inner"><a class="np-brand" href="/">samuelalake / product designer + engineer</a><nav aria-label="Sections"><a href="/">Work</a><a href="/about">About</a></nav></div></header>
@@ -58,19 +58,14 @@
         <p class="np-label">Competitive research</p>
         <h2>A video-first canvas can compete across creative workflows</h2>
         <p class="np-copy">I looked beyond traditional video editors to tools for animation, asset creation, explainers, and text-based editing. The opportunity is to bring those jobs into one editable canvas and timeline, building from the familiar motion model already in V1.</p>
-        <figure class="np-opportunity-map" aria-label="Composa positioning and four creative workflows">
-          <div class="np-opportunity-root">
-            <img src="/projects/composa-evidence/composa-favicon.svg" width="32" height="32" alt="" />
-            <strong>Composa</strong>
-            <span>Video-first canvas<br>+ editable timeline</span>
-          </div>
-          <ul class="np-opportunity-branches">
-            <li><span class="np-opportunity-status">V1 foundation</span><h3>Animation presets</h3><div class="np-reference-products"><a href="https://support.apple.com/keynote"><img src="/projects/composa-evidence/keynote-icon.png" alt="" width="20" height="20" />Keynote</a><span>· Gizmo</span></div><p>Familiar Build in, Action, and Build out controls for motion.</p></li>
-            <li><span class="np-opportunity-status">Opportunity to explore</span><h3>Asset creation</h3><div class="np-reference-products"><a href="https://www.palmier.io/"><img src="/projects/composa-evidence/palmier-icon.png" alt="" width="20" height="20" />Palmier</a></div><p>Generate and refine visual assets within the video canvas and timeline.</p></li>
-            <li><span class="np-opportunity-status">Opportunity to explore</span><h3>Screen explainers</h3><div class="np-reference-products"><a href="https://www.guidde.com/"><img src="/projects/composa-evidence/guidde-icon.png" alt="" width="20" height="20" />Guidde</a></div><p>Add annotations and voiceovers over imported design frames.</p></li>
-            <li><span class="np-opportunity-status">Opportunity to explore</span><h3>Text-based editing</h3><div class="np-reference-products"><a href="https://www.descript.com/underlord"><img src="/projects/composa-evidence/descript-icon.png" alt="" width="20" height="20" />Descript / Underlord</a></div><p>Connect text and voice edits to visual layers on the canvas.</p></li>
+        <figure class="np-opportunity-map" aria-label="Creative workflow spectrum and reference apps">
+          <ul class="np-workflow-spectrum">
+            <li><h3>Animation presets</h3><div class="np-reference-products"><a href="https://support.apple.com/keynote"><img src="/projects/composa-evidence/keynote-icon.png" alt="" width="20" height="20" />Keynote</a><span>Gizmo</span></div></li>
+            <li><h3>Asset creation</h3><div class="np-reference-products"><a href="https://www.palmier.io/"><img src="/projects/composa-evidence/palmier-icon.png" alt="" width="20" height="20" />Palmier</a><a href="https://www.descript.com/"><img src="/projects/composa-evidence/descript-icon.png" alt="" width="20" height="20" />Descript</a></div></li>
+            <li><h3>Screen explainers</h3><div class="np-reference-products"><a href="https://www.guidde.com/"><img src="/projects/composa-evidence/guidde-icon.png" alt="" width="20" height="20" />Guidde</a><a href="https://cleanshot.com/"><img src="/projects/composa-evidence/cleanshot-icon.png" alt="" width="20" height="20" />CleanShot</a></div></li>
+            <li><h3>Text-based editing</h3><div class="np-reference-products"><a href="https://www.descript.com/"><img src="/projects/composa-evidence/descript-icon.png" alt="" width="20" height="20" />Descript</a></div></li>
           </ul>
-          <figcaption>Selected research references and Composa’s potential direction—not a feature-parity claim. Future opportunities sit beyond the first editing loop.</figcaption>
+          <figcaption>Animate with presets · Generate visual assets · Capture and explain screens · Edit video through text</figcaption>
         </figure>
       </section>
 
@@ -119,16 +114,16 @@
       <section class="np-section">
         <p class="np-label">Where it stands</p>
         <h2>Shipped and available in public beta</h2>
-        <p class="np-copy"><a class="np-product-link" href="https://composa.app"><img src="/projects/composa-evidence/composa-favicon.svg" width="18" height="18" alt="" />Composa</a> is live and available to use now. I am tracking how designers use the public beta as I decide whether to keep growing it as a side project or turn it into an open-core, founder-led business.</p>
+        <p class="np-copy"><a class="np-product-link" href="https://composa.app"><img src="/projects/composa-evidence/composa-favicon.svg" width="18" height="18" alt="" />Composa</a> is live in public beta for you to try. I intend to launch publicly soon and track signals on how it’s received as I decide whether to keep growing it as a side project or turn it into an open-core, founder-led business.</p>
       </section>
 
       <section class="np-section">
         <p class="np-label">Reflection</p>
         <h2>What I learned</h2>
-        <p class="np-copy">Building Composa taught me how to work with AI at two levels: inside my own design and engineering workflow, and across a repeatable process for turning product decisions into verified software. The second required designing how agents receive work, check their results, and bring decisions back to me.</p>
+        <p class="np-copy">Building Composa taught me to put a working product in front of people to test the opportunity, and to design a repeatable AI-assisted process for turning product decisions into verified software.</p>
         <div class="np-grid two">
-          <article class="np-card"><h3>Make AI part of the design loop</h3><p>I used AI to move between interface references, specifications, and working code. Reviewing the result in the product helped me refine the next instruction. Clear design intent and concrete feedback mattered as much as the prompt.</p></article>
-          <article class="np-card"><h3>Design the system that builds the product</h3><p>Beyond individual AI-assisted tasks, I built a repeatable workflow around scoped agent work, shared specifications, verification, and a human review-and-merge gate. My role expanded to defining what agents could decide, what evidence counted as done, and where I needed to step in. That process let me direct a wider range of work while keeping responsibility for the result.</p></article>
+          <article class="np-card"><h3>Build to validate</h3><p>I saw a gap between design and video, then built a public product people could try. The strongest signal comes from putting the idea in front of the market.</p></article>
+          <article class="np-card"><h3>Design the system that builds the product</h3><p>I used AI to move between interface references, specifications, and working code, refining instructions through product review. I then made that loop repeatable: scoped agent work, shared specifications, verification, and a human review-and-merge gate. My role became defining what agents could decide, what evidence counted as done, and where I needed to step in. That let me direct more work while keeping responsibility for the result.</p></article>
         </div>
       </section>
     </main>
