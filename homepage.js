@@ -206,8 +206,39 @@
   }
 
   // --- muted recordings: meaningful posters at rest, playback only while visible ---
-  var autoplayVideos = [].slice.call(document.querySelectorAll("video[autoplay]:not([data-no-media-controls])"));
-  autoplayVideos.forEach(function (video) { video.muted = true; });
+  var autoplayVideos = [].slice.call(document.querySelectorAll("video[data-viewport-autoplay], video[autoplay]"));
+  // Native autoplay must also be absent from HTML: it can run before this script.
+  function mediaIsVisible(video) {
+    if (document.hidden || video.closest('[aria-hidden="true"], [hidden]')) return false;
+    var r = video.getBoundingClientRect();
+    var left = r.left, right = r.right, top = r.top, bottom = r.bottom;
+    for (var parent = video.parentElement; parent; parent = parent.parentElement) {
+      var style = getComputedStyle(parent);
+      if (style.display === "none" || style.visibility === "hidden" || style.opacity === "0") return false;
+      var bounds = parent.getBoundingClientRect();
+      if (/hidden|clip|scroll|auto/.test(style.overflowX)) { left = Math.max(left, bounds.left); right = Math.min(right, bounds.right); }
+      if (/hidden|clip|scroll|auto/.test(style.overflowY)) { top = Math.max(top, bounds.top); bottom = Math.min(bottom, bounds.bottom); }
+    }
+    var area = Math.max(0, right - left) * Math.max(0, bottom - top);
+    var visible = Math.max(0, Math.min(right, innerWidth) - Math.max(left, 0)) * Math.max(0, Math.min(bottom, innerHeight) - Math.max(top, 0));
+    return area > 0 && visible / area >= 0.2;
+  }
+  function playVisibleMedia(video, manual) {
+    if (manual) video.dataset.manualPlayback = "true";
+    if (!mediaIsVisible(video) || video.dataset.userPaused === "true" || (reduce && video.dataset.manualPlayback !== "true")) {
+      video.pause();
+      return;
+    }
+    if (video.paused) video.play().catch(function () {});
+  }
+  autoplayVideos.forEach(function (video) {
+    video.removeAttribute("autoplay");
+    video.muted = true;
+    video.pause();
+    video.addEventListener("play", function () {
+      if (!mediaIsVisible(video)) video.pause();
+    });
+  });
 
   // Compact play, restart, and sound controls appear over recordings on hover/focus.
   function mediaIcon(name) {
@@ -243,7 +274,7 @@
       var shouldPlay = videos.every(function (video) { return video.paused; });
       videos.forEach(function (video) {
         video.dataset.userPaused = shouldPlay ? "false" : "true";
-        if (shouldPlay) video.play().catch(function () {});
+        if (shouldPlay) playVisibleMedia(video, true);
         else video.pause();
       });
       updateMediaControls();
@@ -252,7 +283,7 @@
       videos.forEach(function (video) {
         video.currentTime = 0;
         video.dataset.userPaused = "false";
-        video.play().catch(function () {});
+        playVisibleMedia(video, true);
       });
       updateMediaControls();
     });
@@ -270,12 +301,13 @@
   }
   var groupedVideos = [];
   [].slice.call(document.querySelectorAll("[data-shared-media-controls]")).forEach(function (group) {
-    var videos = [].slice.call(group.querySelectorAll("video[autoplay]"));
+    var videos = [].slice.call(group.querySelectorAll("video[data-viewport-autoplay]"));
     if (!videos.length) return;
     groupedVideos = groupedVideos.concat(videos);
     attachMediaControls(videos, group);
   });
   autoplayVideos.forEach(function (video) {
+    if (video.hasAttribute("data-no-media-controls")) return;
     if (groupedVideos.indexOf(video) !== -1) return;
     var host = video.closest(".cs-device") || video.closest(".cs-figure") || video.parentElement;
     attachMediaControls([video], host);
@@ -355,19 +387,28 @@
     renderTimedAnnotations();
   });
 
-  if (!reduce && "IntersectionObserver" in window) {
-    var videoIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting && entry.target.dataset.userPaused !== "true") entry.target.play().catch(function () {});
-        else entry.target.pause();
-      });
-    }, { threshold: 0.1 });
-    autoplayVideos.forEach(function (video) { videoIO.observe(video); });
-  } else if (!reduce) {
-    autoplayVideos.forEach(function (video) { video.play().catch(function () {}); });
-  } else {
-    autoplayVideos.forEach(function (video) { video.pause(); });
+  var mediaFrame = null;
+  function syncVisibleMedia() {
+    mediaFrame = null;
+    autoplayVideos.forEach(function (video) { playVisibleMedia(video); });
   }
+  function scheduleVisibleMedia() {
+    if (mediaFrame === null) mediaFrame = requestAnimationFrame(syncVisibleMedia);
+  }
+  // Scroll checks also cover clipped recordings and browsers without IO.
+  document.addEventListener("scroll", scheduleVisibleMedia, { passive: true, capture: true });
+  window.addEventListener("resize", scheduleVisibleMedia);
+  document.addEventListener("visibilitychange", syncVisibleMedia);
+  if ("IntersectionObserver" in window) {
+    var videoIO = new IntersectionObserver(scheduleVisibleMedia, { threshold: [0, 0.2, 1] });
+    autoplayVideos.forEach(function (video) { videoIO.observe(video.closest(".np-audio-crop") || video); });
+  }
+  matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", function (event) {
+    reduce = event.matches;
+    autoplayVideos.forEach(function (video) { delete video.dataset.manualPlayback; });
+    syncVisibleMedia();
+  });
+  scheduleVisibleMedia();
 
   // --- custom overlay scrollbar (native bar hidden in CSS; no layout shift between pages) ---
   var thumb = document.createElement("div");
@@ -531,7 +572,7 @@
           showSlide(index + 1);
           return;
         }
-        if (video.paused && video.dataset.userPaused !== "true") video.play().catch(function () {});
+        playVisibleMedia(video);
         return;
       }
       if (!canAutoAdvance()) return;
@@ -560,11 +601,12 @@
           video.loop = false;
           video.currentTime = 0;
           if (slideIndex !== index) video.pause();
-          else if (inView && !reduce && video.dataset.userPaused !== "true") video.play().catch(function () {});
+          else if (inView) playVisibleMedia(video);
         });
         updateSyncedProgress();
       }
       scheduleAuto();
+      scheduleVisibleMedia();
     }
     if (previous) previous.addEventListener("click", function () { showSlide(index - 1); });
     if (next) next.addEventListener("click", function () { showSlide(index + 1); });
