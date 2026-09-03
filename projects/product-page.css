@@ -50,7 +50,7 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
 .np-theme-note { margin: 18px 0 0; color: var(--np-muted); font-size: 15px; line-height: 1.6; }
 .np-opportunity-map { margin: 36px 0 0; }
 .np-opportunity-board { padding: 18px 30px 30px; border: 1px solid var(--np-line); background: var(--np-soft); }
-.np-opportunity-board > .np-board-tag { margin-bottom: 30px; }
+.np-opportunity-board > .np-board-tag { margin-left: -18px; margin-bottom: 30px; }
 .np-workflow-spectrum { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
 .np-workflow-spectrum > li { position: relative; min-width: 0; padding: 24px 12px 0; border-top: 1px solid var(--np-line); }
 .np-workflow-spectrum > li::before { position: absolute; top: -5px; left: 12px; width: 9px; height: 9px; border-radius: 50%; background: var(--np-muted); content: ""; }
@@ -62,6 +62,7 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
 .np-opportunity-map > figcaption { margin-top: 12px; color: var(--np-muted); font-size: 13px; line-height: 1.6; }
 @media (max-width: 640px) {
   .np-opportunity-board { padding: 18px 18px 24px; }
+  .np-opportunity-board > .np-board-tag { margin-left: -6px; }
   .np-workflow-spectrum { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 32px; }
 }
 .np-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 42px; }
@@ -175,6 +176,8 @@ body { margin: 0; background: var(--portfolio-bg); color: var(--portfolio-fg); f
 }
 .np-reference-board { margin-top: 44px; padding: 18px; border: 1px solid var(--np-line); background: var(--np-soft); }
 .np-board-tag { display: inline-flex; width: fit-content; max-width: 100%; margin: 0 0 20px; padding: 4px 7px; align-self: flex-start; border: 1px solid var(--np-line); border-radius: 4px; background: var(--np-paper); font-size: 12px; }
+.np-board-tag:has(> img) { align-items: center; gap: 5px; }
+.np-board-tag > img { width: 14px; height: 14px; flex: none; object-fit: contain; }
 .np-reference-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .np-reference { min-width: 0; }
 .np-reference > .cs-device { width: 100%; aspect-ratio: 4 / 5; padding: 24px; }
